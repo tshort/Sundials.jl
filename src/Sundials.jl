@@ -45,6 +45,10 @@ end
 shlib = libsundials_kinsol
 include("kinsol.jl")
 
+shlib = libsundials_arkode
+include("arkode.jl")
+
+
 include("constants.jl")
 
 ##################################################################
