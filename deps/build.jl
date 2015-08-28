@@ -12,8 +12,9 @@ else
     ida = library_dependency("libsundials_ida")
 end
 kinsol = library_dependency("libsundials_kinsol")
+arkode = library_dependency("libsundials_arkode")
 nvecserial = library_dependency("libsundials_nvecserial")
-sundialslibs = enable_sensitivities ? [cvodes, idas, kinsol, nvecserial] : [cvode, ida, kinsol, nvecserial]
+sundialslibs = enable_sensitivities ? [cvodes, idas, kinsol, arkode, nvecserial] : [cvode, ida, kinsol, arkode, nvecserial]
 
 sundialsver = "sundials-2.6.2"
 provides(Sources, URI("http://my.fit.edu/~jgoldfar/$sundialsver.tar.gz"), sundialslibs)
@@ -42,10 +43,12 @@ if enable_sensitivities
 @BinDeps.install [:libsundials_cvodes => :libsundials_cvodes,
                   :libsundials_idas => :libsundials_idas,
                   :libsundials_kinsol => :libsundials_kinsol,
+                  :libsundials_arkode => :libsundials_arkode,
                   :libsundials_nvecserial => :libsundials_nvecserial]
 else
 @BinDeps.install [:libsundials_cvode => :libsundials_cvode,
                   :libsundials_ida => :libsundials_ida,
                   :libsundials_kinsol => :libsundials_kinsol,
+                  :libsundials_arkode => :libsundials_arkode,
                   :libsundials_nvecserial => :libsundials_nvecserial]
 end
