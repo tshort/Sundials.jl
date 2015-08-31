@@ -34,3 +34,6 @@ println("residual:")
 println(residual, "\n")
 
 @test abs(minimum(residual)) < 1e-5
+
+println("== start arkode example")
+include("../examples/arkode_test.jl")
