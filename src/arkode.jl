@@ -408,43 +408,43 @@ const ARKDLS_MASSFUNC_RECVR   =-9
 @ctypedef ARKDlsBandMassFn Ptr{:Void}
 # typedef int (*ARKDlsBandMassFn)
 
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsSetDenseJacFn(void *arkode_mem,
-# # 					ARKDlsDenseJacFn jac);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsSetBandJacFn(void *arkode_mem,
-# # 				       ARKDlsBandJacFn jac);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsSetDenseMassFn(void *arkode_mem,
-# # 					 ARKDlsDenseMassFn mass);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsSetBandMassFn(void *arkode_mem,
-# # 					ARKDlsBandMassFn mass);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsGetWorkSpace(void *arkode_mem,
-# # 				       long int *lenrwLS,
-# # 				       long int *leniwLS);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsGetMassWorkSpace(void *arkode_mem,
-# # 					   long int *lenrwMLS,
-# # 					   long int *leniwMLS);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsGetNumJacEvals(void *arkode_mem,
-# # 					 long int *njevals);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsGetNumMassEvals(void *arkode_mem,
-# # 					  long int *nmevals);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsGetNumRhsEvals(void *arkode_mem,
-# # 					 long int *nfevalsLS);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsGetLastFlag(void *arkode_mem,
-# # 				      long int *flag);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int ARKDlsGetLastMassFlag(void *arkode_mem,
-# # 					  long int *flag);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # char *ARKDlsGetReturnFlagName(long int flag);
+@c Int32 ARKDlsSetDenseJacFn (Ptr{:None}, :ARKDlsDenseJacFn) shlib
+# int ARKDlsSetDenseJacFn(void *arkode_mem,
+# 					ARKDlsDenseJacFn jac);
+@c Int32 ARKDlsSetBandJacFn (Ptr{:None}, :ARKDlsBandJacFn) shlib
+# int ARKDlsSetBandJacFn(void *arkode_mem,
+# 				       ARKDlsBandJacFn jac);
+@c Int32 ARKDlsSetDenseMassFn (Ptr{:None}, :ARKDlsDenseMassFn) shlib
+# int ARKDlsSetDenseMassFn(void *arkode_mem,
+# 					 ARKDlsDenseMassFn mass);
+@c Int32 ARKDlsSetBandMassFn (Ptr{:None}, :ARKDlsBandMassFn) shlib
+# int ARKDlsSetBandMassFn(void *arkode_mem,
+# 					ARKDlsBandMassFn mass);
+@c Int32 ARKDlsGetWorkSpace (Ptr{:None}, Ptr{:Clong}, Ptr{:Clong}) shlib
+# int ARKDlsGetWorkSpace(void *arkode_mem,
+# 				       long int *lenrwLS,
+# 				       long int *leniwLS);
+@c Int32 ARKDlsGetMassWorkSpace (Ptr{:None}, Ptr{:Clong}, Ptr{:Clong}) shlib
+# int ARKDlsGetMassWorkSpace(void *arkode_mem,
+# 					   long int *lenrwMLS,
+# 					   long int *leniwMLS);
+@c Int32 ARKDlsGetNumJacEvals (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKDlsGetNumJacEvals(void *arkode_mem,
+# 					 long int *njevals);
+@c Int32 ARKDlsGetNumMassEvals (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKDlsGetNumMassEvals(void *arkode_mem,
+# 					  long int *nmevals);
+@c Int32 ARKDlsGetNumRhsEvals (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKDlsGetNumRhsEvals(void *arkode_mem,
+# 					 long int *nfevalsLS);
+@c Int32 ARKDlsGetLastFlag (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKDlsGetLastFlag(void *arkode_mem,
+# 				      long int *flag);
+@c Int32 ARKDlsGetLastMassFlag (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKDlsGetLastMassFlag(void *arkode_mem,
+# 					  long int *flag);
+@c Ptr{:Uint8} ARKDlsGetReturnFlagName (Ptr{:None}, :Clong) shlib
+# char *ARKDlsGetReturnFlagName(long int flag);
 
 #header: arkode/arkode_impl.h
 # #= Basic ARKODE constants =#
@@ -546,6 +546,7 @@ const MSBP        =20                  #= default =#
 #  The type ARKodeMem is type pointer to struct ARKodeMemRec.
 #  This structure contains fields to keep track of problem state.
 # ---------------------------------------------------------------=#
+immutable ARKodeMemRec
 # typedef struct ARKodeMemRec {
 
 #   realtype ark_uround;         #= machine unit roundoff =#
@@ -827,43 +828,45 @@ const MSBP        =20                  #= default =#
 #   int          ark_mxgnull;     #= num. warning messages about possible g==0    =#
 
 # } *ARKodeMem;
+end
+typealias ARKodeMem Ptr{ARKodeMemRec}
 
 # #= Constants for convfail (input to ark_lsetup) =#
 const ARK_NO_FAILURES =0
 const ARK_FAIL_BAD_J  =1
 const ARK_FAIL_OTHER  =2
 
-# #= Prototype of internal ewtSet function =#
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int arkEwtSet(N_Vector ycur, N_Vector weight, void *data);
+#= Prototype of internal ewtSet function =#
+@c Int32 arkEwtSet (:N_Vector, :N_Vector, Ptr{:None}) shlib
+# int arkEwtSet(N_Vector ycur, N_Vector weight, void *data);
 
-# # #= Prototype of internal rwtSet function =#
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int arkRwtSet(N_Vector ycur, N_Vector weight, void *data);
+# #= Prototype of internal rwtSet function =#
+@c Int32 arkRwtSet (:N_Vector, :N_Vector, Ptr{:None}) shlib
+# int arkRwtSet(N_Vector ycur, N_Vector weight, void *data);
 
-# # #= Prototype of internal errHandler function =#
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # void arkErrHandler(int error_code, const char *module,
-# # 		   const char *function, char *msg, void *data);
+# #= Prototype of internal errHandler function =#
+@c Int32 arkErrHandler (:Int32, Ptr{:Uint8}, Ptr{:Uint8}, Ptr{:Uint8}, Ptr{:None}) shlib
+# void arkErrHandler(int error_code, const char *module,
+# 		   const char *function, char *msg, void *data);
 
-# # #= Prototype of internal explicit stability estimation function =#
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
-# # int arkExpStab(N_Vector y, realtype t, realtype *hstab, void *user_data);
+# #= Prototype of internal explicit stability estimation function =#
+@c Int32 arkExpStab (:N_Vector, :realtype, Ptr{:realtype}, Ptr{:None}) shlib
+# int arkExpStab(N_Vector y, realtype t, realtype *hstab, void *user_data);
 
-# #================================================================
-#    HIGH LEVEL ERROR HANDLER, USED THROUGHOUT ARKODE
-# ================================================================#
+#================================================================
+   HIGH LEVEL ERROR HANDLER, USED THROUGHOUT ARKODE
+================================================================#
 
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
+@c Ptr{:None} arkProcessError (:ARKodeMem, :Int32, Ptr{:Uint8}, Ptr{:Uint8}, Ptr{:Uint8}) shlib
 # void arkProcessError(ARKodeMem ark_mem, int error_code,
 # 		     const char *module, const char *fname,
 # 		     const char *msgfmt, ...);
 
 
-#header: arkode/arkode_pcg.h
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
+# header: arkode/arkode_pcg.h
+@c Int32 ARKPcg (Ptr{:None}, :Int32, :Int32) shlib
 # int ARKPcg(void *arkode_mem, int pretype, int maxl);
-# @c Int32 ARKMassDense (Ptr{:None}, :Clong, :ARKDlsDenseMassFn) shlib
+@c Int32 ARKMassPcg (Ptr{:None}, :Int32, :Int32, :ARKSpilsMassTimesVecFn, Ptr{:None}) shlib
 # int ARKMassPcg(void *arkode_mem, int pretype, int maxl,
 # 			       ARKSpilsMassTimesVecFn mtimes,
 # 			       void *mtimes_data);
@@ -890,42 +893,42 @@ const ARKSLS_MASSFUNC_RECVR   =-12
 @ctypedef ARKSlsSparseMassFn Ptr{:Void}
 @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
 # int ARKSlsSetSparseJacFn(void *arkode_mem, ARKSlsSparseJacFn jac);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSlsSetSparseMassFn(void *arkode_mem, ARKSlsSparseMassFn mass);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSlsGetNumJacEvals(void *arkode_mem, long int *njevals);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSlsGetNumMassEvals(void *arkode_mem, long int *nmevals);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSlsGetLastFlag(void *arkode_mem, long int *flag);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSlsGetLastMassFlag(void *arkode_mem, long int *flag);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # char *ARKSlsGetReturnFlagName(long int flag);
+@c Int32 ARKSlsSetSparseMassFn (Ptr{:None},:ARKSlsSparseMassFn) shlib
+# int ARKSlsSetSparseMassFn(void *arkode_mem, ARKSlsSparseMassFn mass);
+@c Int32 ARKSlsGetNumJacEvals (Ptr{:None},Ptr{:Clong}) shlib
+# int ARKSlsGetNumJacEvals(void *arkode_mem, long int *njevals);
+@c Int32 ARKSlsGetNumMassEvals (Ptr{:None},Ptr{:Clong}) shlib
+# int ARKSlsGetNumMassEvals(void *arkode_mem, long int *nmevals);
+@c Int32 ARKSlsGetLastFlag (Ptr{:None},Ptr{:Clong}) shlib
+# int ARKSlsGetLastFlag(void *arkode_mem, long int *flag);
+@c Int32 ARKSlsGetLastMassFlag (Ptr{:None},Ptr{:Clong}) shlib
+# int ARKSlsGetLastMassFlag(void *arkode_mem, long int *flag);
+@c Ptr{:Uint8} ARKSlsGetReturnFlagName (:Clong) shlib
+# char *ARKSlsGetReturnFlagName(long int flag);
 
 #header: arkode/arkode_spbcgs.h
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpbcg(void *arkode_mem, int pretype, int maxl);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKMassSpbcg(void *arkode_mem, int pretype, int maxl,
-# # 				 ARKSpilsMassTimesVecFn mtimes,
-# # 				 void *mtimes_data);
+@c Int32 ARKSpbcg (Ptr{:None},:Int32, :Int32) shlib
+# int ARKSpbcg(void *arkode_mem, int pretype, int maxl);
+@c Int32 ARKMassSpbcg (Ptr{:None},:Int32, :Int32, :ARKSpilsMassTimesVecFn, Ptr{:None}) shlib
+# int ARKMassSpbcg(void *arkode_mem, int pretype, int maxl,
+# 				 ARKSpilsMassTimesVecFn mtimes,
+# 				 void *mtimes_data);
 
 #header: arkode/arkode_spfgmr.h
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpfgmr(void *arkode_mem, int pretype, int maxl);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKMassSpfgmr(void *arkode_mem, int pretype, int maxl,
-# # 				  ARKSpilsMassTimesVecFn mtimes,
-# # 				  void *mtimes_data);
+@c Int32 ARKSpfgmr (Ptr{:None},:Int32, :Int32) shlib
+# int ARKSpfgmr(void *arkode_mem, int pretype, int maxl);
+@c Int32 ARKMassSpfgmr (Ptr{:None},:Int32, :Int32, :ARKSpilsMassTimesVecFn, Ptr{:None}) shlib
+# int ARKMassSpfgmr(void *arkode_mem, int pretype, int maxl,
+# 				  ARKSpilsMassTimesVecFn mtimes,
+# 				  void *mtimes_data);
 
 #header: arkode/arkode_spgmr.h
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpgmr(void *arkode_mem, int pretype, int maxl);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKMassSpgmr(void *arkode_mem, int pretype, int maxl,
-# # 				 ARKSpilsMassTimesVecFn mtimes,
-# # 				 void *mtimes_data);
+@c Int32 ARKSpgmr (Ptr{:None},:Int32, :Int32) shlib
+# int ARKSpgmr(void *arkode_mem, int pretype, int maxl);
+@c Int32 ARKMassSpgmr (Ptr{:None},:Int32, :Int32, :ARKSpilsMassTimesVecFn, Ptr{:None}) shlib
+# int ARKMassSpgmr(void *arkode_mem, int pretype, int maxl,
+# 				 ARKSpilsMassTimesVecFn mtimes,
+# 				 void *mtimes_data);
 
 #header: arkode/arkode_spils.h
 # #=---------------------------------------------------------------
@@ -975,88 +978,88 @@ const ARKSPILS_EPLIN  =0.05
 # typedef int (*ARKSpilsMassPrecSolveFn)
 
 
-
-# # int ARKSpilsSetPrecType(void *arkode_mem, int pretype);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetMassPrecType(void *arkode_mem, int pretype);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetGSType(void *arkode_mem, int gstype);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetMassGSType(void *arkode_mem, int gstype);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetMaxl(void *arkode_mem, int maxl);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetMassMaxl(void *arkode_mem, int maxl);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetEpsLin(void *arkode_mem, realtype eplifac);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetMassEpsLin(void *arkode_mem, realtype eplifac);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
+@c Int32 ARKSpilsSetPrecType (Ptr{:None},:Int32) shlib
+# int ARKSpilsSetPrecType(void *arkode_mem, int pretype);
+@c Int32 ARKSpilsSetMassPrecType (Ptr{:None},:Int32) shlib
+# int ARKSpilsSetMassPrecType(void *arkode_mem, int pretype);
+@c Int32 ARKSpilsSetGSType (Ptr{:None},:Int32) shlib
+# int ARKSpilsSetGSType(void *arkode_mem, int gstype);
+@c Int32 ARKSpilsSetMassGSType (Ptr{:None},:Int32) shlib
+# int ARKSpilsSetMassGSType(void *arkode_mem, int gstype);
+@c Int32 ARKSpilsSetMaxl (Ptr{:None},:Int32) shlib
+# int ARKSpilsSetMaxl(void *arkode_mem, int maxl);
+@c Int32 ARKSpilsSetMassMaxl (Ptr{:None},:Int32) shlib
+# int ARKSpilsSetMassMaxl(void *arkode_mem, int maxl);
+@c Int32 ARKSpilsSetEpsLin (Ptr{:None},:realtype) shlib
+# int ARKSpilsSetEpsLin(void *arkode_mem, realtype eplifac);
+@c Int32 ARKSpilsSetMassEpsLin (Ptr{:None},:realtype) shlib
+# int ARKSpilsSetMassEpsLin(void *arkode_mem, realtype eplifac);
+@c Int32 ARKSpilsSetPreconditioner (Ptr{:None},:ARKSpilsPrecSetupFn, :ARKSpilsPrecSolveFn) shlib
 # # int ARKSpilsSetPreconditioner(void *arkode_mem,
 # # 				      ARKSpilsPrecSetupFn pset,
 # # 				      ARKSpilsPrecSolveFn psolve);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetMassPreconditioner(void *arkode_mem,
-# # 					  ARKSpilsMassPrecSetupFn pset,
-# # 					  ARKSpilsMassPrecSolveFn psolve);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetJacTimesVecFn(void *arkode_mem,
-# # 				     ARKSpilsJacTimesVecFn jtv);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsSetMassTimesVecFn(void *arkode_mem,
-# # 				      ARKSpilsMassTimesVecFn mtv,
-# # 				      void *mtimes_data);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetWorkSpace(void *arkode_mem,
-# # 					 long int *lenrwLS,
-# # 					 long int *leniwLS);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetMassWorkSpace(void *arkode_mem,
-# # 					     long int *lenrwMLS,
-# # 					     long int *leniwMLS);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetNumPrecEvals(void *arkode_mem,
-# # 					    long int *npevals);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
+@c Int32 ARKSpilsSetMassPreconditioner (Ptr{:None},:ARKSpilsMassPrecSetupFn, :ARKSpilsMassPrecSolveFn) shlib
+# int ARKSpilsSetMassPreconditioner(void *arkode_mem,
+# 					  ARKSpilsMassPrecSetupFn pset,
+# 					  ARKSpilsMassPrecSolveFn psolve);
+@c Int32 ARKSpilsSetJacTimesVecFn (Ptr{:None},:ARKSpilsJacTimesVecFn) shlib
+# int ARKSpilsSetJacTimesVecFn(void *arkode_mem,
+# 				     ARKSpilsJacTimesVecFn jtv);
+@c Int32 ARKSpilsSetMassTimesVecFn (Ptr{:None},:ARKSpilsMassTimesVecFn, Ptr{:None}) shlib
+# int ARKSpilsSetMassTimesVecFn(void *arkode_mem,
+# 				      ARKSpilsMassTimesVecFn mtv,
+# 				      void *mtimes_data);
+@c Int32 ARKSpilsGetWorkSpace (Ptr{:None}, Ptr{:Clong}, Ptr{:Clong}) shlib
+# int ARKSpilsGetWorkSpace(void *arkode_mem,
+# 					 long int *lenrwLS,
+# 					 long int *leniwLS);
+@c Int32 ARKSpilsGetMassWorkSpace (Ptr{:None}, Ptr{:Clong}, Ptr{:Clong}) shlib
+# int ARKSpilsGetMassWorkSpace(void *arkode_mem,
+# 					     long int *lenrwMLS,
+# 					     long int *leniwMLS);
+@c Int32 ARKSpilsGetNumPrecEvals (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetNumPrecEvals(void *arkode_mem,
+# 					    long int *npevals);
+@c Int32 ARKSpilsGetNumMassPrecEvals (Ptr{:None}, Ptr{:Clong}) shlib
 # # int ARKSpilsGetNumMassPrecEvals(void *arkode_mem,
 # # 						long int *nmpevals);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetNumPrecSolves(void *arkode_mem,
-# # 					     long int *npsolves);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetNumMassPrecSolves(void *arkode_mem,
-# # 						 long int *nmpsolves);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetNumLinIters(void *arkode_mem,
-# # 					   long int *nliters);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetNumMassIters(void *arkode_mem,
-# # 					    long int *nmiters);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetNumConvFails(void *arkode_mem,
-# # 					    long int *nlcfails);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetNumMassConvFails(void *arkode_mem,
-# # 						long int *nmcfails);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetNumJtimesEvals(void *arkode_mem,
-# # 					      long int *njvevals);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetNumRhsEvals(void *arkode_mem,
-# # 					   long int *nfevalsLS);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetLastFlag(void *arkode_mem,
-# # 					long int *flag);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSpilsGetLastMassFlag(void *arkode_mem,
-# # 					    long int *flag);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # char *ARKSpilsGetReturnFlagName(long int flag);
+@c Int32 ARKSpilsGetNumPrecSolves (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetNumPrecSolves(void *arkode_mem,
+# 					     long int *npsolves);
+@c Int32 ARKSpilsGetNumMassPrecSolves (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetNumMassPrecSolves(void *arkode_mem,
+# 						 long int *nmpsolves);
+@c Int32 ARKSpilsGetNumLinIters (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetNumLinIters(void *arkode_mem,
+# 					   long int *nliters);
+@c Int32 ARKSpilsGetNumMassIters (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetNumMassIters(void *arkode_mem,
+# 					    long int *nmiters);
+@c Int32 ARKSpilsGetNumConvFails (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetNumConvFails(void *arkode_mem,
+# 					    long int *nlcfails);
+@c Int32 ARKSpilsGetNumMassConvFails (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetNumMassConvFails(void *arkode_mem,
+# 						long int *nmcfails);
+@c Int32 ARKSpilsGetNumJtimesEvals (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetNumJtimesEvals(void *arkode_mem,
+# 					      long int *njvevals);
+@c Int32 ARKSpilsGetNumRhsEvals (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetNumRhsEvals(void *arkode_mem,
+# 					   long int *nfevalsLS);
+@c Int32 ARKSpilsGetLastFlag (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetLastFlag(void *arkode_mem,
+# 					long int *flag);
+@c Int32 ARKSpilsGetLastMassFlag (Ptr{:None}, Ptr{:Clong}) shlib
+# int ARKSpilsGetLastMassFlag(void *arkode_mem,
+# 					    long int *flag);
+@c Ptr{:Uint8} ARKSpilsGetReturnFlagName (:Clong) shlib
+# char *ARKSpilsGetReturnFlagName(long int flag);
 
 #header: arkode/arkode_sptfqmr.h
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKSptfqmr(void *arkode_mem, int pretype, int maxl);
-# @c Int32 ARKSlsSetSparseJacFn (Ptr{:None},:ARKSlsSparseJacFn) shlib
-# # int ARKMassSptfqmr(void *arkode_mem, int pretype, int maxl,
-# # 				   ARKSpilsMassTimesVecFn mtimes,
-# # 				   void *mtimes_data);
+@c Int32 ARKSptfqmr (Ptr{:None},:ARKSlsSparseJacFn) shlib
+# int ARKSptfqmr(void *arkode_mem, int pretype, int maxl);
+@c Int32 ARKMassSptfqmr (Ptr{:None},:ARKSlsSparseJacFn) shlib
+# int ARKMassSptfqmr(void *arkode_mem, int pretype, int maxl,
+# 				   ARKSpilsMassTimesVecFn mtimes,
+# 				   void *mtimes_data);
