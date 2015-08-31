@@ -5,7 +5,7 @@ if isfile(joinpath(dirname(dirname(@__FILE__)),"deps","deps.jl"))
 else
     error("Sundials not properly installed. Please run Pkg.build(\"Sundials\")")
 end
- 
+
 ##################################################################
 # Deprecations
 ##################################################################
@@ -74,8 +74,19 @@ nvector(x::N_Vector) = x
 #
 ##################################################################
 
-
-
+# ARKode
+ARKodeInit(mem, fi::Function, t0, y) =
+    ARKodeInit(mem,
+               C_NULL,
+               cfunction(fi, Int32, (realtype, N_Vector, N_Vector, Ptr{Void})),
+               t0,
+               nvector(y))
+ARKodeInit(mem, fe::Function, fi::Function, t0, y) =
+    ARKodeInit(mem,
+               cfunction(fe, Int32, (realtype, N_Vector, N_Vector, Ptr{Void})),
+               cfunction(fi, Int32, (realtype, N_Vector, N_Vector, Ptr{Void})),
+               t0,
+               nvector(y))
 # KINSOL
 KINInit(mem, sysfn::Function, y) =
     KINInit(mem, cfunction(sysfn, Int32, (N_Vector, N_Vector, Ptr{Void})), nvector(y))
