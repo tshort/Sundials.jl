@@ -75,6 +75,9 @@ nvector(x::N_Vector) = x
 ##################################################################
 
 # ARKode
+#TODO: Simplify interface to ARKodeInit to allow either fully explicit,
+# fully implicit, or both. This is incorrect as written (written just for
+# the example code.)
 ARKodeInit(mem, fi::Function, t0, y) =
     ARKodeInit(mem,
                C_NULL,
@@ -87,6 +90,11 @@ ARKodeInit(mem, fe::Function, fi::Function, t0, y) =
                cfunction(fi, Int32, (realtype, N_Vector, N_Vector, Ptr{Void})),
                t0,
                nvector(y))
+
+ARKDlsSetDenseJacFn(mem, jac::Function) =
+    ARKDlsSetDenseJacFn(mem, cfunction(jac, Int32, (Int32, realtype, N_Vector, N_Vector, DlsMat, Ptr{Void}, N_Vector, N_Vector, N_Vector)))
+ARKode(mem, tout, yout::Vector{realtype}, tret, itask) =
+    ARKode(mem, tout, nvector(yout), tret, itask)
 # KINSOL
 KINInit(mem, sysfn::Function, y) =
     KINInit(mem, cfunction(sysfn, Int32, (N_Vector, N_Vector, Ptr{Void})), nvector(y))
