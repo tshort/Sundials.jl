@@ -276,7 +276,7 @@ function cvode(f::Function, y0::Vector{Float64}, t::Vector{Float64}; reltol::Flo
     flag = CVodeSetUserData(mem, f)
     flag = CVodeSStolerances(mem, reltol, abstol)
     flag = CVDense(mem, neq)
-    yres = zeros(length(t), length(y0))
+    const yres = zeros(length(t), length(y0))
     yres[1,:] = y0
     y = copy(y0)
     tout = [0.0]
