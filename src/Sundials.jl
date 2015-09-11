@@ -53,10 +53,10 @@ include("constants.jl")
 #
 ##################################################################
 
-nvlength(x::N_Vector) = unsafe_load(unsafe_load(convert(Ptr{Ptr{Clong}}, x)))
+nvlength(x::N_Vector) = unsafe_load(unsafe_load(convert(Ref{Ref{Clong}}, x)))
 asarray(x::N_Vector) = pointer_to_array(N_VGetArrayPointer_Serial(x), (nvlength(x),))
 asarray(x::Vector{realtype}) = x
-asarray(x::Ptr{realtype}, dims::Tuple) = pointer_to_array(x, dims)
+asarray(x::Ref{realtype}, dims::Tuple) = pointer_to_array(x, dims)
 asarray(x::N_Vector, dims::Tuple) = reinterpret(realtype, asarray(x), dims)
 nvector(x::Vector{realtype}) = N_VMake_Serial(length(x), x)
 nvector(x::N_Vector) = x
@@ -74,7 +74,7 @@ nvector(x::N_Vector) = x
 
 # KINSOL
 KINInit(mem, sysfn::Function, y) =
-    KINInit(mem, cfunction(sysfn, Int32, (N_Vector, N_Vector, Ptr{Void})), nvector(y))
+    KINInit(mem, cfunction(sysfn, Int32, (N_Vector, N_Vector, Ref{Void})), nvector(y))
 KINSetConstraints(mem, constraints::Vector{realtype}) =
     KINSetConstraints(mem, nvector(constraints))
 KINSol(mem, u::Vector{realtype}, strategy, u_scale::Vector{realtype}, f_scale::Vector{realtype}) =
@@ -82,13 +82,13 @@ KINSol(mem, u::Vector{realtype}, strategy, u_scale::Vector{realtype}, f_scale::V
 
 # IDA
 IDAInit(mem, res::Function, t0, yy0, yp0) =
-    IDAInit(mem, cfunction(res, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ptr{Void})), t0, nvector(yy0), nvector(yp0))
+    IDAInit(mem, cfunction(res, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ref{Void})), t0, nvector(yy0), nvector(yp0))
 IDARootInit(mem, nrtfn, g::Function) =
-    IDARootInit(mem, nrtfn, cfunction(g, Int32, (realtype, N_Vector, N_Vector, Ptr{realtype}, Ptr{Void})))
+    IDARootInit(mem, nrtfn, cfunction(g, Int32, (realtype, N_Vector, N_Vector, Ref{realtype}, Ref{Void})))
 IDASVtolerances(mem, reltol, abstol::Vector{realtype}) =
     IDASVtolerances(mem, reltol, nvector(abstol))
 IDADlsSetDenseJacFn(mem, jac::Function) =
-    IDADlsSetDenseJacFn(mem, cfunction(jac, Int32, (Int32, realtype, realtype, N_Vector, N_Vector, N_Vector, DlsMat, Ptr{Void}, N_Vector, N_Vector, N_Vector)))
+    IDADlsSetDenseJacFn(mem, cfunction(jac, Int32, (Int32, realtype, realtype, N_Vector, N_Vector, N_Vector, DlsMat, Ref{Void}, N_Vector, N_Vector, N_Vector)))
 IDASetId(mem, id::Vector{realtype}) =
     IDASetId(mem, nvector(id))
 IDASetConstraints(mem, constraints::Vector{realtype}) =
@@ -98,7 +98,7 @@ IDASolve(mem, tout, tret, yret::Vector{realtype}, ypret::Vector{realtype}, itask
 
 # CVODE
 CVodeInit(mem, f::Function, t0, y0) =
-    CVodeInit(mem, cfunction(f, Int32, (realtype, N_Vector, N_Vector, Ptr{Void})), t0, nvector(y0))
+    CVodeInit(mem, cfunction(f, Int32, (realtype, N_Vector, N_Vector, Ref{Void})), t0, nvector(y0))
 CVodeReInit(mem, t0, y0::Vector{realtype}) =
     CVodeReInit(mem, t0, nvector(y0))
 CVodeSVtolerances(mem, reltol, abstol::Vector{realtype}) =
@@ -110,30 +110,30 @@ CVodeGetErrWeights(mem, eweight::Vector{realtype}) =
 CVodeGetEstLocalErrors(mem, ele::Vector{realtype}) =
     CVodeGetEstLocalErrors(mem, nvector(ele))
 CVodeRootInit(mem, nrtfn, g::Function) =
-    CVodeRootInit(mem, nrtfn, cfunction(g, Int32, (realtype, N_Vector, Ptr{realtype}, Ptr{Void})))
+    CVodeRootInit(mem, nrtfn, cfunction(g, Int32, (realtype, N_Vector, Ref{realtype}, Ref{Void})))
 CVDlsSetDenseJacFn(mem, jac::Function) =
-    CVDlsSetDenseJacFn(mem, cfunction(jac, Int32, (Int32, realtype, N_Vector, N_Vector, DlsMat, Ptr{Void}, N_Vector, N_Vector, N_Vector)))
+    CVDlsSetDenseJacFn(mem, cfunction(jac, Int32, (Int32, realtype, N_Vector, N_Vector, DlsMat, Ref{Void}, N_Vector, N_Vector, N_Vector)))
 CVode(mem, tout, yout::Vector{realtype}, tret, itask) =
     CVode(mem, tout, nvector(yout), tret, itask)
 
 if isdefined(:libsundials_cvodes)
 # CVODES
 CVodeQuadInit(mem, fQ::Function, yQ0) =
-    CVodeQuadInit(mem, cfunction(fQ, Int32, (realtype, N_Vector, N_Vector, Ptr{Void})), nvector(yQ0))
+    CVodeQuadInit(mem, cfunction(fQ, Int32, (realtype, N_Vector, N_Vector, Ref{Void})), nvector(yQ0))
 CVodeQuadReInit(mem, yQ0::Vector{realtype}) =
     CVodeQuadReInit(mem, nvector(yQ0))
 CVodeQuadSVtolerances(mem, reltolQ, abstolQ::Vector{realtype}) =
     CVodeQuadSVtolerances(mem, reltolQ, nvector(abstolQ))
 CVodeSensInit(mem, Ns, ism, fS::Function, yS0) =
-    CVodeSensInit(mem, Ns, ism, cfunction(fS, Int32, (int32, realtype, N_Vector, N_Vector, N_Vector, N_Vector, Ptr{Void}, N_Vector, N_Vector)), nvector(yS0))
+    CVodeSensInit(mem, Ns, ism, cfunction(fS, Int32, (int32, realtype, N_Vector, N_Vector, N_Vector, N_Vector, Ref{Void}, N_Vector, N_Vector)), nvector(yS0))
 CVodeSensInit1(mem, Ns, ism, fS1::Function, yS0) =
-    CVodeSensInit1(mem, Ns, ism, cfunction(fS1, Int32, (int32, realtype, N_Vector, N_Vector, int32, N_Vector, N_Vector, Ptr{Void}, N_Vector, N_Vector)), nvector(yS0))
+    CVodeSensInit1(mem, Ns, ism, cfunction(fS1, Int32, (int32, realtype, N_Vector, N_Vector, int32, N_Vector, N_Vector, Ref{Void}, N_Vector, N_Vector)), nvector(yS0))
 CVodeSensReInit(mem, ism, yS0::Vector{realtype}) =
     CVodeSensReInit(mem, ism, nvector(yS0))
 CVodeSensSVtolerances(mem, reltolS, abstolS::Vector{realtype}) =
     CVodeSensSVtolerances(mem, reltolS, nvector(abstolS))
 CVodeQuadSensInit(mem, fQS::Function, yQS0) =
-    CVodeQuadSensInit(mem, cfunction(fQS, Int32, (int32, realtype, N_Vector, N_Vector, N_Vector, N_Vector, Ptr{Void}, N_Vector, N_Vector)), nvector(yQS0))
+    CVodeQuadSensInit(mem, cfunction(fQS, Int32, (int32, realtype, N_Vector, N_Vector, N_Vector, N_Vector, Ref{Void}, N_Vector, N_Vector)), nvector(yQS0))
 CVodeQuadSensReInit(mem, yQS0::Vector{realtype}) =
     CVodeQuadSensReInit(mem, nvector(yQS0))
 CVodeQuadSensSVtolerances(mem, reltolQS, abstolQS::Vector{realtype}) =
@@ -165,17 +165,17 @@ CVodeGetSensErrWeights(mem, eSweight::Vector{realtype}) =
 CVodeGetQuadSensErrWeights(mem, eQSweight::Vector{realtype}) =
     CVodeGetQuadSensErrWeights(mem, nvector(eQSweight))
 CVodeInitB(mem, which, fB::Function, tB0, yB0) =
-    CVodeInitB(mem, which, cfunction(fB, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ptr{Void})), tB0, nvector(yB0))
+    CVodeInitB(mem, which, cfunction(fB, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ref{Void})), tB0, nvector(yB0))
 CVodeInitBS(mem, which, fBs::Function, tB0, yB0) =
-    CVodeInitBS(mem, which, cfunction(fBs, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ptr{Void})), tB0, nvector(yB0))
+    CVodeInitBS(mem, which, cfunction(fBs, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ref{Void})), tB0, nvector(yB0))
 CVodeReInitB(mem, which, tB0, yB0::Vector{realtype}) =
     CVodeReInitB(mem, which, tB0, nvector(yB0))
 CVodeSVtolerancesB(mem, which, reltolB, abstolB::Vector{realtype}) =
     CVodeSVtolerancesB(mem, which, reltolB, nvector(abstolB))
 CVodeQuadInitB(mem, which, fQB::Function, yQB0) =
-    CVodeQuadInitB(mem, which, cfunction(fQB, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ptr{Void})), nvector(yQB0))
+    CVodeQuadInitB(mem, which, cfunction(fQB, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ref{Void})), nvector(yQB0))
 CVodeQuadInitBS(mem, which, fQBs::Function, yQB0) =
-    CVodeQuadInitBS(mem, which, cfunction(fQBs, Int32, (realtype, N_Vector, N_Vector, N_Vector, N_Vector, Ptr{Void})), nvector(yQB0))
+    CVodeQuadInitBS(mem, which, cfunction(fQBs, Int32, (realtype, N_Vector, N_Vector, N_Vector, N_Vector, Ref{Void})), nvector(yQB0))
 CVodeQuadReInitB(mem, which, yQB0::Vector{realtype}) =
     CVodeQuadReInitB(mem, which, nvector(yQB0))
 CVodeQuadSVtolerancesB(mem, which, reltolQB, abstolQB::Vector{realtype}) =
@@ -193,15 +193,15 @@ CVodeGetAdjDataPointHermite(mem, which, t, y::Vector{realtype}, yd::Vector{realt
 CVodeGetAdjDataPointPolynomial(mem, which, t, y::Vector{realtype}) =
     CVodeGetAdjDataPointPolynomial(mem, which, t, nvector(y))
 CVodeWFtolerances(mem, efun::Function) =
-    CVodeWFtolerances(mem, cfunction(efun, Int32, (N_Vector, N_Vector, Ptr{Void})))
+    CVodeWFtolerances(mem, cfunction(efun, Int32, (N_Vector, N_Vector, Ref{Void})))
 CVodeSetErrHandlerFn(mem, ehfun::Function, eh_data) =
-    CVodeSetErrHandlerFn(mem, cfunction(ehfun, Void, (Int32, Ptr{Uint8}, Ptr{Uint8}, Ptr{Uint8}, Ptr{Void})), eh_data)
+    CVodeSetErrHandlerFn(mem, cfunction(ehfun, Void, (Int32, Ref{Uint8}, Ref{Uint8}, Ref{Uint8}, Ref{Void})), eh_data)
 
 # IDAS  (still incomplete)
 IDAReInit(mem, t0, yy0::Vector{realtype}, yp0::Vector{realtype}) =
     IDAReInit(mem, t0, nvector(yy0), nvector(yp0))
 IDAQuadInit(mem, rhsQ::Function, yQ0) =
-    IDAQuadInit(mem, cfunction(rhsQ, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ptr{Void})), nvector(yQ0))
+    IDAQuadInit(mem, cfunction(rhsQ, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ref{Void})), nvector(yQ0))
 IDAQuadReInit(mem, yQ0::Vector{realtype}) =
     IDAQuadReInit(mem, nvector(yQ0))
 
@@ -216,7 +216,7 @@ end
 ##################################################################
 
 
-@c Int32 KINSetUserData (Ptr{:None},Any) libsundials_kinsol  ## needed to allow passing a Function through the user data
+@c Int32 KINSetUserData (Ref{:None},Any) libsundials_kinsol  ## needed to allow passing a Function through the user data
 
 function kinsolfun(y::N_Vector, fy::N_Vector, userfun::Function)
     y = asarray(y)
@@ -252,7 +252,7 @@ function kinsol(f::Function, y0::Vector{Float64})
     return y
 end
 
-@c Int32 CVodeSetUserData (Ptr{:None},Any) libsundials_cvode  ## needed to allow passing a Function through the user data
+@c Int32 CVodeSetUserData (Ref{:None},Any) libsundials_cvode  ## needed to allow passing a Function through the user data
 
 function cvodefun(t::Float64, y::N_Vector, yp::N_Vector, userfun::Function)
     y = Sundials.asarray(y)
@@ -287,7 +287,7 @@ function cvode(f::Function, y0::Vector{Float64}, t::Vector{Float64}; reltol::Flo
     return yres
 end
 
-@c Int32 IDASetUserData (Ptr{:None},Any) libsundials_ida  ## needed to allow passing a Function through the user data
+@c Int32 IDASetUserData (Ref{:None},Any) libsundials_ida  ## needed to allow passing a Function through the user data
 
 function idasolfun(t::Float64, y::N_Vector, yp::N_Vector, r::N_Vector, userfun::Function)
     y = Sundials.asarray(y)
