@@ -26,26 +26,49 @@ if isdefined(:libsundials_cvodes)
     libsundials_cvode = libsundials_cvodes
     libsundials_ida = libsundials_idas
 end
+if VERSION >= v"0.4-"
+  shlib = libsundials_nvecserial
+  include("nvector.jl")
+  shlib = libsundials_cvode
+  include("libsundials.jl")
+  include("cvode.jl")
+  if isdefined(:libsundials_cvodes)
+      shlib = libsundials_cvodes
+      include("cvodes.jl")
+  end
+  shlib = libsundials_ida
+  include("ida.jl")
+  if isdefined(:libsundials_cvodes)
+      shlib = libsundials_idas
+      include("idas.jl")
+  end
+  shlib = libsundials_kinsol
+  include("kinsol.jl")
 
-shlib = libsundials_nvecserial
-include("nvector.jl")
-shlib = libsundials_cvode
-include("libsundials.jl")
-include("cvode.jl")
-if isdefined(:libsundials_cvodes)
-    shlib = libsundials_cvodes
-    include("cvodes.jl")
-end
-shlib = libsundials_ida
-include("ida.jl")
-if isdefined(:libsundials_cvodes)
-    shlib = libsundials_idas
-    include("idas.jl")
-end
-shlib = libsundials_kinsol
-include("kinsol.jl")
+  include("constants.jl")
+  include("Sundials-inc.jl")
+else
+  shlib = libsundials_nvecserial
+  include("legacy/nvector.jl")
+  shlib = libsundials_cvode
+  include("legacy/libsundials.jl")
+  include("legacy/cvode.jl")
+  if isdefined(:libsundials_cvodes)
+      shlib = libsundials_cvodes
+      include("legacy/cvodes.jl")
+  end
+  shlib = libsundials_ida
+  include("legacy/ida.jl")
+  if isdefined(:libsundials_cvodes)
+      shlib = libsundials_idas
+      include("legacy/idas.jl")
+  end
+  shlib = libsundials_kinsol
+  include("legacy/kinsol.jl")
 
-include("constants.jl")
+  include("legacy/constants.jl")
+  include("legacy/Sundials-inc.jl")
+end
 
 ##################################################################
 #
