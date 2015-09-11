@@ -1,4 +1,5 @@
 using BinDeps
+using Compat
 
 @BinDeps.setup
 
@@ -40,13 +41,13 @@ provides(SimpleBuild,
     end), sundialslibs)
 
 if enable_sensitivities
-@BinDeps.install Dict(:libsundials_cvodes => :libsundials_cvodes,
+@BinDeps.install @compat Dict(:libsundials_cvodes => :libsundials_cvodes,
                   :libsundials_idas => :libsundials_idas,
                   :libsundials_kinsol => :libsundials_kinsol,
                   :libsundials_arkode => :libsundials_arkode,
                   :libsundials_nvecserial => :libsundials_nvecserial)
 else
-@BinDeps.install Dict(:libsundials_cvode => :libsundials_cvode,
+@BinDeps.install @compat Dict(:libsundials_cvode => :libsundials_cvode,
                   :libsundials_ida => :libsundials_ida,
                   :libsundials_kinsol => :libsundials_kinsol,
                   :libsundials_arkode => :libsundials_arkode,
