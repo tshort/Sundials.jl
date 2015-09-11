@@ -1,5 +1,5 @@
 
-recurs_sym_type(ex::Any) = 
+recurs_sym_type(ex::Any) =
   (ex==None || typeof(ex)==Symbol || length(ex.args)==1) ? eval(ex) : Expr(ex.head, ex.args[1], recurs_sym_type(ex.args[2]))
 macro c(ret_type, func, arg_types, lib)
   local _arg_types = Expr(:tuple, [recurs_sym_type(a) for a in arg_types.args]...)
@@ -18,101 +18,105 @@ macro ctypedef(fake_t,real_t)
   end
 end
 
+
+type KINSOL_struct; end # dummy type to give us a typed pointer
+typealias KINSOL_ptr Ptr{KINSOL_struct}
+
+
 # header: /usr/local/include/kinsol/kinsol_band.h
-@ctypedef KINDlsDenseJacFn Ref{:Void}
-@ctypedef KINDlsBandJacFn Ref{:Void}
-@c Int32 KINDlsSetDenseJacFn (Ref{:None},:KINDlsDenseJacFn) shlib
-@c Int32 KINDlsSetBandJacFn (Ref{:None},:KINDlsBandJacFn) shlib
-@c Int32 KINDlsGetWorkSpace (Ref{:None},Ref{:Clong},Ref{:Clong}) shlib
-@c Int32 KINDlsGetNumJacEvals (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINDlsGetNumFuncEvals (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINDlsGetLastFlag (Ref{:None},Ref{:Clong}) shlib
-@c Ref{:Uint8} KINDlsGetReturnFlagName (:Clong,) shlib
-@c Int32 KINBand (Ref{:None},:Clong,:Clong,:Clong) shlib
+@ctypedef KINDlsDenseJacFn Ptr{:Void}
+@ctypedef KINDlsBandJacFn Ptr{:Void}
+@c Int32 KINDlsSetDenseJacFn (:KINSOL_ptr,:KINDlsDenseJacFn) shlib
+@c Int32 KINDlsSetBandJacFn (:KINSOL_ptr,:KINDlsBandJacFn) shlib
+@c Int32 KINDlsGetWorkSpace (:KINSOL_ptr,Ptr{:Clong},Ptr{:Clong}) shlib
+@c Int32 KINDlsGetNumJacEvals (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINDlsGetNumFuncEvals (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINDlsGetLastFlag (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Ptr{:Uint8} KINDlsGetReturnFlagName (:Clong,) shlib
+@c Int32 KINBand (:KINSOL_ptr,:Clong,:Clong,:Clong) shlib
 
 # header: /usr/local/include/kinsol/kinsol_bbdpre.h
-@ctypedef KINCommFn Ref{:Void}
-@ctypedef KINLocalFn Ref{:Void}
-@c Int32 KINBBDPrecInit (Ref{:None},:Clong,:Clong,:Clong,:Clong,:Clong,:realtype,:KINLocalFn,:KINCommFn) shlib
-@c Int32 KINBBDPrecGetWorkSpace (Ref{:None},Ref{:Clong},Ref{:Clong}) shlib
-@c Int32 KINBBDPrecGetNumGfnEvals (Ref{:None},Ref{:Clong}) shlib
+@ctypedef KINCommFn Ptr{:Void}
+@ctypedef KINLocalFn Ptr{:Void}
+@c Int32 KINBBDPrecInit (:KINSOL_ptr,:Clong,:Clong,:Clong,:Clong,:Clong,:realtype,:KINLocalFn,:KINCommFn) shlib
+@c Int32 KINBBDPrecGetWorkSpace (:KINSOL_ptr,Ptr{:Clong},Ptr{:Clong}) shlib
+@c Int32 KINBBDPrecGetNumGfnEvals (:KINSOL_ptr,Ptr{:Clong}) shlib
 
 # header: /usr/local/include/kinsol/kinsol_dense.h
-@c Int32 KINDense (Ref{:None},:Clong) shlib
+@c Int32 KINDense (:KINSOL_ptr,:Clong) shlib
 
 # header: /usr/local/include/kinsol/kinsol_direct.h
 
 # header: /usr/local/include/kinsol/kinsol.h
-@ctypedef KINSysFn Ref{:Void}
-@ctypedef KINErrHandlerFn Ref{:Void}
-@ctypedef KINInfoHandlerFn Ref{:Void}
-@c Ref{:None} KINCreate () shlib
-@c Int32 KINSetErrHandlerFn (Ref{:None},:KINErrHandlerFn,Ref{:None}) shlib
-@c Int32 KINSetErrFile (Ref{:None},Ref{:FILE}) shlib
-@c Int32 KINSetInfoHandlerFn (Ref{:None},:KINInfoHandlerFn,Ref{:None}) shlib
-@c Int32 KINSetInfoFile (Ref{:None},Ref{:FILE}) shlib
-@c Int32 KINSetUserData (Ref{:None},Ref{:None}) shlib
-@c Int32 KINSetPrintLevel (Ref{:None},:Int32) shlib
-@c Int32 KINSetNumMaxIters (Ref{:None},:Clong) shlib
-@c Int32 KINSetNoInitSetup (Ref{:None},:Int32) shlib
-@c Int32 KINSetNoResMon (Ref{:None},:Int32) shlib
-@c Int32 KINSetMaxSetupCalls (Ref{:None},:Clong) shlib
-@c Int32 KINSetMaxSubSetupCalls (Ref{:None},:Clong) shlib
-@c Int32 KINSetEtaForm (Ref{:None},:Int32) shlib
-@c Int32 KINSetEtaConstValue (Ref{:None},:realtype) shlib
-@c Int32 KINSetEtaParams (Ref{:None},:realtype,:realtype) shlib
-@c Int32 KINSetResMonParams (Ref{:None},:realtype,:realtype) shlib
-@c Int32 KINSetResMonConstValue (Ref{:None},:realtype) shlib
-@c Int32 KINSetNoMinEps (Ref{:None},:Int32) shlib
-@c Int32 KINSetMaxNewtonStep (Ref{:None},:realtype) shlib
-@c Int32 KINSetMaxBetaFails (Ref{:None},:Clong) shlib
-@c Int32 KINSetRelErrFunc (Ref{:None},:realtype) shlib
-@c Int32 KINSetFuncNormTol (Ref{:None},:realtype) shlib
-@c Int32 KINSetScaledStepTol (Ref{:None},:realtype) shlib
-@c Int32 KINSetConstraints (Ref{:None},:N_Vector) shlib
-@c Int32 KINSetSysFunc (Ref{:None},:KINSysFn) shlib
-@c Int32 KINInit (Ref{:None},:KINSysFn,:N_Vector) shlib
-@c Int32 KINSol (Ref{:None},:N_Vector,:Int32,:N_Vector,:N_Vector) shlib
-@c Int32 KINGetWorkSpace (Ref{:None},Ref{:Clong},Ref{:Clong}) shlib
-@c Int32 KINGetNumNonlinSolvIters (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINGetNumFuncEvals (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINGetNumBetaCondFails (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINGetNumBacktrackOps (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINGetFuncNorm (Ref{:None},Ref{:realtype}) shlib
-@c Int32 KINGetStepLength (Ref{:None},Ref{:realtype}) shlib
-@c Ref{:Uint8} KINGetReturnFlagName (:Clong,) shlib
-@c None KINFree (Ref{Ref{:None}},) shlib
+@ctypedef KINSysFn Ptr{:Void}
+@ctypedef KINErrHandlerFn Ptr{:Void}
+@ctypedef KINInfoHandlerFn Ptr{:Void}
+@c KINSOL_ptr KINCreate () shlib
+@c Int32 KINSetErrHandlerFn (:KINSOL_ptr,:KINErrHandlerFn,Ptr{:None}) shlib
+@c Int32 KINSetErrFile (:KINSOL_ptr,Ptr{:FILE}) shlib
+@c Int32 KINSetInfoHandlerFn (:KINSOL_ptr,:KINInfoHandlerFn,Ptr{:None}) shlib
+@c Int32 KINSetInfoFile (:KINSOL_ptr,Ptr{:FILE}) shlib
+@c Int32 KINSetUserData (:KINSOL_ptr,Ptr{:None}) shlib
+@c Int32 KINSetPrintLevel (:KINSOL_ptr,:Int32) shlib
+@c Int32 KINSetNumMaxIters (:KINSOL_ptr,:Clong) shlib
+@c Int32 KINSetNoInitSetup (:KINSOL_ptr,:Int32) shlib
+@c Int32 KINSetNoResMon (:KINSOL_ptr,:Int32) shlib
+@c Int32 KINSetMaxSetupCalls (:KINSOL_ptr,:Clong) shlib
+@c Int32 KINSetMaxSubSetupCalls (:KINSOL_ptr,:Clong) shlib
+@c Int32 KINSetEtaForm (:KINSOL_ptr,:Int32) shlib
+@c Int32 KINSetEtaConstValue (:KINSOL_ptr,:realtype) shlib
+@c Int32 KINSetEtaParams (:KINSOL_ptr,:realtype,:realtype) shlib
+@c Int32 KINSetResMonParams (:KINSOL_ptr,:realtype,:realtype) shlib
+@c Int32 KINSetResMonConstValue (:KINSOL_ptr,:realtype) shlib
+@c Int32 KINSetNoMinEps (:KINSOL_ptr,:Int32) shlib
+@c Int32 KINSetMaxNewtonStep (:KINSOL_ptr,:realtype) shlib
+@c Int32 KINSetMaxBetaFails (:KINSOL_ptr,:Clong) shlib
+@c Int32 KINSetRelErrFunc (:KINSOL_ptr,:realtype) shlib
+@c Int32 KINSetFuncNormTol (:KINSOL_ptr,:realtype) shlib
+@c Int32 KINSetScaledStepTol (:KINSOL_ptr,:realtype) shlib
+@c Int32 KINSetConstraints (:KINSOL_ptr,:N_Vector) shlib
+@c Int32 KINSetSysFunc (:KINSOL_ptr,:KINSysFn) shlib
+@c Int32 KINInit (:KINSOL_ptr,:KINSysFn,:N_Vector) shlib
+@c Int32 KINSol (:KINSOL_ptr,:N_Vector,:Int32,:N_Vector,:N_Vector) shlib
+@c Int32 KINGetWorkSpace (:KINSOL_ptr,Ptr{:Clong},Ptr{:Clong}) shlib
+@c Int32 KINGetNumNonlinSolvIters (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINGetNumFuncEvals (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINGetNumBetaCondFails (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINGetNumBacktrackOps (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINGetFuncNorm (:KINSOL_ptr,Ptr{:realtype}) shlib
+@c Int32 KINGetStepLength (:KINSOL_ptr,Ptr{:realtype}) shlib
+@c Ptr{:Uint8} KINGetReturnFlagName (:Clong,) shlib
+@c None KINFree (Ptr{:KINSOL_ptr},) shlib
 
 # header: /usr/local/include/kinsol/kinsol_impl.h
-@ctypedef KINMem Ref{:Void}
-@c None KINProcessError (:KINMem,:Int32,Ref{:Uint8},Ref{:Uint8},Ref{:Uint8}) shlib
-@c None KINErrHandler (:Int32,Ref{:Uint8},Ref{:Uint8},Ref{:Uint8},Ref{:None}) shlib
-@c None KINPrintInfo (:KINMem,:Int32,Ref{:Uint8},Ref{:Uint8},Ref{:Uint8}) shlib
-@c None KINInfoHandler (Ref{:Uint8},Ref{:Uint8},Ref{:Uint8},Ref{:None}) shlib
+@ctypedef KINMem Ptr{:Void}
+@c None KINProcessError (:KINMem,:Int32,Ptr{:Uint8},Ptr{:Uint8},Ptr{:Uint8}) shlib
+@c None KINErrHandler (:Int32,Ptr{:Uint8},Ptr{:Uint8},Ptr{:Uint8},Ptr{:None}) shlib
+@c None KINPrintInfo (:KINMem,:Int32,Ptr{:Uint8},Ptr{:Uint8},Ptr{:Uint8}) shlib
+@c None KINInfoHandler (Ptr{:Uint8},Ptr{:Uint8},Ptr{:Uint8},Ptr{:None}) shlib
 
 # header: /usr/local/include/kinsol/kinsol_spbcgs.h
-@ctypedef KINSpilsPrecSetupFn Ref{:Void}
-@ctypedef KINSpilsPrecSolveFn Ref{:Void}
-@ctypedef KINSpilsJacTimesVecFn Ref{:Void}
-@c Int32 KINSpilsSetMaxRestarts (Ref{:None},:Int32) shlib
-@c Int32 KINSpilsSetPreconditioner (Ref{:None},:KINSpilsPrecSetupFn,:KINSpilsPrecSolveFn) shlib
-@c Int32 KINSpilsSetJacTimesVecFn (Ref{:None},:KINSpilsJacTimesVecFn) shlib
-@c Int32 KINSpilsGetWorkSpace (Ref{:None},Ref{:Clong},Ref{:Clong}) shlib
-@c Int32 KINSpilsGetNumPrecEvals (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINSpilsGetNumPrecSolves (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINSpilsGetNumLinIters (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINSpilsGetNumConvFails (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINSpilsGetNumJtimesEvals (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINSpilsGetNumFuncEvals (Ref{:None},Ref{:Clong}) shlib
-@c Int32 KINSpilsGetLastFlag (Ref{:None},Ref{:Clong}) shlib
-@c Ref{:Uint8} KINSpilsGetReturnFlagName (:Clong,) shlib
-@c Int32 KINSpbcg (Ref{:None},:Int32) shlib
+@c Int32 KINSpbcg (:KINSOL_ptr,:Int32) shlib
 
 # header: /usr/local/include/kinsol/kinsol_spgmr.h
-@c Int32 KINSpgmr (Ref{:None},:Int32) shlib
+@c Int32 KINSpgmr (:KINSOL_ptr,:Int32) shlib
 
 # header: /usr/local/include/kinsol/kinsol_spils.h
+@ctypedef KINSpilsPrecSetupFn Ptr{:Void}
+@ctypedef KINSpilsPrecSolveFn Ptr{:Void}
+@ctypedef KINSpilsJacTimesVecFn Ptr{:Void}
+@c Int32 KINSpilsSetMaxRestarts (:KINSOL_ptr,:Int32) shlib
+@c Int32 KINSpilsSetPreconditioner (:KINSOL_ptr,:KINSpilsPrecSetupFn,:KINSpilsPrecSolveFn) shlib
+@c Int32 KINSpilsSetJacTimesVecFn (:KINSOL_ptr,:KINSpilsJacTimesVecFn) shlib
+@c Int32 KINSpilsGetWorkSpace (:KINSOL_ptr,Ptr{:Clong},Ptr{:Clong}) shlib
+@c Int32 KINSpilsGetNumPrecEvals (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINSpilsGetNumPrecSolves (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINSpilsGetNumLinIters (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINSpilsGetNumConvFails (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINSpilsGetNumJtimesEvals (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINSpilsGetNumFuncEvals (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Int32 KINSpilsGetLastFlag (:KINSOL_ptr,Ptr{:Clong}) shlib
+@c Ptr{:Uint8} KINSpilsGetReturnFlagName (:Clong,) shlib
 
 # header: /usr/local/include/kinsol/kinsol_sptfqmr.h
-@c Int32 KINSptfqmr (Ref{:None},:Int32) shlib
-
+@c Int32 KINSptfqmr (:KINSOL_ptr,:Int32) shlib
