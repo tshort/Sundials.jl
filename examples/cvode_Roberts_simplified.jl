@@ -7,5 +7,5 @@ function f(t, y, ydot)
     ydot[3] = 3.0e7*y[2]*y[2]
     ydot[2] = -ydot[1] - ydot[3]
 end
-t = [0.0, 4 * logspace(-1., 7., 9)]
-res = Sundials.cvode(f, [1.0, 0.0, 0.0], t)
+t = [0.0; 4 * logspace(-1., 7., 9)]
+res = Sundials.cvode(f, [1.0; 0.0; 0.0], t)
