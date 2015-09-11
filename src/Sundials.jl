@@ -46,6 +46,10 @@ if VERSION >= v"0.4-"
   include("kinsol.jl")
 
   include("constants.jl")
+
+  shlib = libsundials_arkode
+  include("arkode.jl")
+
   include("Sundials-inc.jl")
 else
   shlib = libsundials_nvecserial
@@ -67,6 +71,10 @@ else
   include("legacy/kinsol.jl")
 
   include("legacy/constants.jl")
+
+  shlib = libsundials_arkode
+  include("arkode.jl")
+
   include("legacy/Sundials-inc.jl")
 end
 end # module
