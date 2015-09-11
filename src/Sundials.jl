@@ -258,7 +258,7 @@ function cvodefun(t::Float64, y::N_Vector, yp::N_Vector, userfun::Function)
     y = Sundials.asarray(y)
     yp = Sundials.asarray(yp)
     userfun(t, y, yp)
-    return int32(0)
+    return Int32(0)
 end
 
 function cvode(f::Function, y0::Vector{Float64}, t::Vector{Float64}; reltol::Float64=1e-4, abstol::Float64=1e-6)
