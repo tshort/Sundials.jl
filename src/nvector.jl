@@ -19,20 +19,20 @@ macro ctypedef(fake_t,real_t)
 end
 
 type NVECTOR_struct; end # dummy type to give us a typed pointer
-typealias N_Vector Ptr{NVECTOR_struct}
+typealias N_Vector Ref{NVECTOR_struct}
 
 
 # header: /usr/local/include/nvector/nvector_parallel.h
 @ctypedef RealType Float64
-@ctypedef N_Vector_Ops Ptr{:Void}
-# @ctypedef N_Vector Ptr{:Void}
-@ctypedef N_Vector_S Ptr{:N_Vector}
+@ctypedef N_Vector_Ops Ref{:Void}
+# @ctypedef N_Vector Ref{:Void}
+@ctypedef N_Vector_S Ref{:N_Vector}
 @c N_Vector N_VClone (:N_Vector,) shlib
 @c N_Vector N_VCloneEmpty (:N_Vector,) shlib
 @c None N_VDestroy (:N_Vector,) shlib
-@c None N_VSpace (:N_Vector,Ptr{:Clong},Ptr{:Clong}) shlib
-@c Ptr{:RealType} N_VGetArrayPointer (:N_Vector,) shlib
-@c None N_VSetArrayPointer (Ptr{:RealType},:N_Vector) shlib
+@c None N_VSpace (:N_Vector,Ref{:Clong},Ref{:Clong}) shlib
+@c Ref{:RealType} N_VGetArrayPointer (:N_Vector,) shlib
+@c None N_VSetArrayPointer (Ref{:RealType},:N_Vector) shlib
 @c None N_VLinearSum (:RealType,:N_Vector,:RealType,:N_Vector,:N_Vector) shlib
 @c None N_VConst (:RealType,:N_Vector) shlib
 @c None N_VProd (:N_Vector,:N_Vector,:N_Vector) shlib
@@ -52,23 +52,23 @@ typealias N_Vector Ptr{NVECTOR_struct}
 @c Int32 N_VInvTest (:N_Vector,:N_Vector) shlib
 @c Int32 N_VConstrMask (:N_Vector,:N_Vector,:N_Vector) shlib
 @c RealType N_VMinQuotient (:N_Vector,:N_Vector) shlib
-@c Ptr{:N_Vector} N_VCloneEmptyVectorArray (:Int32,:N_Vector) shlib
-@c Ptr{:N_Vector} N_VCloneVectorArray (:Int32,:N_Vector) shlib
-@c None N_VDestroyVectorArray (Ptr{:N_Vector},:Int32) shlib
-@ctypedef N_VectorContent_Parallel Ptr{:Void}
+@c Ref{:N_Vector} N_VCloneEmptyVectorArray (:Int32,:N_Vector) shlib
+@c Ref{:N_Vector} N_VCloneVectorArray (:Int32,:N_Vector) shlib
+@c None N_VDestroyVectorArray (Ref{:N_Vector},:Int32) shlib
+@ctypedef N_VectorContent_Parallel Ref{:Void}
 @c N_Vector N_VNew_Parallel (:Int32,:Clong,:Clong) shlib
 @c N_Vector N_VNewEmpty_Parallel (:Int32,:Clong,:Clong) shlib
-@c N_Vector N_VMake_Parallel (:Int32,:Clong,:Clong,Ptr{:RealType}) shlib
-@c Ptr{:N_Vector} N_VCloneVectorArray_Parallel (:Int32,:N_Vector) shlib
-@c Ptr{:N_Vector} N_VCloneVectorArrayEmpty_Parallel (:Int32,:N_Vector) shlib
-@c None N_VDestroyVectorArray_Parallel (Ptr{:N_Vector},:Int32) shlib
+@c N_Vector N_VMake_Parallel (:Int32,:Clong,:Clong,Ref{:RealType}) shlib
+@c Ref{:N_Vector} N_VCloneVectorArray_Parallel (:Int32,:N_Vector) shlib
+@c Ref{:N_Vector} N_VCloneVectorArrayEmpty_Parallel (:Int32,:N_Vector) shlib
+@c None N_VDestroyVectorArray_Parallel (Ref{:N_Vector},:Int32) shlib
 @c None N_VPrint_Parallel (:N_Vector,) shlib
 @c N_Vector N_VCloneEmpty_Parallel (:N_Vector,) shlib
 @c N_Vector N_VClone_Parallel (:N_Vector,) shlib
 @c None N_VDestroy_Parallel (:N_Vector,) shlib
-@c None N_VSpace_Parallel (:N_Vector,Ptr{:Clong},Ptr{:Clong}) shlib
-@c Ptr{:RealType} N_VGetArrayPointer_Parallel (:N_Vector,) shlib
-@c None N_VSetArrayPointer_Parallel (Ptr{:RealType},:N_Vector) shlib
+@c None N_VSpace_Parallel (:N_Vector,Ref{:Clong},Ref{:Clong}) shlib
+@c Ref{:RealType} N_VGetArrayPointer_Parallel (:N_Vector,) shlib
+@c None N_VSetArrayPointer_Parallel (Ref{:RealType},:N_Vector) shlib
 @c None N_VLinearSum_Parallel (:RealType,:N_Vector,:RealType,:N_Vector,:N_Vector) shlib
 @c None N_VConst_Parallel (:RealType,:N_Vector) shlib
 @c None N_VProd_Parallel (:N_Vector,:N_Vector,:N_Vector) shlib
@@ -90,20 +90,20 @@ typealias N_Vector Ptr{NVECTOR_struct}
 @c RealType N_VMinQuotient_Parallel (:N_Vector,:N_Vector) shlib
 
 # header: /usr/local/include/nvector/nvector_serial.h
-@ctypedef N_VectorContent_Serial Ptr{:Void}
+@ctypedef N_VectorContent_Serial Ref{:Void}
 @c N_Vector N_VNew_Serial (:Clong,) shlib
 @c N_Vector N_VNewEmpty_Serial (:Clong,) shlib
-@c N_Vector N_VMake_Serial (:Clong,Ptr{:RealType}) shlib
-@c Ptr{:N_Vector} N_VCloneVectorArray_Serial (:Int32,:N_Vector) shlib
-@c Ptr{:N_Vector} N_VCloneVectorArrayEmpty_Serial (:Int32,:N_Vector) shlib
-@c None N_VDestroyVectorArray_Serial (Ptr{:N_Vector},:Int32) shlib
+@c N_Vector N_VMake_Serial (:Clong,Ref{:RealType}) shlib
+@c Ref{:N_Vector} N_VCloneVectorArray_Serial (:Int32,:N_Vector) shlib
+@c Ref{:N_Vector} N_VCloneVectorArrayEmpty_Serial (:Int32,:N_Vector) shlib
+@c None N_VDestroyVectorArray_Serial (Ref{:N_Vector},:Int32) shlib
 @c None N_VPrint_Serial (:N_Vector,) shlib
 @c N_Vector N_VCloneEmpty_Serial (:N_Vector,) shlib
 @c N_Vector N_VClone_Serial (:N_Vector,) shlib
 @c None N_VDestroy_Serial (:N_Vector,) shlib
-@c None N_VSpace_Serial (:N_Vector,Ptr{:Clong},Ptr{:Clong}) shlib
-@c Ptr{:RealType} N_VGetArrayPointer_Serial (:N_Vector,) shlib
-@c None N_VSetArrayPointer_Serial (Ptr{:RealType},:N_Vector) shlib
+@c None N_VSpace_Serial (:N_Vector,Ref{:Clong},Ref{:Clong}) shlib
+@c Ref{:RealType} N_VGetArrayPointer_Serial (:N_Vector,) shlib
+@c None N_VSetArrayPointer_Serial (Ref{:RealType},:N_Vector) shlib
 @c None N_VLinearSum_Serial (:RealType,:N_Vector,:RealType,:N_Vector,:N_Vector) shlib
 @c None N_VConst_Serial (:RealType,:N_Vector) shlib
 @c None N_VProd_Serial (:N_Vector,:N_Vector,:N_Vector) shlib

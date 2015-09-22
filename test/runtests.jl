@@ -1,6 +1,10 @@
 using Sundials
 using Base.Test
 
+const vv = Sundials.NVector([0.0, 0.1, 0.2])
+dump(vv)
+exit(0)
+
 # run cvode example
 println("== start cvode example")
 include("../examples/cvode_Roberts_simplified.jl")
