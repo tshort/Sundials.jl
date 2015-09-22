@@ -63,8 +63,8 @@ type KINSOL   # memory handle for KINSOL
         return k
     end
 end
-Base.convert(::Type{KINSOL_ptr}, k::KINSOL) = k.kinsol[1]
-Base.convert(T::Type{Ptr{KINSOL_ptr}}, k::KINSOL) = convert(T, k.kinsol)
+Base.unsafe_convert(::Type{KINSOL_ptr}, k::KINSOL) = k.kinsol[1]
+Base.unsafe_convert(T::Type{Ptr{KINSOL_ptr}}, k::KINSOL) = unsafe_convert(T, k.kinsol)
 
 type CVODE    # memory handle for CVode
     cvode::Vector{CVODE_ptr} # vector for passing to functions expecting Ptr{CVODE_ptr}
@@ -74,8 +74,8 @@ type CVODE    # memory handle for CVode
         return k
     end
 end
-Base.convert(::Type{CVODE_ptr}, k::CVODE) = k.cvode[1]
-Base.convert(T::Type{Ptr{CVODE_ptr}}, k::CVODE) = convert(T, k.cvode)
+Base.unsafe_convert(::Type{CVODE_ptr}, k::CVODE) = k.cvode[1]
+Base.unsafe_convert(T::Type{Ptr{CVODE_ptr}}, k::CVODE) = unsafe_convert(T, k.cvode)
 
 type IDA # memory handle for IDA
     ida::Vector{IDA_ptr} # vector for passing to functions expecting Ptr{IDA_ptr}
@@ -85,22 +85,23 @@ type IDA # memory handle for IDA
         return k
     end
 end
-Base.convert(::Type{IDA_ptr}, k::IDA) = k.ida[1]
-Base.convert(T::Type{Ptr{IDA_ptr}}, k::IDA) = convert(T, k.ida)
+Base.unsafe_convert(::Type{IDA_ptr}, k::IDA) = k.ida[1]
+Base.unsafe_convert(T::Type{Ptr{IDA_ptr}}, k::IDA) = unsafe_convert(T, k.ida)
 
 type NVector <: DenseVector{RealType} # memory handle for NVectors
     ptr::Vector{N_Vector} # vector for passing to functions expecting Ptr{N_Vector}
     v::Vector{RealType}
 
     function NVector(x::Vector{RealType})
-        k = new([N_VMake_Serial(length(x), x)], x)
+        intv = [N_VMake_Serial(length(x), x)]
+        k = new(intv, x)
         finalizer(k, N_VDestroy_Serial)
         return k
     end
 end
 NVector{T<:Real}(x::Vector{T}) = NVector(copy!(similar(x, RealType), x))
 
-Base.convert(::Type{N_Vector}, nv::NVector) = nv.ptr[1]
+Base.unsafe_convert(::Type{N_Vector}, nv::NVector) = nv.ptr[1]
 Base.convert(::Type{Vector{RealType}}, nv::NVector)= nv.v
 
 Base.size(nv::NVector, d...) = size(nv.v, d...)
@@ -326,7 +327,7 @@ function cvodefun(t::Float64, y::N_Vector, yp::N_Vector, userfun::Function)
     y = asarray(y)
     yp = asarray(yp)
     userfun(t, y, yp)
-    return int32(0)
+    return Int32(0)
 end
 
 function cvode(f::Function, y0::Vector{Float64}, t::Vector{Float64}; reltol::Float64=1e-4, abstol::Float64=1e-6)
