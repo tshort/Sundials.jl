@@ -20,20 +20,21 @@ if isdefined(:libsundials_cvodes)
     libsundials_ida = libsundials_idas
 end
 
+include("sundials_h.jl")
 shlib = libsundials_nvecserial
 include("nvector.jl")
 shlib = libsundials_cvode
 include("libsundials.jl")
-include("cvode.jl")
 if isdefined(:libsundials_cvodes)
-    shlib = libsundials_cvodes
     include("cvodes.jl")
+else
+    include("cvode.jl")
 end
 shlib = libsundials_ida
-include("ida.jl")
 if isdefined(:libsundials_cvodes)
-    shlib = libsundials_idas
     include("idas.jl")
+else
+    include("ida.jl")
 end
 shlib = libsundials_kinsol
 include("kinsol.jl")
