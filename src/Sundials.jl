@@ -1,17 +1,10 @@
 module Sundials
-
-if isfile(joinpath(dirname(dirname(@__FILE__)),"deps","deps.jl"))
-    include("../deps/deps.jl")
+const depsfile = joinpath(dirname(dirname(@__FILE__)),"deps","deps.jl")
+if isfile(depsfile)
+    include(depsfile)
 else
     error("Sundials not properly installed. Please run Pkg.build(\"Sundials\")")
 end
- 
-##################################################################
-# Deprecations
-##################################################################
-
-@deprecate ode cvode
-@deprecate ida idasol
 
 
 ##################################################################
