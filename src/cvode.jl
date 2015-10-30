@@ -2,7 +2,7 @@
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
 
-function CVodeCreate(lmm::Cint,iter::Cint)
+function CVodeCreate(lmm::Int,iter::Int)
     ccall((:CVodeCreate,shlib),Ptr{Void},(Cint,Cint),lmm,iter)
 end
 
