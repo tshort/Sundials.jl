@@ -6,11 +6,11 @@ function bandGBTRF(a::Ptr{Ptr{realtype}},n::Clong,mu::Clong,ml::Clong,smu::Clong
     ccall((:bandGBTRF,shlib),Clong,(Ptr{Ptr{realtype}},Clong,Clong,Clong,Clong,Ptr{Clong}),a,n,mu,ml,smu,p)
 end
 
-function BandGBTRS(A::DlsMat,p::Ptr{Clong},b::Ptr{realtype})
+function BandGBTRS(A::DlsMat,p::Ptr{Clong},b::Vector{realtype})
     ccall((:BandGBTRS,shlib),Void,(DlsMat,Ptr{Clong},Ptr{realtype}),A,p,b)
 end
 
-function bandGBTRS(a::Ptr{Ptr{realtype}},n::Clong,smu::Clong,ml::Clong,p::Ptr{Clong},b::Ptr{realtype})
+function bandGBTRS(a::Ptr{Ptr{realtype}},n::Clong,smu::Clong,ml::Clong,p::Ptr{Clong},b::Vector{realtype})
     ccall((:bandGBTRS,shlib),Void,(Ptr{Ptr{realtype}},Clong,Clong,Clong,Ptr{Clong},Ptr{realtype}),a,n,smu,ml,p,b)
 end
 
@@ -43,7 +43,7 @@ function DenseGETRF(A::DlsMat,p::Ptr{Clong})
     ccall((:DenseGETRF,shlib),Clong,(DlsMat,Ptr{Clong}),A,p)
 end
 
-function DenseGETRS(A::DlsMat,p::Ptr{Clong},b::Ptr{realtype})
+function DenseGETRS(A::DlsMat,p::Ptr{Clong},b::Vector{realtype})
     ccall((:DenseGETRS,shlib),Void,(DlsMat,Ptr{Clong},Ptr{realtype}),A,p,b)
 end
 
@@ -51,7 +51,7 @@ function denseGETRF(a::Ptr{Ptr{realtype}},m::Clong,n::Clong,p::Ptr{Clong})
     ccall((:denseGETRF,shlib),Clong,(Ptr{Ptr{realtype}},Clong,Clong,Ptr{Clong}),a,m,n,p)
 end
 
-function denseGETRS(a::Ptr{Ptr{realtype}},n::Clong,p::Ptr{Clong},b::Ptr{realtype})
+function denseGETRS(a::Ptr{Ptr{realtype}},n::Clong,p::Ptr{Clong},b::Vector{realtype})
     ccall((:denseGETRS,shlib),Void,(Ptr{Ptr{realtype}},Clong,Ptr{Clong},Ptr{realtype}),a,n,p,b)
 end
 
@@ -59,7 +59,7 @@ function DensePOTRF(A::DlsMat)
     ccall((:DensePOTRF,shlib),Clong,(DlsMat,),A)
 end
 
-function DensePOTRS(A::DlsMat,b::Ptr{realtype})
+function DensePOTRS(A::DlsMat,b::Vector{realtype})
     ccall((:DensePOTRS,shlib),Void,(DlsMat,Ptr{realtype}),A,b)
 end
 
@@ -67,23 +67,23 @@ function densePOTRF(a::Ptr{Ptr{realtype}},m::Clong)
     ccall((:densePOTRF,shlib),Clong,(Ptr{Ptr{realtype}},Clong),a,m)
 end
 
-function densePOTRS(a::Ptr{Ptr{realtype}},m::Clong,b::Ptr{realtype})
+function densePOTRS(a::Ptr{Ptr{realtype}},m::Clong,b::Vector{realtype})
     ccall((:densePOTRS,shlib),Void,(Ptr{Ptr{realtype}},Clong,Ptr{realtype}),a,m,b)
 end
 
-function DenseGEQRF(A::DlsMat,beta::Ptr{realtype},wrk::Ptr{realtype})
+function DenseGEQRF(A::DlsMat,beta::Vector{realtype},wrk::Vector{realtype})
     ccall((:DenseGEQRF,shlib),Cint,(DlsMat,Ptr{realtype},Ptr{realtype}),A,beta,wrk)
 end
 
-function DenseORMQR(A::DlsMat,beta::Ptr{realtype},vn::Ptr{realtype},vm::Ptr{realtype},wrk::Ptr{realtype})
+function DenseORMQR(A::DlsMat,beta::Vector{realtype},vn::Vector{realtype},vm::Vector{realtype},wrk::Vector{realtype})
     ccall((:DenseORMQR,shlib),Cint,(DlsMat,Ptr{realtype},Ptr{realtype},Ptr{realtype},Ptr{realtype}),A,beta,vn,vm,wrk)
 end
 
-function denseGEQRF(a::Ptr{Ptr{realtype}},m::Clong,n::Clong,beta::Ptr{realtype},v::Ptr{realtype})
+function denseGEQRF(a::Ptr{Ptr{realtype}},m::Clong,n::Clong,beta::Vector{realtype},v::Vector{realtype})
     ccall((:denseGEQRF,shlib),Cint,(Ptr{Ptr{realtype}},Clong,Clong,Ptr{realtype},Ptr{realtype}),a,m,n,beta,v)
 end
 
-function denseORMQR(a::Ptr{Ptr{realtype}},m::Clong,n::Clong,beta::Ptr{realtype},v::Ptr{realtype},w::Ptr{realtype},wrk::Ptr{realtype})
+function denseORMQR(a::Ptr{Ptr{realtype}},m::Clong,n::Clong,beta::Vector{realtype},v::Vector{realtype},w::Vector{realtype},wrk::Vector{realtype})
     ccall((:denseORMQR,shlib),Cint,(Ptr{Ptr{realtype}},Clong,Clong,Ptr{realtype},Ptr{realtype},Ptr{realtype},Ptr{realtype}),a,m,n,beta,v,w,wrk)
 end
 
@@ -122,7 +122,7 @@ function DestroyMat(A::DlsMat)
     ccall((:DestroyMat,shlib),Void,(DlsMat,),A)
 end
 
-function NewIntArray(N::Cint)
+function NewIntArray(N::Int)
     ccall((:NewIntArray,shlib),Ptr{Cint},(Cint,),N)
 end
 
@@ -162,7 +162,7 @@ function destroyMat(a::Ptr{Ptr{realtype}})
     ccall((:destroyMat,shlib),Void,(Ptr{Ptr{realtype}},),a)
 end
 
-function newIntArray(n::Cint)
+function newIntArray(n::Int)
     ccall((:newIntArray,shlib),Ptr{Cint},(Cint,),n)
 end
 
@@ -180,19 +180,19 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/sundials/sundials_iterative.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function ModifiedGS(v::Ptr{N_Vector},h::Ptr{Ptr{realtype}},k::Cint,p::Cint,new_vk_norm::Ptr{realtype})
+function ModifiedGS(v::Ptr{N_Vector},h::Ptr{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype})
     ccall((:ModifiedGS,shlib),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype}),v,h,k,p,new_vk_norm)
 end
 
-function ClassicalGS(v::Ptr{N_Vector},h::Ptr{Ptr{realtype}},k::Cint,p::Cint,new_vk_norm::Ptr{realtype},temp::N_Vector,s::Ptr{realtype})
+function ClassicalGS(v::Ptr{N_Vector},h::Ptr{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype},temp::N_Vector,s::Vector{realtype})
     ccall((:ClassicalGS,shlib),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype},N_Vector,Ptr{realtype}),v,h,k,p,new_vk_norm,temp,s)
 end
 
-function QRfact(n::Cint,h::Ptr{Ptr{realtype}},q::Ptr{realtype},job::Cint)
+function QRfact(n::Int,h::Ptr{Ptr{realtype}},q::Vector{realtype},job::Int)
     ccall((:QRfact,shlib),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Cint),n,h,q,job)
 end
 
-function QRsol(n::Cint,h::Ptr{Ptr{realtype}},q::Ptr{realtype},b::Ptr{realtype})
+function QRsol(n::Int,h::Ptr{Ptr{realtype}},q::Vector{realtype},b::Vector{realtype})
     ccall((:QRsol,shlib),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype}),n,h,q,b)
 end
 
@@ -203,11 +203,11 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/sundials/sundials_spgmr.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function SpgmrMalloc(l_max::Cint,vec_tmpl::N_Vector)
+function SpgmrMalloc(l_max::Int,vec_tmpl::N_Vector)
     ccall((:SpgmrMalloc,shlib),SpgmrMem,(Cint,N_Vector),l_max,vec_tmpl)
 end
 
-function SpgmrSolve(mem::SpgmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Cint,gstype::Cint,delta::realtype,max_restarts::Cint,P_data::Ptr{Void},s1::N_Vector,s2::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Ptr{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
+function SpgmrSolve(mem::SpgmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,gstype::Int,delta::realtype,max_restarts::Int,P_data::Ptr{Void},s1::N_Vector,s2::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
     ccall((:SpgmrSolve,shlib),Cint,(SpgmrMem,Ptr{Void},N_Vector,N_Vector,Cint,Cint,realtype,Cint,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,gstype,delta,max_restarts,P_data,s1,s2,atimes,psolve,res_norm,nli,nps)
 end
 
@@ -217,11 +217,11 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/sundials/sundials_sptfqmr.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function SptfqmrMalloc(l_max::Cint,vec_tmpl::N_Vector)
+function SptfqmrMalloc(l_max::Int,vec_tmpl::N_Vector)
     ccall((:SptfqmrMalloc,shlib),SptfqmrMem,(Cint,N_Vector),l_max,vec_tmpl)
 end
 
-function SptfqmrSolve(mem::SptfqmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Cint,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Ptr{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
+function SptfqmrSolve(mem::SptfqmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
     ccall((:SptfqmrSolve,shlib),Cint,(SptfqmrMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
 end
 
@@ -238,7 +238,7 @@ end
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
 
-function RPowerI(base::realtype,exponent::Cint)
+function RPowerI(base::realtype,exponent::Int)
     ccall((:RPowerI,shlib),realtype,(realtype,Cint),base,exponent)
 end
 

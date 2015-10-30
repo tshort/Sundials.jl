@@ -35,14 +35,12 @@ end
 typealias __builtin_va_list Ptr{:Void}
 
 if isdefined(:libsundials_cvodes)
-    libsundials_cvode = libsundials_cvodes
-    libsundials_ida = libsundials_idas
+    const libsundials_cvode = libsundials_cvodes
+    const libsundials_ida = libsundials_idas
 end
 
 include("sundials_h.jl")
-shlib = libsundials_nvecserial
 include("nvector.jl")
-shlib = libsundials_cvode
 include("libsundials.jl")
 if isdefined(:libsundials_cvodes)
     include("cvodes.jl")
