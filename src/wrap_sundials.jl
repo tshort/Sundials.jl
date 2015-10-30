@@ -47,7 +47,7 @@ clang_extraargs = [
 "-D", "__STDC_LIMIT_MACROS", "-D", "__STDC_CONSTANT_MACROS", 
 "-v"]
 context = wrap_c.init(
-# common_file="sundials_h.jl", 
+common_file="sundials_h.jl", 
 clang_args = clang_extraargs, clang_diagnostics = true, clang_includes = [clang_includes; incpath], header_outputfile = header_file)
 context.headers = headers
 run(context)
