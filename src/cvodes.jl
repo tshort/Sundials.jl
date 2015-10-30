@@ -110,9 +110,12 @@ function CVodeSetErrHandlerFn(cvode_mem::Ptr{Void},ehfun::CVErrHandlerFn,eh_data
     ccall((:CVodeSetErrHandlerFn,cvodes),Cint,(Ptr{Void},CVErrHandlerFn,Ptr{Void}),cvode_mem,ehfun,eh_data)
 end
 
-function CVodeSetErrFile(cvode_mem::Ptr{Void},errfp::Ptr{FILE})
-    ccall((:CVodeSetErrFile,cvodes),Cint,(Ptr{Void},Ptr{FILE}),cvode_mem,errfp)
+function CVodeSetErrFile(cvode_mem::Ptr{Void},errfp::Ptr{Void})
+    ccall((:CVodeSetErrFile,cvodes),Cint,(Ptr{Void},Ptr{Void}),cvode_mem,errfp)
 end
+# function CVodeSetErrFile(cvode_mem::Ptr{Void},errfp::Ptr{Void})
+#     ccall((:CVodeSetErrFile,cvodes),Cint,(Ptr{Void},Ptr{Void}),cvode_mem,errfp)
+# end
 
 function CVodeSetUserData(cvode_mem::Ptr{Void},user_data::Ptr{Void})
     ccall((:CVodeSetUserData,cvodes),Cint,(Ptr{Void},Ptr{Void}),cvode_mem,user_data)
@@ -879,8 +882,8 @@ function CVodeSetErrHandlerFn(cvode_mem::Ptr{Void},ehfun::CVErrHandlerFn,eh_data
     ccall((:CVodeSetErrHandlerFn,cvodes),Cint,(Ptr{Void},CVErrHandlerFn,Ptr{Void}),cvode_mem,ehfun,eh_data)
 end
 
-function CVodeSetErrFile(cvode_mem::Ptr{Void},errfp::Ptr{FILE})
-    ccall((:CVodeSetErrFile,cvodes),Cint,(Ptr{Void},Ptr{FILE}),cvode_mem,errfp)
+function CVodeSetErrFile(cvode_mem::Ptr{Void},errfp::Ptr{Void})
+    ccall((:CVodeSetErrFile,cvodes),Cint,(Ptr{Void},Ptr{Void}),cvode_mem,errfp)
 end
 
 function CVodeSetUserData(cvode_mem::Ptr{Void},user_data::Ptr{Void})

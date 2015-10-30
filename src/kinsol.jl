@@ -9,16 +9,16 @@ function KINSetErrHandlerFn(kinmem::Ptr{Void},ehfun::KINErrHandlerFn,eh_data::Pt
     ccall((:KINSetErrHandlerFn,shlib),Cint,(Ptr{Void},KINErrHandlerFn,Ptr{Void}),kinmem,ehfun,eh_data)
 end
 
-function KINSetErrFile(kinmem::Ptr{Void},errfp::Ptr{FILE})
-    ccall((:KINSetErrFile,shlib),Cint,(Ptr{Void},Ptr{FILE}),kinmem,errfp)
+function KINSetErrFile(kinmem::Ptr{Void},errfp::Ptr{Void})
+    ccall((:KINSetErrFile,shlib),Cint,(Ptr{Void},Ptr{Void}),kinmem,errfp)
 end
 
 function KINSetInfoHandlerFn(kinmem::Ptr{Void},ihfun::KINInfoHandlerFn,ih_data::Ptr{Void})
     ccall((:KINSetInfoHandlerFn,shlib),Cint,(Ptr{Void},KINInfoHandlerFn,Ptr{Void}),kinmem,ihfun,ih_data)
 end
 
-function KINSetInfoFile(kinmem::Ptr{Void},infofp::Ptr{FILE})
-    ccall((:KINSetInfoFile,shlib),Cint,(Ptr{Void},Ptr{FILE}),kinmem,infofp)
+function KINSetInfoFile(kinmem::Ptr{Void},infofp::Ptr{Void})
+    ccall((:KINSetInfoFile,shlib),Cint,(Ptr{Void},Ptr{Void}),kinmem,infofp)
 end
 
 function KINSetUserData(kinmem::Ptr{Void},user_data::Ptr{Void})
@@ -261,16 +261,16 @@ function KINSetErrHandlerFn(kinmem::Ptr{Void},ehfun::KINErrHandlerFn,eh_data::Pt
     ccall((:KINSetErrHandlerFn,shlib),Cint,(Ptr{Void},KINErrHandlerFn,Ptr{Void}),kinmem,ehfun,eh_data)
 end
 
-function KINSetErrFile(kinmem::Ptr{Void},errfp::Ptr{FILE})
-    ccall((:KINSetErrFile,shlib),Cint,(Ptr{Void},Ptr{FILE}),kinmem,errfp)
+function KINSetErrFile(kinmem::Ptr{Void},errfp::Ptr{Void})
+    ccall((:KINSetErrFile,shlib),Cint,(Ptr{Void},Ptr{Void}),kinmem,errfp)
 end
 
 function KINSetInfoHandlerFn(kinmem::Ptr{Void},ihfun::KINInfoHandlerFn,ih_data::Ptr{Void})
     ccall((:KINSetInfoHandlerFn,shlib),Cint,(Ptr{Void},KINInfoHandlerFn,Ptr{Void}),kinmem,ihfun,ih_data)
 end
 
-function KINSetInfoFile(kinmem::Ptr{Void},infofp::Ptr{FILE})
-    ccall((:KINSetInfoFile,shlib),Cint,(Ptr{Void},Ptr{FILE}),kinmem,infofp)
+function KINSetInfoFile(kinmem::Ptr{Void},infofp::Ptr{Void})
+    ccall((:KINSetInfoFile,shlib),Cint,(Ptr{Void},Ptr{Void}),kinmem,infofp)
 end
 
 function KINSetUserData(kinmem::Ptr{Void},user_data::Ptr{Void})

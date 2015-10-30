@@ -9,8 +9,8 @@ function IDASetErrHandlerFn(ida_mem::Ptr{Void},ehfun::IDAErrHandlerFn,eh_data::P
     ccall((:IDASetErrHandlerFn,idas),Cint,(Ptr{Void},IDAErrHandlerFn,Ptr{Void}),ida_mem,ehfun,eh_data)
 end
 
-function IDASetErrFile(ida_mem::Ptr{Void},errfp::Ptr{FILE})
-    ccall((:IDASetErrFile,idas),Cint,(Ptr{Void},Ptr{FILE}),ida_mem,errfp)
+function IDASetErrFile(ida_mem::Ptr{Void},errfp::Ptr{Void})
+    ccall((:IDASetErrFile,idas),Cint,(Ptr{Void},Ptr{Void}),ida_mem,errfp)
 end
 
 function IDASetUserData(ida_mem::Ptr{Void},user_data::Ptr{Void})
@@ -775,8 +775,8 @@ function IDASetErrHandlerFn(ida_mem::Ptr{Void},ehfun::IDAErrHandlerFn,eh_data::P
     ccall((:IDASetErrHandlerFn,idas),Cint,(Ptr{Void},IDAErrHandlerFn,Ptr{Void}),ida_mem,ehfun,eh_data)
 end
 
-function IDASetErrFile(ida_mem::Ptr{Void},errfp::Ptr{FILE})
-    ccall((:IDASetErrFile,idas),Cint,(Ptr{Void},Ptr{FILE}),ida_mem,errfp)
+function IDASetErrFile(ida_mem::Ptr{Void},errfp::Ptr{Void})
+    ccall((:IDASetErrFile,idas),Cint,(Ptr{Void},Ptr{Void}),ida_mem,errfp)
 end
 
 function IDASetUserData(ida_mem::Ptr{Void},user_data::Ptr{Void})
