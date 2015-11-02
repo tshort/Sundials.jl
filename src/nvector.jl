@@ -114,15 +114,15 @@ function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
     ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
 end
 
-function N_VNew_Serial(vec_length::Clong)
+function N_VNew_Serial(vec_length::Int)
     ccall((:N_VNew_Serial,libsundials_nvecserial),N_Vector,(Clong,),vec_length)
 end
 
-function N_VNewEmpty_Serial(vec_length::Clong)
+function N_VNewEmpty_Serial(vec_length::Int)
     ccall((:N_VNewEmpty_Serial,libsundials_nvecserial),N_Vector,(Clong,),vec_length)
 end
 
-function N_VMake_Serial(vec_length::Clong,v_data::Vector{realtype})
+function N_VMake_Serial(vec_length::Int,v_data::Vector{realtype})
     ccall((:N_VMake_Serial,libsundials_nvecserial),N_Vector,(Clong,Ptr{realtype}),vec_length,v_data)
 end
 
