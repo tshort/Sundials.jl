@@ -21,7 +21,7 @@ function IDASetMaxOrd(ida_mem::Ptr{Void},maxord::Int)
     ccall((:IDASetMaxOrd,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxord)
 end
 
-function IDASetMaxNumSteps(ida_mem::Ptr{Void},mxsteps::Clong)
+function IDASetMaxNumSteps(ida_mem::Ptr{Void},mxsteps::Int)
     ccall((:IDASetMaxNumSteps,libsundials_ida),Cint,(Ptr{Void},Clong),ida_mem,mxsteps)
 end
 
@@ -417,7 +417,7 @@ function IDAGetQuadSensDky1(ida_mem::Ptr{Void},t::realtype,k::Int,is::Int,dkyQS:
     ccall((:IDAGetQuadSensDky1,libsundials_ida),Cint,(Ptr{Void},realtype,Cint,Cint,N_Vector),ida_mem,t,k,is,dkyQS)
 end
 
-function IDAGetReturnFlagName(flag::Clong)
+function IDAGetReturnFlagName(flag::Int)
     ccall((:IDAGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -437,7 +437,7 @@ function IDAQuadSensFree(ida_mem::Ptr{Void})
     ccall((:IDAQuadSensFree,libsundials_ida),Void,(Ptr{Void},),ida_mem)
 end
 
-function IDAAdjInit(ida_mem::Ptr{Void},steps::Clong,interp::Int)
+function IDAAdjInit(ida_mem::Ptr{Void},steps::Int,interp::Int)
     ccall((:IDAAdjInit,libsundials_ida),Cint,(Ptr{Void},Clong,Cint),ida_mem,steps,interp)
 end
 
@@ -521,7 +521,7 @@ function IDASetMaxOrdB(ida_mem::Ptr{Void},which::Int,maxordB::Int)
     ccall((:IDASetMaxOrdB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,maxordB)
 end
 
-function IDASetMaxNumStepsB(ida_mem::Ptr{Void},which::Int,mxstepsB::Clong)
+function IDASetMaxNumStepsB(ida_mem::Ptr{Void},which::Int,mxstepsB::Int)
     ccall((:IDASetMaxNumStepsB,libsundials_ida),Cint,(Ptr{Void},Cint,Clong),ida_mem,which,mxstepsB)
 end
 
@@ -612,7 +612,7 @@ function IDADlsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:IDADlsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
 end
 
-function IDADlsGetReturnFlagName(flag::Clong)
+function IDADlsGetReturnFlagName(flag::Int)
     ccall((:IDADlsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -686,7 +686,7 @@ function IDASpilsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:IDASpilsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
 end
 
-function IDASpilsGetReturnFlagName(flag::Clong)
+function IDASpilsGetReturnFlagName(flag::Int)
     ccall((:IDASpilsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -720,22 +720,22 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_band.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function IDABand(ida_mem::Ptr{Void},Neq::Clong,mupper::Clong,mlower::Clong)
+function IDABand(ida_mem::Ptr{Void},Neq::Int,mupper::Int,mlower::Int)
     ccall((:IDABand,libsundials_ida),Cint,(Ptr{Void},Clong,Clong,Clong),ida_mem,Neq,mupper,mlower)
 end
 
-function IDABandB(idaadj_mem::Ptr{Void},which::Int,NeqB::Clong,mupperB::Clong,mlowerB::Clong)
+function IDABandB(idaadj_mem::Ptr{Void},which::Int,NeqB::Int,mupperB::Int,mlowerB::Int)
     ccall((:IDABandB,libsundials_ida),Cint,(Ptr{Void},Cint,Clong,Clong,Clong),idaadj_mem,which,NeqB,mupperB,mlowerB)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_bbdpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
 
-function IDABBDPrecInit(ida_mem::Ptr{Void},Nlocal::Clong,mudq::Clong,mldq::Clong,mukeep::Clong,mlkeep::Clong,dq_rel_yy::realtype,Gres::IDABBDLocalFn,Gcomm::IDABBDCommFn)
+function IDABBDPrecInit(ida_mem::Ptr{Void},Nlocal::Int,mudq::Int,mldq::Int,mukeep::Int,mlkeep::Int,dq_rel_yy::realtype,Gres::IDABBDLocalFn,Gcomm::IDABBDCommFn)
     ccall((:IDABBDPrecInit,libsundials_ida),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,IDABBDLocalFn,IDABBDCommFn),ida_mem,Nlocal,mudq,mldq,mukeep,mlkeep,dq_rel_yy,Gres,Gcomm)
 end
 
-function IDABBDPrecReInit(ida_mem::Ptr{Void},mudq::Clong,mldq::Clong,dq_rel_yy::realtype)
+function IDABBDPrecReInit(ida_mem::Ptr{Void},mudq::Int,mldq::Int,dq_rel_yy::realtype)
     ccall((:IDABBDPrecReInit,libsundials_ida),Cint,(Ptr{Void},Clong,Clong,realtype),ida_mem,mudq,mldq,dq_rel_yy)
 end
 
@@ -747,21 +747,21 @@ function IDABBDPrecGetNumGfnEvals(ida_mem::Ptr{Void},ngevalsBBDP::Ptr{Clong})
     ccall((:IDABBDPrecGetNumGfnEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,ngevalsBBDP)
 end
 
-function IDABBDPrecInitB(ida_mem::Ptr{Void},which::Int,NlocalB::Clong,mudqB::Clong,mldqB::Clong,mukeepB::Clong,mlkeepB::Clong,dq_rel_yyB::realtype,GresB::IDABBDLocalFnB,GcommB::IDABBDCommFnB)
+function IDABBDPrecInitB(ida_mem::Ptr{Void},which::Int,NlocalB::Int,mudqB::Int,mldqB::Int,mukeepB::Int,mlkeepB::Int,dq_rel_yyB::realtype,GresB::IDABBDLocalFnB,GcommB::IDABBDCommFnB)
     ccall((:IDABBDPrecInitB,libsundials_ida),Cint,(Ptr{Void},Cint,Clong,Clong,Clong,Clong,Clong,realtype,IDABBDLocalFnB,IDABBDCommFnB),ida_mem,which,NlocalB,mudqB,mldqB,mukeepB,mlkeepB,dq_rel_yyB,GresB,GcommB)
 end
 
-function IDABBDPrecReInitB(ida_mem::Ptr{Void},which::Int,mudqB::Clong,mldqB::Clong,dq_rel_yyB::realtype)
+function IDABBDPrecReInitB(ida_mem::Ptr{Void},which::Int,mudqB::Int,mldqB::Int,dq_rel_yyB::realtype)
     ccall((:IDABBDPrecReInitB,libsundials_ida),Cint,(Ptr{Void},Cint,Clong,Clong,realtype),ida_mem,which,mudqB,mldqB,dq_rel_yyB)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_dense.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function IDADense(ida_mem::Ptr{Void},Neq::Clong)
+function IDADense(ida_mem::Ptr{Void},Neq::Int)
     ccall((:IDADense,libsundials_ida),Cint,(Ptr{Void},Clong),ida_mem,Neq)
 end
 
-function IDADenseB(ida_mem::Ptr{Void},which::Int,NeqB::Clong)
+function IDADenseB(ida_mem::Ptr{Void},which::Int,NeqB::Int)
     ccall((:IDADenseB,libsundials_ida),Cint,(Ptr{Void},Cint,Clong),ida_mem,which,NeqB)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_impl.h
@@ -787,7 +787,7 @@ function IDASetMaxOrd(ida_mem::Ptr{Void},maxord::Int)
     ccall((:IDASetMaxOrd,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxord)
 end
 
-function IDASetMaxNumSteps(ida_mem::Ptr{Void},mxsteps::Clong)
+function IDASetMaxNumSteps(ida_mem::Ptr{Void},mxsteps::Int)
     ccall((:IDASetMaxNumSteps,libsundials_ida),Cint,(Ptr{Void},Clong),ida_mem,mxsteps)
 end
 
@@ -1183,7 +1183,7 @@ function IDAGetQuadSensDky1(ida_mem::Ptr{Void},t::realtype,k::Int,is::Int,dkyQS:
     ccall((:IDAGetQuadSensDky1,libsundials_ida),Cint,(Ptr{Void},realtype,Cint,Cint,N_Vector),ida_mem,t,k,is,dkyQS)
 end
 
-function IDAGetReturnFlagName(flag::Clong)
+function IDAGetReturnFlagName(flag::Int)
     ccall((:IDAGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -1203,7 +1203,7 @@ function IDAQuadSensFree(ida_mem::Ptr{Void})
     ccall((:IDAQuadSensFree,libsundials_ida),Void,(Ptr{Void},),ida_mem)
 end
 
-function IDAAdjInit(ida_mem::Ptr{Void},steps::Clong,interp::Int)
+function IDAAdjInit(ida_mem::Ptr{Void},steps::Int,interp::Int)
     ccall((:IDAAdjInit,libsundials_ida),Cint,(Ptr{Void},Clong,Cint),ida_mem,steps,interp)
 end
 
@@ -1287,7 +1287,7 @@ function IDASetMaxOrdB(ida_mem::Ptr{Void},which::Int,maxordB::Int)
     ccall((:IDASetMaxOrdB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,maxordB)
 end
 
-function IDASetMaxNumStepsB(ida_mem::Ptr{Void},which::Int,mxstepsB::Clong)
+function IDASetMaxNumStepsB(ida_mem::Ptr{Void},which::Int,mxstepsB::Int)
     ccall((:IDASetMaxNumStepsB,libsundials_ida),Cint,(Ptr{Void},Cint,Clong),ida_mem,which,mxstepsB)
 end
 

@@ -29,7 +29,7 @@ function KINSetPrintLevel(kinmemm::Ptr{Void},printfl::Int)
     ccall((:KINSetPrintLevel,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmemm,printfl)
 end
 
-function KINSetNumMaxIters(kinmem::Ptr{Void},mxiter::Clong)
+function KINSetNumMaxIters(kinmem::Ptr{Void},mxiter::Int)
     ccall((:KINSetNumMaxIters,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,mxiter)
 end
 
@@ -41,11 +41,11 @@ function KINSetNoResMon(kinmem::Ptr{Void},noNNIResMon::Int)
     ccall((:KINSetNoResMon,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,noNNIResMon)
 end
 
-function KINSetMaxSetupCalls(kinmem::Ptr{Void},msbset::Clong)
+function KINSetMaxSetupCalls(kinmem::Ptr{Void},msbset::Int)
     ccall((:KINSetMaxSetupCalls,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,msbset)
 end
 
-function KINSetMaxSubSetupCalls(kinmem::Ptr{Void},msbsetsub::Clong)
+function KINSetMaxSubSetupCalls(kinmem::Ptr{Void},msbsetsub::Int)
     ccall((:KINSetMaxSubSetupCalls,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,msbsetsub)
 end
 
@@ -77,7 +77,7 @@ function KINSetMaxNewtonStep(kinmem::Ptr{Void},mxnewtstep::realtype)
     ccall((:KINSetMaxNewtonStep,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,mxnewtstep)
 end
 
-function KINSetMaxBetaFails(kinmem::Ptr{Void},mxnbcf::Clong)
+function KINSetMaxBetaFails(kinmem::Ptr{Void},mxnbcf::Int)
     ccall((:KINSetMaxBetaFails,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,mxnbcf)
 end
 
@@ -137,7 +137,7 @@ function KINGetStepLength(kinmem::Ptr{Void},steplength::Ptr{realtype})
     ccall((:KINGetStepLength,libsundials_kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,steplength)
 end
 
-function KINGetReturnFlagName(flag::Clong)
+function KINGetReturnFlagName(flag::Int)
     ccall((:KINGetReturnFlagName,libsundials_kinsol),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -171,7 +171,7 @@ function KINDlsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
     ccall((:KINDlsGetLastFlag,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
 end
 
-function KINDlsGetReturnFlagName(flag::Clong)
+function KINDlsGetReturnFlagName(flag::Int)
     ccall((:KINDlsGetReturnFlagName,libsundials_kinsol),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_spils.h
@@ -221,19 +221,19 @@ function KINSpilsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
     ccall((:KINSpilsGetLastFlag,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
 end
 
-function KINSpilsGetReturnFlagName(flag::Clong)
+function KINSpilsGetReturnFlagName(flag::Int)
     ccall((:KINSpilsGetReturnFlagName,libsundials_kinsol),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_band.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function KINBand(kinmem::Ptr{Void},N::Clong,mupper::Clong,mlower::Clong)
+function KINBand(kinmem::Ptr{Void},N::Int,mupper::Int,mlower::Int)
     ccall((:KINBand,libsundials_kinsol),Cint,(Ptr{Void},Clong,Clong,Clong),kinmem,N,mupper,mlower)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_bbdpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function KINBBDPrecInit(kinmem::Ptr{Void},Nlocal::Clong,mudq::Clong,mldq::Clong,mukeep::Clong,mlkeep::Clong,dq_rel_uu::realtype,gloc::KINLocalFn,gcomm::KINCommFn)
+function KINBBDPrecInit(kinmem::Ptr{Void},Nlocal::Int,mudq::Int,mldq::Int,mukeep::Int,mlkeep::Int,dq_rel_uu::realtype,gloc::KINLocalFn,gcomm::KINCommFn)
     ccall((:KINBBDPrecInit,libsundials_kinsol),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,KINLocalFn,KINCommFn),kinmem,Nlocal,mudq,mldq,mukeep,mlkeep,dq_rel_uu,gloc,gcomm)
 end
 
@@ -247,7 +247,7 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_dense.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function KINDense(kinmem::Ptr{Void},N::Clong)
+function KINDense(kinmem::Ptr{Void},N::Int)
     ccall((:KINDense,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,N)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_impl.h
@@ -281,7 +281,7 @@ function KINSetPrintLevel(kinmemm::Ptr{Void},printfl::Int)
     ccall((:KINSetPrintLevel,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmemm,printfl)
 end
 
-function KINSetNumMaxIters(kinmem::Ptr{Void},mxiter::Clong)
+function KINSetNumMaxIters(kinmem::Ptr{Void},mxiter::Int)
     ccall((:KINSetNumMaxIters,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,mxiter)
 end
 
@@ -293,11 +293,11 @@ function KINSetNoResMon(kinmem::Ptr{Void},noNNIResMon::Int)
     ccall((:KINSetNoResMon,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,noNNIResMon)
 end
 
-function KINSetMaxSetupCalls(kinmem::Ptr{Void},msbset::Clong)
+function KINSetMaxSetupCalls(kinmem::Ptr{Void},msbset::Int)
     ccall((:KINSetMaxSetupCalls,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,msbset)
 end
 
-function KINSetMaxSubSetupCalls(kinmem::Ptr{Void},msbsetsub::Clong)
+function KINSetMaxSubSetupCalls(kinmem::Ptr{Void},msbsetsub::Int)
     ccall((:KINSetMaxSubSetupCalls,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,msbsetsub)
 end
 
@@ -329,7 +329,7 @@ function KINSetMaxNewtonStep(kinmem::Ptr{Void},mxnewtstep::realtype)
     ccall((:KINSetMaxNewtonStep,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,mxnewtstep)
 end
 
-function KINSetMaxBetaFails(kinmem::Ptr{Void},mxnbcf::Clong)
+function KINSetMaxBetaFails(kinmem::Ptr{Void},mxnbcf::Int)
     ccall((:KINSetMaxBetaFails,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,mxnbcf)
 end
 
@@ -389,7 +389,7 @@ function KINGetStepLength(kinmem::Ptr{Void},steplength::Ptr{realtype})
     ccall((:KINGetStepLength,libsundials_kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,steplength)
 end
 
-function KINGetReturnFlagName(flag::Clong)
+function KINGetReturnFlagName(flag::Int)
     ccall((:KINGetReturnFlagName,libsundials_kinsol),Ptr{UInt8},(Clong,),flag)
 end
 

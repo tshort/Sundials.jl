@@ -125,7 +125,7 @@ function CVodeSetMaxOrd(cvode_mem::Ptr{Void},maxord::Int)
     ccall((:CVodeSetMaxOrd,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxord)
 end
 
-function CVodeSetMaxNumSteps(cvode_mem::Ptr{Void},mxsteps::Clong)
+function CVodeSetMaxNumSteps(cvode_mem::Ptr{Void},mxsteps::Int)
     ccall((:CVodeSetMaxNumSteps,libsundials_cvode),Cint,(Ptr{Void},Clong),cvode_mem,mxsteps)
 end
 
@@ -341,7 +341,7 @@ function CVodeGetNonlinSolvStats(cvode_mem::Ptr{Void},nniters::Ptr{Clong},nncfai
     ccall((:CVodeGetNonlinSolvStats,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,nniters,nncfails)
 end
 
-function CVodeGetReturnFlagName(flag::Clong)
+function CVodeGetReturnFlagName(flag::Int)
     ccall((:CVodeGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -421,7 +421,7 @@ function CVodeGetQuadSensStats(cvode_mem::Ptr{Void},nfQSevals::Ptr{Clong},nQSetf
     ccall((:CVodeGetQuadSensStats,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,nfQSevals,nQSetfails)
 end
 
-function CVodeAdjInit(cvode_mem::Ptr{Void},steps::Clong,interp::Int)
+function CVodeAdjInit(cvode_mem::Ptr{Void},steps::Int,interp::Int)
     ccall((:CVodeAdjInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Cint),cvode_mem,steps,interp)
 end
 
@@ -501,7 +501,7 @@ function CVodeSetMaxOrdB(cvode_mem::Ptr{Void},which::Int,maxordB::Int)
     ccall((:CVodeSetMaxOrdB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,maxordB)
 end
 
-function CVodeSetMaxNumStepsB(cvode_mem::Ptr{Void},which::Int,mxstepsB::Clong)
+function CVodeSetMaxNumStepsB(cvode_mem::Ptr{Void},which::Int,mxstepsB::Int)
     ccall((:CVodeSetMaxNumStepsB,libsundials_cvode),Cint,(Ptr{Void},Cint,Clong),cvode_mem,which,mxstepsB)
 end
 
@@ -584,7 +584,7 @@ function CVDlsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:CVDlsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
 end
 
-function CVDlsGetReturnFlagName(flag::Clong)
+function CVDlsGetReturnFlagName(flag::Int)
     ccall((:CVDlsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -654,7 +654,7 @@ function CVSpilsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:CVSpilsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
 end
 
-function CVSpilsGetReturnFlagName(flag::Clong)
+function CVSpilsGetReturnFlagName(flag::Int)
     ccall((:CVSpilsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -684,17 +684,17 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_band.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function CVBand(cvode_mem::Ptr{Void},N::Clong,mupper::Clong,mlower::Clong)
+function CVBand(cvode_mem::Ptr{Void},N::Int,mupper::Int,mlower::Int)
     ccall((:CVBand,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong),cvode_mem,N,mupper,mlower)
 end
 
-function CVBandB(cvode_mem::Ptr{Void},which::Int,nB::Clong,mupperB::Clong,mlowerB::Clong)
+function CVBandB(cvode_mem::Ptr{Void},which::Int,nB::Int,mupperB::Int,mlowerB::Int)
     ccall((:CVBandB,libsundials_cvode),Cint,(Ptr{Void},Cint,Clong,Clong,Clong),cvode_mem,which,nB,mupperB,mlowerB)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_bandpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function CVBandPrecInit(cvode_mem::Ptr{Void},N::Clong,mu::Clong,ml::Clong)
+function CVBandPrecInit(cvode_mem::Ptr{Void},N::Int,mu::Int,ml::Int)
     ccall((:CVBandPrecInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong),cvode_mem,N,mu,ml)
 end
 
@@ -706,17 +706,17 @@ function CVBandPrecGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsBP::Ptr{Clong})
     ccall((:CVBandPrecGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsBP)
 end
 
-function CVBandPrecInitB(cvode_mem::Ptr{Void},which::Int,nB::Clong,muB::Clong,mlB::Clong)
+function CVBandPrecInitB(cvode_mem::Ptr{Void},which::Int,nB::Int,muB::Int,mlB::Int)
     ccall((:CVBandPrecInitB,libsundials_cvode),Cint,(Ptr{Void},Cint,Clong,Clong,Clong),cvode_mem,which,nB,muB,mlB)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_bbdpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function CVBBDPrecInit(cvode_mem::Ptr{Void},Nlocal::Clong,mudq::Clong,mldq::Clong,mukeep::Clong,mlkeep::Clong,dqrely::realtype,gloc::CVLocalFn,cfn::CVCommFn)
+function CVBBDPrecInit(cvode_mem::Ptr{Void},Nlocal::Int,mudq::Int,mldq::Int,mukeep::Int,mlkeep::Int,dqrely::realtype,gloc::CVLocalFn,cfn::CVCommFn)
     ccall((:CVBBDPrecInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,CVLocalFn,CVCommFn),cvode_mem,Nlocal,mudq,mldq,mukeep,mlkeep,dqrely,gloc,cfn)
 end
 
-function CVBBDPrecReInit(cvode_mem::Ptr{Void},mudq::Clong,mldq::Clong,dqrely::realtype)
+function CVBBDPrecReInit(cvode_mem::Ptr{Void},mudq::Int,mldq::Int,dqrely::realtype)
     ccall((:CVBBDPrecReInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,realtype),cvode_mem,mudq,mldq,dqrely)
 end
 
@@ -728,21 +728,21 @@ function CVBBDPrecGetNumGfnEvals(cvode_mem::Ptr{Void},ngevalsBBDP::Ptr{Clong})
     ccall((:CVBBDPrecGetNumGfnEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,ngevalsBBDP)
 end
 
-function CVBBDPrecInitB(cvode_mem::Ptr{Void},which::Int,NlocalB::Clong,mudqB::Clong,mldqB::Clong,mukeepB::Clong,mlkeepB::Clong,dqrelyB::realtype,glocB::CVLocalFnB,cfnB::CVCommFnB)
+function CVBBDPrecInitB(cvode_mem::Ptr{Void},which::Int,NlocalB::Int,mudqB::Int,mldqB::Int,mukeepB::Int,mlkeepB::Int,dqrelyB::realtype,glocB::CVLocalFnB,cfnB::CVCommFnB)
     ccall((:CVBBDPrecInitB,libsundials_cvode),Cint,(Ptr{Void},Cint,Clong,Clong,Clong,Clong,Clong,realtype,CVLocalFnB,CVCommFnB),cvode_mem,which,NlocalB,mudqB,mldqB,mukeepB,mlkeepB,dqrelyB,glocB,cfnB)
 end
 
-function CVBBDPrecReInitB(cvode_mem::Ptr{Void},which::Int,mudqB::Clong,mldqB::Clong,dqrelyB::realtype)
+function CVBBDPrecReInitB(cvode_mem::Ptr{Void},which::Int,mudqB::Int,mldqB::Int,dqrelyB::realtype)
     ccall((:CVBBDPrecReInitB,libsundials_cvode),Cint,(Ptr{Void},Cint,Clong,Clong,realtype),cvode_mem,which,mudqB,mldqB,dqrelyB)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_dense.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function CVDense(cvode_mem::Ptr{Void},N::Clong)
+function CVDense(cvode_mem::Ptr{Void},N::Int)
     ccall((:CVDense,libsundials_cvode),Cint,(Ptr{Void},Clong),cvode_mem,N)
 end
 
-function CVDenseB(cvode_mem::Ptr{Void},which::Int,nB::Clong)
+function CVDenseB(cvode_mem::Ptr{Void},which::Int,nB::Int)
     ccall((:CVDenseB,libsundials_cvode),Cint,(Ptr{Void},Cint,Clong),cvode_mem,which,nB)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_diag.h
@@ -764,7 +764,7 @@ function CVDiagGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:CVDiagGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
 end
 
-function CVDiagGetReturnFlagName(flag::Clong)
+function CVDiagGetReturnFlagName(flag::Int)
     ccall((:CVDiagGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -882,7 +882,7 @@ function CVodeSetMaxOrd(cvode_mem::Ptr{Void},maxord::Int)
     ccall((:CVodeSetMaxOrd,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxord)
 end
 
-function CVodeSetMaxNumSteps(cvode_mem::Ptr{Void},mxsteps::Clong)
+function CVodeSetMaxNumSteps(cvode_mem::Ptr{Void},mxsteps::Int)
     ccall((:CVodeSetMaxNumSteps,libsundials_cvode),Cint,(Ptr{Void},Clong),cvode_mem,mxsteps)
 end
 
@@ -1098,7 +1098,7 @@ function CVodeGetNonlinSolvStats(cvode_mem::Ptr{Void},nniters::Ptr{Clong},nncfai
     ccall((:CVodeGetNonlinSolvStats,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,nniters,nncfails)
 end
 
-function CVodeGetReturnFlagName(flag::Clong)
+function CVodeGetReturnFlagName(flag::Int)
     ccall((:CVodeGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -1178,7 +1178,7 @@ function CVodeGetQuadSensStats(cvode_mem::Ptr{Void},nfQSevals::Ptr{Clong},nQSetf
     ccall((:CVodeGetQuadSensStats,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,nfQSevals,nQSetfails)
 end
 
-function CVodeAdjInit(cvode_mem::Ptr{Void},steps::Clong,interp::Int)
+function CVodeAdjInit(cvode_mem::Ptr{Void},steps::Int,interp::Int)
     ccall((:CVodeAdjInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Cint),cvode_mem,steps,interp)
 end
 
@@ -1258,7 +1258,7 @@ function CVodeSetMaxOrdB(cvode_mem::Ptr{Void},which::Int,maxordB::Int)
     ccall((:CVodeSetMaxOrdB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,maxordB)
 end
 
-function CVodeSetMaxNumStepsB(cvode_mem::Ptr{Void},which::Int,mxstepsB::Clong)
+function CVodeSetMaxNumStepsB(cvode_mem::Ptr{Void},which::Int,mxstepsB::Int)
     ccall((:CVodeSetMaxNumStepsB,libsundials_cvode),Cint,(Ptr{Void},Cint,Clong),cvode_mem,which,mxstepsB)
 end
 
