@@ -1,7 +1,6 @@
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-
 function CVodeCreate(lmm::Int,iter::Int)
     ccall((:CVodeCreate,libsundials_cvode),Ptr{Void},(Cint,Cint),lmm,iter)
 end
@@ -204,7 +203,6 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_direct.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-
 function CVDlsSetDenseJacFn(cvode_mem::Ptr{Void},jac::CVDlsDenseJacFn)
     ccall((:CVDlsSetDenseJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsDenseJacFn),cvode_mem,jac)
 end
@@ -234,6 +232,7 @@ function CVDlsGetReturnFlagName(flag::Int)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_spils.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
+
 
 function CVSpilsSetPrecType(cvode_mem::Ptr{Void},pretype::Int)
     ccall((:CVSpilsSetPrecType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,pretype)
@@ -297,11 +296,40 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_band.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+function CVDlsSetDenseJacFn(cvode_mem::Ptr{Void},jac::CVDlsDenseJacFn)
+    ccall((:CVDlsSetDenseJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsDenseJacFn),cvode_mem,jac)
+end
+
+function CVDlsSetBandJacFn(cvode_mem::Ptr{Void},jac::CVDlsBandJacFn)
+    ccall((:CVDlsSetBandJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsBandJacFn),cvode_mem,jac)
+end
+
+function CVDlsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVDlsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVDlsGetNumJacEvals(cvode_mem::Ptr{Void},njevals::Ptr{Clong})
+    ccall((:CVDlsGetNumJacEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njevals)
+end
+
+function CVDlsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVDlsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVDlsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVDlsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVDlsGetReturnFlagName(flag::Int)
+    ccall((:CVDlsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
+end
+
 function CVBand(cvode_mem::Ptr{Void},N::Int,mupper::Int,mlower::Int)
     ccall((:CVBand,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong),cvode_mem,N,mupper,mlower)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_bandpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
+
 
 function CVBandPrecInit(cvode_mem::Ptr{Void},N::Int,mu::Int,ml::Int)
     ccall((:CVBandPrecInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong),cvode_mem,N,mu,ml)
@@ -312,12 +340,10 @@ function CVBandPrecGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS
 end
 
 function CVBandPrecGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsBP::Ptr{Clong})
-    ccall((:CVBandPrecGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsBP)
+    ccall((:CVBandPrecGetNumRhsEvals,cvode_bandpre),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsBP)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_bbdpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
 
 function CVBBDPrecInit(cvode_mem::Ptr{Void},Nlocal::Int,mudq::Int,mldq::Int,mukeep::Int,mlkeep::Int,dqrely::realtype,gloc::CVLocalFn,cfn::CVCommFn)
     ccall((:CVBBDPrecInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,CVLocalFn,CVCommFn),cvode_mem,Nlocal,mudq,mldq,mukeep,mlkeep,dqrely,gloc,cfn)
@@ -337,12 +363,39 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_dense.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+function CVDlsSetDenseJacFn(cvode_mem::Ptr{Void},jac::CVDlsDenseJacFn)
+    ccall((:CVDlsSetDenseJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsDenseJacFn),cvode_mem,jac)
+end
+
+function CVDlsSetBandJacFn(cvode_mem::Ptr{Void},jac::CVDlsBandJacFn)
+    ccall((:CVDlsSetBandJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsBandJacFn),cvode_mem,jac)
+end
+
+function CVDlsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVDlsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVDlsGetNumJacEvals(cvode_mem::Ptr{Void},njevals::Ptr{Clong})
+    ccall((:CVDlsGetNumJacEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njevals)
+end
+
+function CVDlsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVDlsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVDlsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVDlsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVDlsGetReturnFlagName(flag::Int)
+    ccall((:CVDlsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
+end
+
 function CVDense(cvode_mem::Ptr{Void},N::Int)
     ccall((:CVDense,libsundials_cvode),Cint,(Ptr{Void},Clong),cvode_mem,N)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_diag.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
-
 
 function CVDiag(cvode_mem::Ptr{Void})
     ccall((:CVDiag,libsundials_cvode),Cint,(Ptr{Void},),cvode_mem)
@@ -566,44 +619,170 @@ function CVodeFree(cvode_mem::Vector{Ptr{Void}})
     ccall((:CVodeFree,libsundials_cvode),Void,(Ptr{Ptr{Void}},),cvode_mem)
 end
 
-function CVEwtSet(ycur::N_Vector,weight::N_Vector,data::Ptr{Void})
-    ccall((:CVEwtSet,libsundials_cvode),Cint,(N_Vector,N_Vector,Ptr{Void}),ycur,weight,data)
+function cvEwtSet(ycur::N_Vector,weight::N_Vector,data::Ptr{Void})
+    ccall((:cvEwtSet,libsundials_cvode),Cint,(N_Vector,N_Vector,Ptr{Void}),ycur,weight,data)
 end
 
-function CVErrHandler(error_code::Int,_module::Ptr{UInt8},_function::Ptr{UInt8},msg::Ptr{UInt8},data::Ptr{Void})
-    ccall((:CVErrHandler,libsundials_cvode),Void,(Cint,Ptr{UInt8},Ptr{UInt8},Ptr{UInt8},Ptr{Void}),error_code,_module,_function,msg,data)
+function cvErrHandler(error_code::Int,_module::Ptr{UInt8},_function::Ptr{UInt8},msg::Ptr{UInt8},data::Ptr{Void})
+    ccall((:cvErrHandler,libsundials_cvode),Void,(Cint,Ptr{UInt8},Ptr{UInt8},Ptr{UInt8},Ptr{Void}),error_code,_module,_function,msg,data)
+end
+# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_sparse.h
+# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+function CVSlsSetSparseJacFn(cvode_mem::Ptr{Void},jac::CVSlsSparseJacFn)
+    ccall((:CVSlsSetSparseJacFn,libsundials_cvode),Cint,(Ptr{Void},CVSlsSparseJacFn),cvode_mem,jac)
+end
+
+function CVSlsGetNumJacEvals(ida_mem::Ptr{Void},njevals::Ptr{Clong})
+    ccall((:CVSlsGetNumJacEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,njevals)
+end
+
+function CVSlsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVSlsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
+end
+
+function CVSlsGetReturnFlagName(flag::Int)
+    ccall((:CVSlsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_spbcgs.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+function CVSpilsSetPrecType(cvode_mem::Ptr{Void},pretype::Int)
+    ccall((:CVSpilsSetPrecType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,pretype)
+end
+
+function CVSpilsSetGSType(cvode_mem::Ptr{Void},gstype::Int)
+    ccall((:CVSpilsSetGSType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,gstype)
+end
+
+function CVSpilsSetMaxl(cvode_mem::Ptr{Void},maxl::Int)
+    ccall((:CVSpilsSetMaxl,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxl)
+end
+
+function CVSpilsSetEpsLin(cvode_mem::Ptr{Void},eplifac::realtype)
+    ccall((:CVSpilsSetEpsLin,libsundials_cvode),Cint,(Ptr{Void},realtype),cvode_mem,eplifac)
+end
+
+function CVSpilsSetPreconditioner(cvode_mem::Ptr{Void},pset::CVSpilsPrecSetupFn,psolve::CVSpilsPrecSolveFn)
+    ccall((:CVSpilsSetPreconditioner,libsundials_cvode),Cint,(Ptr{Void},CVSpilsPrecSetupFn,CVSpilsPrecSolveFn),cvode_mem,pset,psolve)
+end
+
+function CVSpilsSetJacTimesVecFn(cvode_mem::Ptr{Void},jtv::CVSpilsJacTimesVecFn)
+    ccall((:CVSpilsSetJacTimesVecFn,libsundials_cvode),Cint,(Ptr{Void},CVSpilsJacTimesVecFn),cvode_mem,jtv)
+end
+
+function CVSpilsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVSpilsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVSpilsGetNumPrecEvals(cvode_mem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npevals)
+end
+
+function CVSpilsGetNumPrecSolves(cvode_mem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecSolves,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npsolves)
+end
+
+function CVSpilsGetNumLinIters(cvode_mem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:CVSpilsGetNumLinIters,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nliters)
+end
+
+function CVSpilsGetNumConvFails(cvode_mem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:CVSpilsGetNumConvFails,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nlcfails)
+end
+
+function CVSpilsGetNumJtimesEvals(cvode_mem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumJtimesEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njvevals)
+end
+
+function CVSpilsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVSpilsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVSpilsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVSpilsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVSpilsGetReturnFlagName(flag::Int)
+    ccall((:CVSpilsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
+end
+
 function SpbcgMalloc(l_max::Int,vec_tmpl::N_Vector)
-    ccall((:SpbcgMalloc,libsundials_cvode),SpbcgMem,(Cint,N_Vector),l_max,vec_tmpl)
+    ccall((:SpbcgMalloc,sundials_spbcgs),SpbcgMem,(Cint,N_Vector),l_max,vec_tmpl)
 end
 
 function SpbcgSolve(mem::SpbcgMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
-    ccall((:SpbcgSolve,libsundials_cvode),Cint,(SpbcgMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
+    ccall((:SpbcgSolve,sundials_spbcgs),Cint,(SpbcgMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
 end
 
 function SpbcgFree(mem::SpbcgMem)
-    ccall((:SpbcgFree,libsundials_cvode),Void,(SpbcgMem,),mem)
+    ccall((:SpbcgFree,sundials_spbcgs),Void,(SpbcgMem,),mem)
 end
 
 function CVSpbcg(cvode_mem::Ptr{Void},pretype::Int,maxl::Int)
-    ccall((:CVSpbcg,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,pretype,maxl)
+    ccall((:CVSpbcg,cvode_spbcgs),Cint,(Ptr{Void},Cint,Cint),cvode_mem,pretype,maxl)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_spgmr.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function SpgmrMalloc(l_max::Int,vec_tmpl::N_Vector)
-    ccall((:SpgmrMalloc,libsundials_cvode),SpgmrMem,(Cint,N_Vector),l_max,vec_tmpl)
+function CVSpilsSetPrecType(cvode_mem::Ptr{Void},pretype::Int)
+    ccall((:CVSpilsSetPrecType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,pretype)
 end
 
-function SpgmrSolve(mem::SpgmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,gstype::Int,delta::realtype,max_restarts::Int,P_data::Ptr{Void},s1::N_Vector,s2::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
-    ccall((:SpgmrSolve,libsundials_cvode),Cint,(SpgmrMem,Ptr{Void},N_Vector,N_Vector,Cint,Cint,realtype,Cint,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,gstype,delta,max_restarts,P_data,s1,s2,atimes,psolve,res_norm,nli,nps)
+function CVSpilsSetGSType(cvode_mem::Ptr{Void},gstype::Int)
+    ccall((:CVSpilsSetGSType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,gstype)
 end
 
-function SpgmrFree(mem::SpgmrMem)
-    ccall((:SpgmrFree,libsundials_cvode),Void,(SpgmrMem,),mem)
+function CVSpilsSetMaxl(cvode_mem::Ptr{Void},maxl::Int)
+    ccall((:CVSpilsSetMaxl,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxl)
+end
+
+function CVSpilsSetEpsLin(cvode_mem::Ptr{Void},eplifac::realtype)
+    ccall((:CVSpilsSetEpsLin,libsundials_cvode),Cint,(Ptr{Void},realtype),cvode_mem,eplifac)
+end
+
+function CVSpilsSetPreconditioner(cvode_mem::Ptr{Void},pset::CVSpilsPrecSetupFn,psolve::CVSpilsPrecSolveFn)
+    ccall((:CVSpilsSetPreconditioner,libsundials_cvode),Cint,(Ptr{Void},CVSpilsPrecSetupFn,CVSpilsPrecSolveFn),cvode_mem,pset,psolve)
+end
+
+function CVSpilsSetJacTimesVecFn(cvode_mem::Ptr{Void},jtv::CVSpilsJacTimesVecFn)
+    ccall((:CVSpilsSetJacTimesVecFn,libsundials_cvode),Cint,(Ptr{Void},CVSpilsJacTimesVecFn),cvode_mem,jtv)
+end
+
+function CVSpilsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVSpilsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVSpilsGetNumPrecEvals(cvode_mem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npevals)
+end
+
+function CVSpilsGetNumPrecSolves(cvode_mem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecSolves,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npsolves)
+end
+
+function CVSpilsGetNumLinIters(cvode_mem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:CVSpilsGetNumLinIters,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nliters)
+end
+
+function CVSpilsGetNumConvFails(cvode_mem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:CVSpilsGetNumConvFails,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nlcfails)
+end
+
+function CVSpilsGetNumJtimesEvals(cvode_mem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumJtimesEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njvevals)
+end
+
+function CVSpilsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVSpilsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVSpilsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVSpilsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVSpilsGetReturnFlagName(flag::Int)
+    ccall((:CVSpilsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 
 function CVSpgmr(cvode_mem::Ptr{Void},pretype::Int,maxl::Int)
@@ -612,17 +791,64 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_sptfqmr.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-
-function SptfqmrMalloc(l_max::Int,vec_tmpl::N_Vector)
-    ccall((:SptfqmrMalloc,libsundials_cvode),SptfqmrMem,(Cint,N_Vector),l_max,vec_tmpl)
+function CVSpilsSetPrecType(cvode_mem::Ptr{Void},pretype::Int)
+    ccall((:CVSpilsSetPrecType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,pretype)
 end
 
-function SptfqmrSolve(mem::SptfqmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
-    ccall((:SptfqmrSolve,libsundials_cvode),Cint,(SptfqmrMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
+function CVSpilsSetGSType(cvode_mem::Ptr{Void},gstype::Int)
+    ccall((:CVSpilsSetGSType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,gstype)
 end
 
-function SptfqmrFree(mem::SptfqmrMem)
-    ccall((:SptfqmrFree,libsundials_cvode),Void,(SptfqmrMem,),mem)
+function CVSpilsSetMaxl(cvode_mem::Ptr{Void},maxl::Int)
+    ccall((:CVSpilsSetMaxl,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxl)
+end
+
+function CVSpilsSetEpsLin(cvode_mem::Ptr{Void},eplifac::realtype)
+    ccall((:CVSpilsSetEpsLin,libsundials_cvode),Cint,(Ptr{Void},realtype),cvode_mem,eplifac)
+end
+
+function CVSpilsSetPreconditioner(cvode_mem::Ptr{Void},pset::CVSpilsPrecSetupFn,psolve::CVSpilsPrecSolveFn)
+    ccall((:CVSpilsSetPreconditioner,libsundials_cvode),Cint,(Ptr{Void},CVSpilsPrecSetupFn,CVSpilsPrecSolveFn),cvode_mem,pset,psolve)
+end
+
+function CVSpilsSetJacTimesVecFn(cvode_mem::Ptr{Void},jtv::CVSpilsJacTimesVecFn)
+    ccall((:CVSpilsSetJacTimesVecFn,libsundials_cvode),Cint,(Ptr{Void},CVSpilsJacTimesVecFn),cvode_mem,jtv)
+end
+
+function CVSpilsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVSpilsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVSpilsGetNumPrecEvals(cvode_mem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npevals)
+end
+
+function CVSpilsGetNumPrecSolves(cvode_mem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecSolves,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npsolves)
+end
+
+function CVSpilsGetNumLinIters(cvode_mem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:CVSpilsGetNumLinIters,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nliters)
+end
+
+function CVSpilsGetNumConvFails(cvode_mem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:CVSpilsGetNumConvFails,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nlcfails)
+end
+
+function CVSpilsGetNumJtimesEvals(cvode_mem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumJtimesEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njvevals)
+end
+
+function CVSpilsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVSpilsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVSpilsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVSpilsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVSpilsGetReturnFlagName(flag::Int)
+    ccall((:CVSpilsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 
 function CVSptfqmr(cvode_mem::Ptr{Void},pretype::Int,maxl::Int)

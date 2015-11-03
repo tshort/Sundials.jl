@@ -47,13 +47,11 @@ if isdefined(:libsundials_cvodes)
 else
     include("cvode.jl")
 end
-shlib = libsundials_ida
 if isdefined(:libsundials_cvodes)
     include("idas.jl")
 else
     include("ida.jl")
 end
-shlib = libsundials_kinsol
 include("kinsol.jl")
 
 include("constants.jl")
@@ -67,7 +65,7 @@ include("constants.jl")
 nvlength(x::N_Vector) = unsafe_load(unsafe_load(convert(Ptr{Ptr{Clong}}, x)))
 asarray(x::N_Vector) = pointer_to_array(N_VGetArrayPointer_Serial(x), (nvlength(x),))
 asarray(x::Vector{realtype}) = x
-asarray(x::Ptr{realtype}, dims::Tuple) = pointer_to_array(x, dims)
+asarray(x::Vector{realtype}, dims::Tuple) = pointer_to_array(x, dims)
 asarray(x::N_Vector, dims::Tuple) = reinterpret(realtype, asarray(x), dims)
 nvector(x::Vector{realtype}) = N_VMake_Serial(length(x), x)
 nvector(x::N_Vector) = x
@@ -227,7 +225,7 @@ end
 ##################################################################
 
 
-@c Int32 KINSetUserData (Ptr{:Void},Any) libsundials_kinsol  ## needed to allow passing a Function through the user data
+# @c Int32 KINSetUserData (Ptr{:Void},Any) libsundials_kinsol  ## needed to allow passing a Function through the user data
 
 function kinsolfun(y::N_Vector, fy::N_Vector, userfun::Function)
     y = asarray(y)
@@ -246,8 +244,11 @@ function kinsol(f::Function, y0::Vector{Float64})
     # use the user_data field to pass a function
     #   see: https://github.com/JuliaLang/julia/issues/2554
     flag = KINInit(kmem, cfunction(kinsolfun, Int32, (N_Vector, N_Vector, Ref{Function})), nvector(y0))
+    println("fl1.")
     flag = KINDense(kmem, neq)
+    println("fl2.")
     flag = KINSetUserData(kmem, f)
+    println("fl3.")
     ## Solve problem
     scale = ones(neq)
     strategy = 0   # KIN_NONE
@@ -264,7 +265,7 @@ function kinsol(f::Function, y0::Vector{Float64})
     return y
 end
 
-@c Int32 CVodeSetUserData (Ptr{:Void},Any) libsundials_cvode  ## needed to allow passing a Function through the user data
+# @c Int32 CVodeSetUserData (Ptr{:Void},Any) libsundials_cvode  ## needed to allow passing a Function through the user data
 
 function cvodefun(t::Float64, y::N_Vector, yp::N_Vector, userfun::Function)
     y = Sundials.asarray(y)
@@ -300,7 +301,7 @@ function cvode(f::Function, y0::Vector{Float64}, t::Vector{Float64}; reltol::Flo
     return yres
 end
 
-@c Int32 IDASetUserData (Ptr{:Void},Any) libsundials_ida  ## needed to allow passing a Function through the user data
+# @c Int32 IDASetUserData (Ptr{:Void},Any) libsundials_ida  ## needed to allow passing a Function through the user data
 
 function idasolfun(t::Float64, y::N_Vector, yp::N_Vector, r::N_Vector, userfun::Function)
     y = Sundials.asarray(y)

@@ -509,8 +509,8 @@ function IDASolveB(ida_mem::Ptr{Void},tBout::realtype,itaskB::Int)
     ccall((:IDASolveB,libsundials_ida),Cint,(Ptr{Void},realtype,Cint),ida_mem,tBout,itaskB)
 end
 
-function IDASetAdjNoSensi(ida_mem::Ptr{Void})
-    ccall((:IDASetAdjNoSensi,libsundials_ida),Cint,(Ptr{Void},),ida_mem)
+function IDAAdjSetNoSensi(ida_mem::Ptr{Void})
+    ccall((:IDAAdjSetNoSensi,libsundials_ida),Cint,(Ptr{Void},),ida_mem)
 end
 
 function IDASetUserDataB(ida_mem::Ptr{Void},which::Int,user_dataB::Ptr{Void})
@@ -587,7 +587,6 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_direct.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-
 function IDADlsSetDenseJacFn(ida_mem::Ptr{Void},jac::IDADlsDenseJacFn)
     ccall((:IDADlsSetDenseJacFn,libsundials_ida),Cint,(Ptr{Void},IDADlsDenseJacFn),ida_mem,jac)
 end
@@ -620,8 +619,16 @@ function IDADlsSetDenseJacFnB(ida_mem::Ptr{Void},which::Int,jacB::IDADlsDenseJac
     ccall((:IDADlsSetDenseJacFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsDenseJacFnB),ida_mem,which,jacB)
 end
 
+function IDADlsSetDenseJacFnBS(ida_mem::Ptr{Void},which::Int,jacBS::IDADlsDenseJacFnBS)
+    ccall((:IDADlsSetDenseJacFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsDenseJacFnBS),ida_mem,which,jacBS)
+end
+
 function IDADlsSetBandJacFnB(idaa_mem::Ptr{Void},which::Int,jacB::IDADlsBandJacFnB)
     ccall((:IDADlsSetBandJacFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsBandJacFnB),idaa_mem,which,jacB)
+end
+
+function IDADlsSetBandJacFnBS(idaa_mem::Ptr{Void},which::Int,jacBS::IDADlsBandJacFnBS)
+    ccall((:IDADlsSetBandJacFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsBandJacFnBS),idaa_mem,which,jacBS)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_spils.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
@@ -714,11 +721,63 @@ function IDASpilsSetPreconditionerB(ida_mem::Ptr{Void},which::Int,psetB::IDASpil
     ccall((:IDASpilsSetPreconditionerB,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsPrecSetupFnB,IDASpilsPrecSolveFnB),ida_mem,which,psetB,psolveB)
 end
 
+function IDASpilsSetPreconditionerBS(ida_mem::Ptr{Void},which::Int,psetBS::IDASpilsPrecSetupFnBS,psolveBS::IDASpilsPrecSolveFnBS)
+    ccall((:IDASpilsSetPreconditionerBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsPrecSetupFnBS,IDASpilsPrecSolveFnBS),ida_mem,which,psetBS,psolveBS)
+end
+
 function IDASpilsSetJacTimesVecFnB(ida_mem::Ptr{Void},which::Int,jtvB::IDASpilsJacTimesVecFnB)
     ccall((:IDASpilsSetJacTimesVecFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsJacTimesVecFnB),ida_mem,which,jtvB)
 end
+
+function IDASpilsSetJacTimesVecFnBS(ida_mem::Ptr{Void},which::Int,jtvBS::IDASpilsJacTimesVecFnBS)
+    ccall((:IDASpilsSetJacTimesVecFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsJacTimesVecFnBS),ida_mem,which,jtvBS)
+end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_band.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+function IDADlsSetDenseJacFn(ida_mem::Ptr{Void},jac::IDADlsDenseJacFn)
+    ccall((:IDADlsSetDenseJacFn,libsundials_ida),Cint,(Ptr{Void},IDADlsDenseJacFn),ida_mem,jac)
+end
+
+function IDADlsSetBandJacFn(ida_mem::Ptr{Void},jac::IDADlsBandJacFn)
+    ccall((:IDADlsSetBandJacFn,libsundials_ida),Cint,(Ptr{Void},IDADlsBandJacFn),ida_mem,jac)
+end
+
+function IDADlsGetWorkSpace(ida_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:IDADlsGetWorkSpace,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),ida_mem,lenrwLS,leniwLS)
+end
+
+function IDADlsGetNumJacEvals(ida_mem::Ptr{Void},njevals::Ptr{Clong})
+    ccall((:IDADlsGetNumJacEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,njevals)
+end
+
+function IDADlsGetNumResEvals(ida_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:IDADlsGetNumResEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nfevalsLS)
+end
+
+function IDADlsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:IDADlsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
+end
+
+function IDADlsGetReturnFlagName(flag::Int)
+    ccall((:IDADlsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
+end
+
+function IDADlsSetDenseJacFnB(ida_mem::Ptr{Void},which::Int,jacB::IDADlsDenseJacFnB)
+    ccall((:IDADlsSetDenseJacFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsDenseJacFnB),ida_mem,which,jacB)
+end
+
+function IDADlsSetDenseJacFnBS(ida_mem::Ptr{Void},which::Int,jacBS::IDADlsDenseJacFnBS)
+    ccall((:IDADlsSetDenseJacFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsDenseJacFnBS),ida_mem,which,jacBS)
+end
+
+function IDADlsSetBandJacFnB(idaa_mem::Ptr{Void},which::Int,jacB::IDADlsBandJacFnB)
+    ccall((:IDADlsSetBandJacFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsBandJacFnB),idaa_mem,which,jacB)
+end
+
+function IDADlsSetBandJacFnBS(idaa_mem::Ptr{Void},which::Int,jacBS::IDADlsBandJacFnBS)
+    ccall((:IDADlsSetBandJacFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsBandJacFnBS),idaa_mem,which,jacBS)
+end
 
 function IDABand(ida_mem::Ptr{Void},Neq::Int,mupper::Int,mlower::Int)
     ccall((:IDABand,libsundials_ida),Cint,(Ptr{Void},Clong,Clong,Clong),ida_mem,Neq,mupper,mlower)
@@ -729,7 +788,6 @@ function IDABandB(idaadj_mem::Ptr{Void},which::Int,NeqB::Int,mupperB::Int,mlower
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_bbdpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
-
 
 function IDABBDPrecInit(ida_mem::Ptr{Void},Nlocal::Int,mudq::Int,mldq::Int,mukeep::Int,mlkeep::Int,dq_rel_yy::realtype,Gres::IDABBDLocalFn,Gcomm::IDABBDCommFn)
     ccall((:IDABBDPrecInit,libsundials_ida),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,IDABBDLocalFn,IDABBDCommFn),ida_mem,Nlocal,mudq,mldq,mukeep,mlkeep,dq_rel_yy,Gres,Gcomm)
@@ -757,6 +815,50 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_dense.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+function IDADlsSetDenseJacFn(ida_mem::Ptr{Void},jac::IDADlsDenseJacFn)
+    ccall((:IDADlsSetDenseJacFn,libsundials_ida),Cint,(Ptr{Void},IDADlsDenseJacFn),ida_mem,jac)
+end
+
+function IDADlsSetBandJacFn(ida_mem::Ptr{Void},jac::IDADlsBandJacFn)
+    ccall((:IDADlsSetBandJacFn,libsundials_ida),Cint,(Ptr{Void},IDADlsBandJacFn),ida_mem,jac)
+end
+
+function IDADlsGetWorkSpace(ida_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:IDADlsGetWorkSpace,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),ida_mem,lenrwLS,leniwLS)
+end
+
+function IDADlsGetNumJacEvals(ida_mem::Ptr{Void},njevals::Ptr{Clong})
+    ccall((:IDADlsGetNumJacEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,njevals)
+end
+
+function IDADlsGetNumResEvals(ida_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:IDADlsGetNumResEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nfevalsLS)
+end
+
+function IDADlsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:IDADlsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
+end
+
+function IDADlsGetReturnFlagName(flag::Int)
+    ccall((:IDADlsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
+end
+
+function IDADlsSetDenseJacFnB(ida_mem::Ptr{Void},which::Int,jacB::IDADlsDenseJacFnB)
+    ccall((:IDADlsSetDenseJacFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsDenseJacFnB),ida_mem,which,jacB)
+end
+
+function IDADlsSetDenseJacFnBS(ida_mem::Ptr{Void},which::Int,jacBS::IDADlsDenseJacFnBS)
+    ccall((:IDADlsSetDenseJacFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsDenseJacFnBS),ida_mem,which,jacBS)
+end
+
+function IDADlsSetBandJacFnB(idaa_mem::Ptr{Void},which::Int,jacB::IDADlsBandJacFnB)
+    ccall((:IDADlsSetBandJacFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsBandJacFnB),idaa_mem,which,jacB)
+end
+
+function IDADlsSetBandJacFnBS(idaa_mem::Ptr{Void},which::Int,jacBS::IDADlsBandJacFnBS)
+    ccall((:IDADlsSetBandJacFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDADlsBandJacFnBS),idaa_mem,which,jacBS)
+end
+
 function IDADense(ida_mem::Ptr{Void},Neq::Int)
     ccall((:IDADense,libsundials_ida),Cint,(Ptr{Void},Clong),ida_mem,Neq)
 end
@@ -766,6 +868,7 @@ function IDADenseB(ida_mem::Ptr{Void},which::Int,NeqB::Int)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_impl.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
+
 
 function IDACreate()
     ccall((:IDACreate,libsundials_ida),Ptr{Void},())
@@ -1275,8 +1378,8 @@ function IDASolveB(ida_mem::Ptr{Void},tBout::realtype,itaskB::Int)
     ccall((:IDASolveB,libsundials_ida),Cint,(Ptr{Void},realtype,Cint),ida_mem,tBout,itaskB)
 end
 
-function IDASetAdjNoSensi(ida_mem::Ptr{Void})
-    ccall((:IDASetAdjNoSensi,libsundials_ida),Cint,(Ptr{Void},),ida_mem)
+function IDAAdjSetNoSensi(ida_mem::Ptr{Void})
+    ccall((:IDAAdjSetNoSensi,libsundials_ida),Cint,(Ptr{Void},),ida_mem)
 end
 
 function IDASetUserDataB(ida_mem::Ptr{Void},which::Int,user_dataB::Ptr{Void})
@@ -1362,19 +1465,133 @@ end
 function IDASensResDQ(Ns::Int,t::realtype,yy::N_Vector,yp::N_Vector,resval::N_Vector,yyS::Ptr{N_Vector},ypS::Ptr{N_Vector},resvalS::Ptr{N_Vector},user_dataS::Ptr{Void},ytemp::N_Vector,yptemp::N_Vector,restemp::N_Vector)
     ccall((:IDASensResDQ,libsundials_ida),Cint,(Cint,realtype,N_Vector,N_Vector,N_Vector,Ptr{N_Vector},Ptr{N_Vector},Ptr{N_Vector},Ptr{Void},N_Vector,N_Vector,N_Vector),Ns,t,yy,yp,resval,yyS,ypS,resvalS,user_dataS,ytemp,yptemp,restemp)
 end
+# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_sparse.h
+# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+function IDASlsSetSparseJacFn(ida_mem::Ptr{Void},jac::IDASlsSparseJacFn)
+    ccall((:IDASlsSetSparseJacFn,libsundials_ida),Cint,(Ptr{Void},IDASlsSparseJacFn),ida_mem,jac)
+end
+
+function IDASlsGetNumJacEvals(ida_mem::Ptr{Void},njevals::Ptr{Clong})
+    ccall((:IDASlsGetNumJacEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,njevals)
+end
+
+function IDASlsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:IDASlsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
+end
+
+function IDASlsGetReturnFlagName(flag::Int)
+    ccall((:IDASlsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
+end
+
+function IDASlsSetSparseJacFnB(ida_mem::Ptr{Void},which::Int,jacB::IDASlsSparseJacFnB)
+    ccall((:IDASlsSetSparseJacFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDASlsSparseJacFnB),ida_mem,which,jacB)
+end
+
+function IDASlsSetSparseJacFnBS(ida_mem::Ptr{Void},which::Int,jacBS::IDASlsSparseJacFnBS)
+    ccall((:IDASlsSetSparseJacFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDASlsSparseJacFnBS),ida_mem,which,jacBS)
+end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_spbcgs.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function SpbcgMalloc(l_max::Int,vec_tmpl::N_Vector)
-    ccall((:SpbcgMalloc,libsundials_ida),SpbcgMem,(Cint,N_Vector),l_max,vec_tmpl)
+function IDASpilsSetPreconditioner(ida_mem::Ptr{Void},pset::IDASpilsPrecSetupFn,psolve::IDASpilsPrecSolveFn)
+    ccall((:IDASpilsSetPreconditioner,libsundials_ida),Cint,(Ptr{Void},IDASpilsPrecSetupFn,IDASpilsPrecSolveFn),ida_mem,pset,psolve)
 end
 
-function SpbcgSolve(mem::SpbcgMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
-    ccall((:SpbcgSolve,libsundials_ida),Cint,(SpbcgMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
+function IDASpilsSetJacTimesVecFn(ida_mem::Ptr{Void},jtv::IDASpilsJacTimesVecFn)
+    ccall((:IDASpilsSetJacTimesVecFn,libsundials_ida),Cint,(Ptr{Void},IDASpilsJacTimesVecFn),ida_mem,jtv)
 end
 
-function SpbcgFree(mem::SpbcgMem)
-    ccall((:SpbcgFree,libsundials_ida),Void,(SpbcgMem,),mem)
+function IDASpilsSetGSType(ida_mem::Ptr{Void},gstype::Int)
+    ccall((:IDASpilsSetGSType,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,gstype)
+end
+
+function IDASpilsSetMaxRestarts(ida_mem::Ptr{Void},maxrs::Int)
+    ccall((:IDASpilsSetMaxRestarts,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxrs)
+end
+
+function IDASpilsSetMaxl(ida_mem::Ptr{Void},maxl::Int)
+    ccall((:IDASpilsSetMaxl,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxl)
+end
+
+function IDASpilsSetEpsLin(ida_mem::Ptr{Void},eplifac::realtype)
+    ccall((:IDASpilsSetEpsLin,libsundials_ida),Cint,(Ptr{Void},realtype),ida_mem,eplifac)
+end
+
+function IDASpilsSetIncrementFactor(ida_mem::Ptr{Void},dqincfac::realtype)
+    ccall((:IDASpilsSetIncrementFactor,libsundials_ida),Cint,(Ptr{Void},realtype),ida_mem,dqincfac)
+end
+
+function IDASpilsGetWorkSpace(ida_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:IDASpilsGetWorkSpace,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),ida_mem,lenrwLS,leniwLS)
+end
+
+function IDASpilsGetNumPrecEvals(ida_mem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:IDASpilsGetNumPrecEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,npevals)
+end
+
+function IDASpilsGetNumPrecSolves(ida_mem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:IDASpilsGetNumPrecSolves,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,npsolves)
+end
+
+function IDASpilsGetNumLinIters(ida_mem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:IDASpilsGetNumLinIters,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nliters)
+end
+
+function IDASpilsGetNumConvFails(ida_mem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:IDASpilsGetNumConvFails,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nlcfails)
+end
+
+function IDASpilsGetNumJtimesEvals(ida_mem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:IDASpilsGetNumJtimesEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,njvevals)
+end
+
+function IDASpilsGetNumResEvals(ida_mem::Ptr{Void},nrevalsLS::Ptr{Clong})
+    ccall((:IDASpilsGetNumResEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nrevalsLS)
+end
+
+function IDASpilsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:IDASpilsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
+end
+
+function IDASpilsGetReturnFlagName(flag::Int)
+    ccall((:IDASpilsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
+end
+
+function IDASpilsSetGSTypeB(ida_mem::Ptr{Void},which::Int,gstypeB::Int)
+    ccall((:IDASpilsSetGSTypeB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,gstypeB)
+end
+
+function IDASpilsSetMaxRestartsB(ida_mem::Ptr{Void},which::Int,maxrsB::Int)
+    ccall((:IDASpilsSetMaxRestartsB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,maxrsB)
+end
+
+function IDASpilsSetEpsLinB(ida_mem::Ptr{Void},which::Int,eplifacB::realtype)
+    ccall((:IDASpilsSetEpsLinB,libsundials_ida),Cint,(Ptr{Void},Cint,realtype),ida_mem,which,eplifacB)
+end
+
+function IDASpilsSetMaxlB(ida_mem::Ptr{Void},which::Int,maxlB::Int)
+    ccall((:IDASpilsSetMaxlB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,maxlB)
+end
+
+function IDASpilsSetIncrementFactorB(ida_mem::Ptr{Void},which::Int,dqincfacB::realtype)
+    ccall((:IDASpilsSetIncrementFactorB,libsundials_ida),Cint,(Ptr{Void},Cint,realtype),ida_mem,which,dqincfacB)
+end
+
+function IDASpilsSetPreconditionerB(ida_mem::Ptr{Void},which::Int,psetB::IDASpilsPrecSetupFnB,psolveB::IDASpilsPrecSolveFnB)
+    ccall((:IDASpilsSetPreconditionerB,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsPrecSetupFnB,IDASpilsPrecSolveFnB),ida_mem,which,psetB,psolveB)
+end
+
+function IDASpilsSetPreconditionerBS(ida_mem::Ptr{Void},which::Int,psetBS::IDASpilsPrecSetupFnBS,psolveBS::IDASpilsPrecSolveFnBS)
+    ccall((:IDASpilsSetPreconditionerBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsPrecSetupFnBS,IDASpilsPrecSolveFnBS),ida_mem,which,psetBS,psolveBS)
+end
+
+function IDASpilsSetJacTimesVecFnB(ida_mem::Ptr{Void},which::Int,jtvB::IDASpilsJacTimesVecFnB)
+    ccall((:IDASpilsSetJacTimesVecFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsJacTimesVecFnB),ida_mem,which,jtvB)
+end
+
+function IDASpilsSetJacTimesVecFnBS(ida_mem::Ptr{Void},which::Int,jtvBS::IDASpilsJacTimesVecFnBS)
+    ccall((:IDASpilsSetJacTimesVecFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsJacTimesVecFnBS),ida_mem,which,jtvBS)
 end
 
 function IDASpbcg(ida_mem::Ptr{Void},maxl::Int)
@@ -1387,6 +1604,106 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_spgmr.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+function IDASpilsSetPreconditioner(ida_mem::Ptr{Void},pset::IDASpilsPrecSetupFn,psolve::IDASpilsPrecSolveFn)
+    ccall((:IDASpilsSetPreconditioner,libsundials_ida),Cint,(Ptr{Void},IDASpilsPrecSetupFn,IDASpilsPrecSolveFn),ida_mem,pset,psolve)
+end
+
+function IDASpilsSetJacTimesVecFn(ida_mem::Ptr{Void},jtv::IDASpilsJacTimesVecFn)
+    ccall((:IDASpilsSetJacTimesVecFn,libsundials_ida),Cint,(Ptr{Void},IDASpilsJacTimesVecFn),ida_mem,jtv)
+end
+
+function IDASpilsSetGSType(ida_mem::Ptr{Void},gstype::Int)
+    ccall((:IDASpilsSetGSType,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,gstype)
+end
+
+function IDASpilsSetMaxRestarts(ida_mem::Ptr{Void},maxrs::Int)
+    ccall((:IDASpilsSetMaxRestarts,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxrs)
+end
+
+function IDASpilsSetMaxl(ida_mem::Ptr{Void},maxl::Int)
+    ccall((:IDASpilsSetMaxl,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxl)
+end
+
+function IDASpilsSetEpsLin(ida_mem::Ptr{Void},eplifac::realtype)
+    ccall((:IDASpilsSetEpsLin,libsundials_ida),Cint,(Ptr{Void},realtype),ida_mem,eplifac)
+end
+
+function IDASpilsSetIncrementFactor(ida_mem::Ptr{Void},dqincfac::realtype)
+    ccall((:IDASpilsSetIncrementFactor,libsundials_ida),Cint,(Ptr{Void},realtype),ida_mem,dqincfac)
+end
+
+function IDASpilsGetWorkSpace(ida_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:IDASpilsGetWorkSpace,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),ida_mem,lenrwLS,leniwLS)
+end
+
+function IDASpilsGetNumPrecEvals(ida_mem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:IDASpilsGetNumPrecEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,npevals)
+end
+
+function IDASpilsGetNumPrecSolves(ida_mem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:IDASpilsGetNumPrecSolves,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,npsolves)
+end
+
+function IDASpilsGetNumLinIters(ida_mem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:IDASpilsGetNumLinIters,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nliters)
+end
+
+function IDASpilsGetNumConvFails(ida_mem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:IDASpilsGetNumConvFails,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nlcfails)
+end
+
+function IDASpilsGetNumJtimesEvals(ida_mem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:IDASpilsGetNumJtimesEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,njvevals)
+end
+
+function IDASpilsGetNumResEvals(ida_mem::Ptr{Void},nrevalsLS::Ptr{Clong})
+    ccall((:IDASpilsGetNumResEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nrevalsLS)
+end
+
+function IDASpilsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:IDASpilsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
+end
+
+function IDASpilsGetReturnFlagName(flag::Int)
+    ccall((:IDASpilsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
+end
+
+function IDASpilsSetGSTypeB(ida_mem::Ptr{Void},which::Int,gstypeB::Int)
+    ccall((:IDASpilsSetGSTypeB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,gstypeB)
+end
+
+function IDASpilsSetMaxRestartsB(ida_mem::Ptr{Void},which::Int,maxrsB::Int)
+    ccall((:IDASpilsSetMaxRestartsB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,maxrsB)
+end
+
+function IDASpilsSetEpsLinB(ida_mem::Ptr{Void},which::Int,eplifacB::realtype)
+    ccall((:IDASpilsSetEpsLinB,libsundials_ida),Cint,(Ptr{Void},Cint,realtype),ida_mem,which,eplifacB)
+end
+
+function IDASpilsSetMaxlB(ida_mem::Ptr{Void},which::Int,maxlB::Int)
+    ccall((:IDASpilsSetMaxlB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,maxlB)
+end
+
+function IDASpilsSetIncrementFactorB(ida_mem::Ptr{Void},which::Int,dqincfacB::realtype)
+    ccall((:IDASpilsSetIncrementFactorB,libsundials_ida),Cint,(Ptr{Void},Cint,realtype),ida_mem,which,dqincfacB)
+end
+
+function IDASpilsSetPreconditionerB(ida_mem::Ptr{Void},which::Int,psetB::IDASpilsPrecSetupFnB,psolveB::IDASpilsPrecSolveFnB)
+    ccall((:IDASpilsSetPreconditionerB,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsPrecSetupFnB,IDASpilsPrecSolveFnB),ida_mem,which,psetB,psolveB)
+end
+
+function IDASpilsSetPreconditionerBS(ida_mem::Ptr{Void},which::Int,psetBS::IDASpilsPrecSetupFnBS,psolveBS::IDASpilsPrecSolveFnBS)
+    ccall((:IDASpilsSetPreconditionerBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsPrecSetupFnBS,IDASpilsPrecSolveFnBS),ida_mem,which,psetBS,psolveBS)
+end
+
+function IDASpilsSetJacTimesVecFnB(ida_mem::Ptr{Void},which::Int,jtvB::IDASpilsJacTimesVecFnB)
+    ccall((:IDASpilsSetJacTimesVecFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsJacTimesVecFnB),ida_mem,which,jtvB)
+end
+
+function IDASpilsSetJacTimesVecFnBS(ida_mem::Ptr{Void},which::Int,jtvBS::IDASpilsJacTimesVecFnBS)
+    ccall((:IDASpilsSetJacTimesVecFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsJacTimesVecFnBS),ida_mem,which,jtvBS)
+end
+
 function IDASpgmr(ida_mem::Ptr{Void},maxl::Int)
     ccall((:IDASpgmr,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxl)
 end
@@ -1397,16 +1714,104 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/idas/idas_sptfqmr.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function SptfqmrMalloc(l_max::Int,vec_tmpl::N_Vector)
-    ccall((:SptfqmrMalloc,libsundials_ida),SptfqmrMem,(Cint,N_Vector),l_max,vec_tmpl)
+function IDASpilsSetPreconditioner(ida_mem::Ptr{Void},pset::IDASpilsPrecSetupFn,psolve::IDASpilsPrecSolveFn)
+    ccall((:IDASpilsSetPreconditioner,libsundials_ida),Cint,(Ptr{Void},IDASpilsPrecSetupFn,IDASpilsPrecSolveFn),ida_mem,pset,psolve)
 end
 
-function SptfqmrSolve(mem::SptfqmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
-    ccall((:SptfqmrSolve,libsundials_ida),Cint,(SptfqmrMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
+function IDASpilsSetJacTimesVecFn(ida_mem::Ptr{Void},jtv::IDASpilsJacTimesVecFn)
+    ccall((:IDASpilsSetJacTimesVecFn,libsundials_ida),Cint,(Ptr{Void},IDASpilsJacTimesVecFn),ida_mem,jtv)
 end
 
-function SptfqmrFree(mem::SptfqmrMem)
-    ccall((:SptfqmrFree,libsundials_ida),Void,(SptfqmrMem,),mem)
+function IDASpilsSetGSType(ida_mem::Ptr{Void},gstype::Int)
+    ccall((:IDASpilsSetGSType,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,gstype)
+end
+
+function IDASpilsSetMaxRestarts(ida_mem::Ptr{Void},maxrs::Int)
+    ccall((:IDASpilsSetMaxRestarts,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxrs)
+end
+
+function IDASpilsSetMaxl(ida_mem::Ptr{Void},maxl::Int)
+    ccall((:IDASpilsSetMaxl,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxl)
+end
+
+function IDASpilsSetEpsLin(ida_mem::Ptr{Void},eplifac::realtype)
+    ccall((:IDASpilsSetEpsLin,libsundials_ida),Cint,(Ptr{Void},realtype),ida_mem,eplifac)
+end
+
+function IDASpilsSetIncrementFactor(ida_mem::Ptr{Void},dqincfac::realtype)
+    ccall((:IDASpilsSetIncrementFactor,libsundials_ida),Cint,(Ptr{Void},realtype),ida_mem,dqincfac)
+end
+
+function IDASpilsGetWorkSpace(ida_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:IDASpilsGetWorkSpace,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),ida_mem,lenrwLS,leniwLS)
+end
+
+function IDASpilsGetNumPrecEvals(ida_mem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:IDASpilsGetNumPrecEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,npevals)
+end
+
+function IDASpilsGetNumPrecSolves(ida_mem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:IDASpilsGetNumPrecSolves,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,npsolves)
+end
+
+function IDASpilsGetNumLinIters(ida_mem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:IDASpilsGetNumLinIters,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nliters)
+end
+
+function IDASpilsGetNumConvFails(ida_mem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:IDASpilsGetNumConvFails,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nlcfails)
+end
+
+function IDASpilsGetNumJtimesEvals(ida_mem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:IDASpilsGetNumJtimesEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,njvevals)
+end
+
+function IDASpilsGetNumResEvals(ida_mem::Ptr{Void},nrevalsLS::Ptr{Clong})
+    ccall((:IDASpilsGetNumResEvals,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,nrevalsLS)
+end
+
+function IDASpilsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:IDASpilsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
+end
+
+function IDASpilsGetReturnFlagName(flag::Int)
+    ccall((:IDASpilsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
+end
+
+function IDASpilsSetGSTypeB(ida_mem::Ptr{Void},which::Int,gstypeB::Int)
+    ccall((:IDASpilsSetGSTypeB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,gstypeB)
+end
+
+function IDASpilsSetMaxRestartsB(ida_mem::Ptr{Void},which::Int,maxrsB::Int)
+    ccall((:IDASpilsSetMaxRestartsB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,maxrsB)
+end
+
+function IDASpilsSetEpsLinB(ida_mem::Ptr{Void},which::Int,eplifacB::realtype)
+    ccall((:IDASpilsSetEpsLinB,libsundials_ida),Cint,(Ptr{Void},Cint,realtype),ida_mem,which,eplifacB)
+end
+
+function IDASpilsSetMaxlB(ida_mem::Ptr{Void},which::Int,maxlB::Int)
+    ccall((:IDASpilsSetMaxlB,libsundials_ida),Cint,(Ptr{Void},Cint,Cint),ida_mem,which,maxlB)
+end
+
+function IDASpilsSetIncrementFactorB(ida_mem::Ptr{Void},which::Int,dqincfacB::realtype)
+    ccall((:IDASpilsSetIncrementFactorB,libsundials_ida),Cint,(Ptr{Void},Cint,realtype),ida_mem,which,dqincfacB)
+end
+
+function IDASpilsSetPreconditionerB(ida_mem::Ptr{Void},which::Int,psetB::IDASpilsPrecSetupFnB,psolveB::IDASpilsPrecSolveFnB)
+    ccall((:IDASpilsSetPreconditionerB,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsPrecSetupFnB,IDASpilsPrecSolveFnB),ida_mem,which,psetB,psolveB)
+end
+
+function IDASpilsSetPreconditionerBS(ida_mem::Ptr{Void},which::Int,psetBS::IDASpilsPrecSetupFnBS,psolveBS::IDASpilsPrecSolveFnBS)
+    ccall((:IDASpilsSetPreconditionerBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsPrecSetupFnBS,IDASpilsPrecSolveFnBS),ida_mem,which,psetBS,psolveBS)
+end
+
+function IDASpilsSetJacTimesVecFnB(ida_mem::Ptr{Void},which::Int,jtvB::IDASpilsJacTimesVecFnB)
+    ccall((:IDASpilsSetJacTimesVecFnB,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsJacTimesVecFnB),ida_mem,which,jtvB)
+end
+
+function IDASpilsSetJacTimesVecFnBS(ida_mem::Ptr{Void},which::Int,jtvBS::IDASpilsJacTimesVecFnBS)
+    ccall((:IDASpilsSetJacTimesVecFnBS,libsundials_ida),Cint,(Ptr{Void},Cint,IDASpilsJacTimesVecFnBS),ida_mem,which,jtvBS)
 end
 
 function IDASptfqmr(ida_mem::Ptr{Void},maxl::Int)

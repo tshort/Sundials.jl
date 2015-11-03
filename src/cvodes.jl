@@ -1,7 +1,6 @@
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-
 function CVodeCreate(lmm::Int,iter::Int)
     ccall((:CVodeCreate,libsundials_cvode),Ptr{Void},(Cint,Cint),lmm,iter)
 end
@@ -113,9 +112,6 @@ end
 function CVodeSetErrFile(cvode_mem::Ptr{Void},errfp::Ptr{Void})
     ccall((:CVodeSetErrFile,libsundials_cvode),Cint,(Ptr{Void},Ptr{Void}),cvode_mem,errfp)
 end
-# function CVodeSetErrFile(cvode_mem::Ptr{Void},errfp::Ptr{Void})
-#     ccall((:CVodeSetErrFile,libsundials_cvode),Cint,(Ptr{Void},Ptr{Void}),cvode_mem,errfp)
-# end
 
 function CVodeSetUserData(cvode_mem::Ptr{Void},user_data::Ptr{Void})
     ccall((:CVodeSetUserData,libsundials_cvode),Cint,(Ptr{Void},Ptr{Void}),cvode_mem,user_data)
@@ -559,7 +555,6 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_direct.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-
 function CVDlsSetDenseJacFn(cvode_mem::Ptr{Void},jac::CVDlsDenseJacFn)
     ccall((:CVDlsSetDenseJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsDenseJacFn),cvode_mem,jac)
 end
@@ -592,11 +587,20 @@ function CVDlsSetDenseJacFnB(cvode_mem::Ptr{Void},which::Int,jacB::CVDlsDenseJac
     ccall((:CVDlsSetDenseJacFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsDenseJacFnB),cvode_mem,which,jacB)
 end
 
+function CVDlsSetDenseJacFnBS(cvode_mem::Ptr{Void},which::Int,jacBS::CVDlsDenseJacFnBS)
+    ccall((:CVDlsSetDenseJacFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsDenseJacFnBS),cvode_mem,which,jacBS)
+end
+
 function CVDlsSetBandJacFnB(cvode_mem::Ptr{Void},which::Int,jacB::CVDlsBandJacFnB)
     ccall((:CVDlsSetBandJacFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsBandJacFnB),cvode_mem,which,jacB)
 end
+
+function CVDlsSetBandJacFnBS(cvode_mem::Ptr{Void},which::Int,jacBS::CVDlsBandJacFnBS)
+    ccall((:CVDlsSetBandJacFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsBandJacFnBS),cvode_mem,which,jacBS)
+end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_spils.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
+
 
 function CVSpilsSetPrecType(cvode_mem::Ptr{Void},pretype::Int)
     ccall((:CVSpilsSetPrecType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,pretype)
@@ -666,8 +670,8 @@ function CVSpilsSetGSTypeB(cvode_mem::Ptr{Void},which::Int,gstypeB::Int)
     ccall((:CVSpilsSetGSTypeB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,gstypeB)
 end
 
-function CVSpilsSetEpslinB(cvode_mem::Ptr{Void},which::Int,eplifacB::realtype)
-    ccall((:CVSpilsSetEpslinB,libsundials_cvode),Cint,(Ptr{Void},Cint,realtype),cvode_mem,which,eplifacB)
+function CVSpilsSetEpsLinB(cvode_mem::Ptr{Void},which::Int,eplifacB::realtype)
+    ccall((:CVSpilsSetEpsLinB,libsundials_cvode),Cint,(Ptr{Void},Cint,realtype),cvode_mem,which,eplifacB)
 end
 
 function CVSpilsSetMaxlB(cvode_mem::Ptr{Void},which::Int,maxlB::Int)
@@ -678,11 +682,63 @@ function CVSpilsSetPreconditionerB(cvode_mem::Ptr{Void},which::Int,psetB::CVSpil
     ccall((:CVSpilsSetPreconditionerB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsPrecSetupFnB,CVSpilsPrecSolveFnB),cvode_mem,which,psetB,psolveB)
 end
 
+function CVSpilsSetPreconditionerBS(cvode_mem::Ptr{Void},which::Int,psetBS::CVSpilsPrecSetupFnBS,psolveBS::CVSpilsPrecSolveFnBS)
+    ccall((:CVSpilsSetPreconditionerBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsPrecSetupFnBS,CVSpilsPrecSolveFnBS),cvode_mem,which,psetBS,psolveBS)
+end
+
 function CVSpilsSetJacTimesVecFnB(cvode_mem::Ptr{Void},which::Int,jtvB::CVSpilsJacTimesVecFnB)
     ccall((:CVSpilsSetJacTimesVecFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsJacTimesVecFnB),cvode_mem,which,jtvB)
 end
+
+function CVSpilsSetJacTimesVecFnBS(cvode_mem::Ptr{Void},which::Int,jtvBS::CVSpilsJacTimesVecFnBS)
+    ccall((:CVSpilsSetJacTimesVecFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsJacTimesVecFnBS),cvode_mem,which,jtvBS)
+end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_band.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+function CVDlsSetDenseJacFn(cvode_mem::Ptr{Void},jac::CVDlsDenseJacFn)
+    ccall((:CVDlsSetDenseJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsDenseJacFn),cvode_mem,jac)
+end
+
+function CVDlsSetBandJacFn(cvode_mem::Ptr{Void},jac::CVDlsBandJacFn)
+    ccall((:CVDlsSetBandJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsBandJacFn),cvode_mem,jac)
+end
+
+function CVDlsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVDlsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVDlsGetNumJacEvals(cvode_mem::Ptr{Void},njevals::Ptr{Clong})
+    ccall((:CVDlsGetNumJacEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njevals)
+end
+
+function CVDlsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVDlsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVDlsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVDlsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVDlsGetReturnFlagName(flag::Int)
+    ccall((:CVDlsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
+end
+
+function CVDlsSetDenseJacFnB(cvode_mem::Ptr{Void},which::Int,jacB::CVDlsDenseJacFnB)
+    ccall((:CVDlsSetDenseJacFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsDenseJacFnB),cvode_mem,which,jacB)
+end
+
+function CVDlsSetDenseJacFnBS(cvode_mem::Ptr{Void},which::Int,jacBS::CVDlsDenseJacFnBS)
+    ccall((:CVDlsSetDenseJacFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsDenseJacFnBS),cvode_mem,which,jacBS)
+end
+
+function CVDlsSetBandJacFnB(cvode_mem::Ptr{Void},which::Int,jacB::CVDlsBandJacFnB)
+    ccall((:CVDlsSetBandJacFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsBandJacFnB),cvode_mem,which,jacB)
+end
+
+function CVDlsSetBandJacFnBS(cvode_mem::Ptr{Void},which::Int,jacBS::CVDlsBandJacFnBS)
+    ccall((:CVDlsSetBandJacFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsBandJacFnBS),cvode_mem,which,jacBS)
+end
 
 function CVBand(cvode_mem::Ptr{Void},N::Int,mupper::Int,mlower::Int)
     ccall((:CVBand,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong),cvode_mem,N,mupper,mlower)
@@ -693,6 +749,7 @@ function CVBandB(cvode_mem::Ptr{Void},which::Int,nB::Int,mupperB::Int,mlowerB::I
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_bandpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
+
 
 function CVBandPrecInit(cvode_mem::Ptr{Void},N::Int,mu::Int,ml::Int)
     ccall((:CVBandPrecInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong),cvode_mem,N,mu,ml)
@@ -711,6 +768,7 @@ function CVBandPrecInitB(cvode_mem::Ptr{Void},which::Int,nB::Int,muB::Int,mlB::I
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_bbdpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
+
 
 function CVBBDPrecInit(cvode_mem::Ptr{Void},Nlocal::Int,mudq::Int,mldq::Int,mukeep::Int,mlkeep::Int,dqrely::realtype,gloc::CVLocalFn,cfn::CVCommFn)
     ccall((:CVBBDPrecInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,CVLocalFn,CVCommFn),cvode_mem,Nlocal,mudq,mldq,mukeep,mlkeep,dqrely,gloc,cfn)
@@ -738,6 +796,50 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_dense.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+function CVDlsSetDenseJacFn(cvode_mem::Ptr{Void},jac::CVDlsDenseJacFn)
+    ccall((:CVDlsSetDenseJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsDenseJacFn),cvode_mem,jac)
+end
+
+function CVDlsSetBandJacFn(cvode_mem::Ptr{Void},jac::CVDlsBandJacFn)
+    ccall((:CVDlsSetBandJacFn,libsundials_cvode),Cint,(Ptr{Void},CVDlsBandJacFn),cvode_mem,jac)
+end
+
+function CVDlsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVDlsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVDlsGetNumJacEvals(cvode_mem::Ptr{Void},njevals::Ptr{Clong})
+    ccall((:CVDlsGetNumJacEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njevals)
+end
+
+function CVDlsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVDlsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVDlsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVDlsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVDlsGetReturnFlagName(flag::Int)
+    ccall((:CVDlsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
+end
+
+function CVDlsSetDenseJacFnB(cvode_mem::Ptr{Void},which::Int,jacB::CVDlsDenseJacFnB)
+    ccall((:CVDlsSetDenseJacFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsDenseJacFnB),cvode_mem,which,jacB)
+end
+
+function CVDlsSetDenseJacFnBS(cvode_mem::Ptr{Void},which::Int,jacBS::CVDlsDenseJacFnBS)
+    ccall((:CVDlsSetDenseJacFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsDenseJacFnBS),cvode_mem,which,jacBS)
+end
+
+function CVDlsSetBandJacFnB(cvode_mem::Ptr{Void},which::Int,jacB::CVDlsBandJacFnB)
+    ccall((:CVDlsSetBandJacFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsBandJacFnB),cvode_mem,which,jacB)
+end
+
+function CVDlsSetBandJacFnBS(cvode_mem::Ptr{Void},which::Int,jacBS::CVDlsBandJacFnBS)
+    ccall((:CVDlsSetBandJacFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVDlsBandJacFnBS),cvode_mem,which,jacBS)
+end
+
 function CVDense(cvode_mem::Ptr{Void},N::Int)
     ccall((:CVDense,libsundials_cvode),Cint,(Ptr{Void},Clong),cvode_mem,N)
 end
@@ -748,31 +850,157 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_diag.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
 function CVDiag(cvode_mem::Ptr{Void})
-    ccall((:CVDiag,libsundials_cvode),Cint,(Ptr{Void},),cvode_mem)
+    ccall((:CVDiaglibsundials_cvodes_diag),Cint,(Ptr{Void},),cvode_mem)
 end
 
 function CVDiagGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
-    ccall((:CVDiagGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+    ccall((:CVDiagGetWorkSpacelibsundials_cvodes_diag),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
 end
 
 function CVDiagGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
-    ccall((:CVDiagGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+    ccall((:CVDiagGetNumRhsEvalslibsundials_cvodes_diag),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
 end
 
 function CVDiagGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
-    ccall((:CVDiagGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+    ccall((:CVDiagGetLastFlaglibsundials_cvodes_diag),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
 end
 
 function CVDiagGetReturnFlagName(flag::Int)
-    ccall((:CVDiagGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
+    ccall((:CVDiagGetReturnFlagNamelibsundials_cvodes_diag),Ptr{UInt8},(Clong,),flag)
 end
 
 function CVDiagB(cvode_mem::Ptr{Void},which::Int)
-    ccall((:CVDiagB,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,which)
+    ccall((:CVDiagBlibsundials_cvodes_diag),Cint,(Ptr{Void},Cint),cvode_mem,which)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_impl.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+
+function CVodeCreate(lmm::Int,iter::Int)
+    ccall((:CVodeCreate,libsundials_cvode),Ptr{Void},(Cint,Cint),lmm,iter)
+end
+
+function CVodeInit(cvode_mem::Ptr{Void},f::CVRhsFn,t0::realtype,y0::N_Vector)
+    ccall((:CVodeInit,libsundials_cvode),Cint,(Ptr{Void},CVRhsFn,realtype,N_Vector),cvode_mem,f,t0,y0)
+end
+
+function CVodeReInit(cvode_mem::Ptr{Void},t0::realtype,y0::N_Vector)
+    ccall((:CVodeReInit,libsundials_cvode),Cint,(Ptr{Void},realtype,N_Vector),cvode_mem,t0,y0)
+end
 
 function CVodeSStolerances(cvode_mem::Ptr{Void},reltol::realtype,abstol::realtype)
     ccall((:CVodeSStolerances,libsundials_cvode),Cint,(Ptr{Void},realtype,realtype),cvode_mem,reltol,abstol)
@@ -1315,59 +1543,1005 @@ function CVodeGetAdjCurrentCheckPoint(cvode_mem::Ptr{Void},addr::Vector{Ptr{Void
 end
 
 function cvEwtSet(ycur::N_Vector,weight::N_Vector,data::Ptr{Void})
-    ccall((:cvEwtSet,libsundials_cvode),Cint,(N_Vector,N_Vector,Ptr{Void}),ycur,weight,data)
+    ccall((:cvEwtSetlibsundials_cvodes_impl),Cint,(N_Vector,N_Vector,Ptr{Void}),ycur,weight,data)
 end
 
 function cvErrHandler(error_code::Int,_module::Ptr{UInt8},_function::Ptr{UInt8},msg::Ptr{UInt8},data::Ptr{Void})
-    ccall((:cvErrHandler,libsundials_cvode),Void,(Cint,Ptr{UInt8},Ptr{UInt8},Ptr{UInt8},Ptr{Void}),error_code,_module,_function,msg,data)
+    ccall((:cvErrHandlerlibsundials_cvodes_impl),Void,(Cint,Ptr{UInt8},Ptr{UInt8},Ptr{UInt8},Ptr{Void}),error_code,_module,_function,msg,data)
 end
 
 function cvSensRhsWrapper(cv_mem::CVodeMem,time::realtype,ycur::N_Vector,fcur::N_Vector,yScur::Ptr{N_Vector},fScur::Ptr{N_Vector},temp1::N_Vector,temp2::N_Vector)
-    ccall((:cvSensRhsWrapper,libsundials_cvode),Cint,(CVodeMem,realtype,N_Vector,N_Vector,Ptr{N_Vector},Ptr{N_Vector},N_Vector,N_Vector),cv_mem,time,ycur,fcur,yScur,fScur,temp1,temp2)
+    ccall((:cvSensRhsWrapperlibsundials_cvodes_impl),Cint,(CVodeMem,realtype,N_Vector,N_Vector,Ptr{N_Vector},Ptr{N_Vector},N_Vector,N_Vector),cv_mem,time,ycur,fcur,yScur,fScur,temp1,temp2)
 end
 
 function cvSensRhs1Wrapper(cv_mem::CVodeMem,time::realtype,ycur::N_Vector,fcur::N_Vector,is::Int,yScur::N_Vector,fScur::N_Vector,temp1::N_Vector,temp2::N_Vector)
-    ccall((:cvSensRhs1Wrapper,libsundials_cvode),Cint,(CVodeMem,realtype,N_Vector,N_Vector,Cint,N_Vector,N_Vector,N_Vector,N_Vector),cv_mem,time,ycur,fcur,is,yScur,fScur,temp1,temp2)
+    ccall((:cvSensRhs1Wrapperlibsundials_cvodes_impl),Cint,(CVodeMem,realtype,N_Vector,N_Vector,Cint,N_Vector,N_Vector,N_Vector,N_Vector),cv_mem,time,ycur,fcur,is,yScur,fScur,temp1,temp2)
 end
 
 function cvSensRhsInternalDQ(Ns::Int,t::realtype,y::N_Vector,ydot::N_Vector,yS::Ptr{N_Vector},ySdot::Ptr{N_Vector},fS_data::Ptr{Void},tempv::N_Vector,ftemp::N_Vector)
-    ccall((:cvSensRhsInternalDQ,libsundials_cvode),Cint,(Cint,realtype,N_Vector,N_Vector,Ptr{N_Vector},Ptr{N_Vector},Ptr{Void},N_Vector,N_Vector),Ns,t,y,ydot,yS,ySdot,fS_data,tempv,ftemp)
+    ccall((:cvSensRhsInternalDQlibsundials_cvodes_impl),Cint,(Cint,realtype,N_Vector,N_Vector,Ptr{N_Vector},Ptr{N_Vector},Ptr{Void},N_Vector,N_Vector),Ns,t,y,ydot,yS,ySdot,fS_data,tempv,ftemp)
 end
 
 function cvSensRhs1InternalDQ(Ns::Int,t::realtype,y::N_Vector,ydot::N_Vector,is::Int,yS::N_Vector,ySdot::N_Vector,fS_data::Ptr{Void},tempv::N_Vector,ftemp::N_Vector)
-    ccall((:cvSensRhs1InternalDQ,libsundials_cvode),Cint,(Cint,realtype,N_Vector,N_Vector,Cint,N_Vector,N_Vector,Ptr{Void},N_Vector,N_Vector),Ns,t,y,ydot,is,yS,ySdot,fS_data,tempv,ftemp)
+    ccall((:cvSensRhs1InternalDQlibsundials_cvodes_impl),Cint,(Cint,realtype,N_Vector,N_Vector,Cint,N_Vector,N_Vector,Ptr{Void},N_Vector,N_Vector),Ns,t,y,ydot,is,yS,ySdot,fS_data,tempv,ftemp)
+end
+# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_sparse.h
+# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+
+function NewDenseMat(M::Int,N::Int)
+    ccall((:NewDenseMat,sundials_direct),DlsMat,(Clong,Clong),M,N)
+end
+
+function NewBandMat(N::Int,mu::Int,ml::Int,smu::Int)
+    ccall((:NewBandMat,sundials_direct),DlsMat,(Clong,Clong,Clong,Clong),N,mu,ml,smu)
+end
+
+function DestroyMat(A::DlsMat)
+    ccall((:DestroyMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function NewIntArray(N::Int)
+    ccall((:NewIntArray,sundials_direct),Ptr{Cint},(Cint,),N)
+end
+
+function NewLintArray(N::Int)
+    ccall((:NewLintArray,sundials_direct),Ptr{Clong},(Clong,),N)
+end
+
+function NewRealArray(N::Int)
+    ccall((:NewRealArray,sundials_direct),Ptr{realtype},(Clong,),N)
+end
+
+function DestroyArray(p::Ptr{Void})
+    ccall((:DestroyArray,sundials_direct),Void,(Ptr{Void},),p)
+end
+
+function AddIdentity(A::DlsMat)
+    ccall((:AddIdentity,sundials_direct),Void,(DlsMat,),A)
+end
+
+function SetToZero(A::DlsMat)
+    ccall((:SetToZero,sundials_direct),Void,(DlsMat,),A)
+end
+
+function PrintMat(A::DlsMat)
+    ccall((:PrintMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function newDenseMat(m::Int,n::Int)
+    ccall((:newDenseMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong),m,n)
+end
+
+function newBandMat(n::Int,smu::Int,ml::Int)
+    ccall((:newBandMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong,Clong),n,smu,ml)
+end
+
+function destroyMat(a::Vector{Ptr{realtype}})
+    ccall((:destroyMat,sundials_direct),Void,(Ptr{Ptr{realtype}},),a)
+end
+
+function newIntArray(n::Int)
+    ccall((:newIntArray,sundials_direct),Ptr{Cint},(Cint,),n)
+end
+
+function newLintArray(n::Int)
+    ccall((:newLintArray,sundials_direct),Ptr{Clong},(Clong,),n)
+end
+
+function newRealArray(m::Int)
+    ccall((:newRealArray,sundials_direct),Ptr{realtype},(Clong,),m)
+end
+
+function destroyArray(v::Ptr{Void})
+    ccall((:destroyArray,sundials_direct),Void,(Ptr{Void},),v)
+end
+
+function NewSparseMat(M::Int,N::Int,NNZ::Int)
+    ccall((:NewSparseMat,sundials_sparse),SlsMat,(Cint,Cint,Cint),M,N,NNZ)
+end
+
+function SlsConvertDls(A::DlsMat)
+    ccall((:SlsConvertDls,sundials_sparse),SlsMat,(DlsMat,),A)
+end
+
+function DestroySparseMat(A::SlsMat)
+    ccall((:DestroySparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function SlsSetToZero(A::SlsMat)
+    ccall((:SlsSetToZero,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function CopySparseMat(A::SlsMat,B::SlsMat)
+    ccall((:CopySparseMat,sundials_sparse),Void,(SlsMat,SlsMat),A,B)
+end
+
+function ScaleSparseMat(b::realtype,A::SlsMat)
+    ccall((:ScaleSparseMat,sundials_sparse),Void,(realtype,SlsMat),b,A)
+end
+
+function AddIdentitySparseMat(A::SlsMat)
+    ccall((:AddIdentitySparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function SlsAddMat(A::SlsMat,B::SlsMat)
+    ccall((:SlsAddMat,sundials_sparse),Cint,(SlsMat,SlsMat),A,B)
+end
+
+function ReallocSparseMat(A::SlsMat)
+    ccall((:ReallocSparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function SlsMatvec(A::SlsMat,x::Vector{realtype},y::Vector{realtype})
+    ccall((:SlsMatvec,sundials_sparse),Cint,(SlsMat,Ptr{realtype},Ptr{realtype}),A,x,y)
+end
+
+function PrintSparseMat(A::SlsMat)
+    ccall((:PrintSparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function CVSlsSetSparseJacFn(cvode_mem::Ptr{Void},jac::CVSlsSparseJacFn)
+    ccall((:CVSlsSetSparseJacFnlibsundials_cvodes_sparse),Cint,(Ptr{Void},CVSlsSparseJacFn),cvode_mem,jac)
+end
+
+function CVSlsGetNumJacEvals(cvode_mem::Ptr{Void},njevals::Ptr{Clong})
+    ccall((:CVSlsGetNumJacEvalslibsundials_cvodes_sparse),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njevals)
+end
+
+function CVSlsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVSlsGetLastFlaglibsundials_cvodes_sparse),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVSlsGetReturnFlagName(flag::Int)
+    ccall((:CVSlsGetReturnFlagNamelibsundials_cvodes_sparse),Ptr{UInt8},(Clong,),flag)
+end
+
+function CVSlsSetSparseJacFnB(cv_mem::Ptr{Void},which::Int,jacB::CVSlsSparseJacFnB)
+    ccall((:CVSlsSetSparseJacFnBlibsundials_cvodes_sparse),Cint,(Ptr{Void},Cint,CVSlsSparseJacFnB),cv_mem,which,jacB)
+end
+
+function CVSlsSetSparseJacFnBS(cv_mem::Ptr{Void},which::Int,jacBS::CVSlsSparseJacFnBS)
+    ccall((:CVSlsSetSparseJacFnBSlibsundials_cvodes_sparse),Cint,(Ptr{Void},Cint,CVSlsSparseJacFnBS),cv_mem,which,jacBS)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_spbcgs.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function CVSpbcg(cvode_mem::Ptr{Void},pretype::Int,maxl::Int)
-    ccall((:CVSpbcg,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,pretype,maxl)
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
 end
 
-function CVSpbcgB(cvode_mem::Ptr{Void},which::Int,pretypeB::Int,maxlB::Int)
-    ccall((:CVSpbcgB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint,Cint),cvode_mem,which,pretypeB,maxlB)
-end
-# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_spgmr.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-function CVSpgmr(cvode_mem::Ptr{Void},pretype::Int,maxl::Int)
-    ccall((:CVSpgmr,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,pretype,maxl)
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
 end
 
-function CVSpgmrB(cvode_mem::Ptr{Void},which::Int,pretypeB::Int,maxlB::Int)
-    ccall((:CVSpgmrB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint,Cint),cvode_mem,which,pretypeB,maxlB)
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
 end
-# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_sptfqmr.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function ModifiedGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype})
+    ccall((:ModifiedGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype}),v,h,k,p,new_vk_norm)
+end
+
+function ClassicalGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype},temp::N_Vector,s::Vector{realtype})
+    ccall((:ClassicalGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype},N_Vector,Ptr{realtype}),v,h,k,p,new_vk_norm,temp,s)
+end
+
+function QRfact(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},job::Int)
+    ccall((:QRfact,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Cint),n,h,q,job)
+end
+
+function QRsol(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},b::Vector{realtype})
+    ccall((:QRsol,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype}),n,h,q,b)
+end
+
+function CVSpilsSetPrecType(cvode_mem::Ptr{Void},pretype::Int)
+    ccall((:CVSpilsSetPrecType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,pretype)
+end
+
+function CVSpilsSetGSType(cvode_mem::Ptr{Void},gstype::Int)
+    ccall((:CVSpilsSetGSType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,gstype)
+end
+
+function CVSpilsSetMaxl(cvode_mem::Ptr{Void},maxl::Int)
+    ccall((:CVSpilsSetMaxl,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxl)
+end
+
+function CVSpilsSetEpsLin(cvode_mem::Ptr{Void},eplifac::realtype)
+    ccall((:CVSpilsSetEpsLin,libsundials_cvode),Cint,(Ptr{Void},realtype),cvode_mem,eplifac)
+end
+
+function CVSpilsSetPreconditioner(cvode_mem::Ptr{Void},pset::CVSpilsPrecSetupFn,psolve::CVSpilsPrecSolveFn)
+    ccall((:CVSpilsSetPreconditioner,libsundials_cvode),Cint,(Ptr{Void},CVSpilsPrecSetupFn,CVSpilsPrecSolveFn),cvode_mem,pset,psolve)
+end
+
+function CVSpilsSetJacTimesVecFn(cvode_mem::Ptr{Void},jtv::CVSpilsJacTimesVecFn)
+    ccall((:CVSpilsSetJacTimesVecFn,libsundials_cvode),Cint,(Ptr{Void},CVSpilsJacTimesVecFn),cvode_mem,jtv)
+end
+
+function CVSpilsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVSpilsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVSpilsGetNumPrecEvals(cvode_mem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npevals)
+end
+
+function CVSpilsGetNumPrecSolves(cvode_mem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecSolves,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npsolves)
+end
+
+function CVSpilsGetNumLinIters(cvode_mem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:CVSpilsGetNumLinIters,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nliters)
+end
+
+function CVSpilsGetNumConvFails(cvode_mem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:CVSpilsGetNumConvFails,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nlcfails)
+end
+
+function CVSpilsGetNumJtimesEvals(cvode_mem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumJtimesEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njvevals)
+end
+
+function CVSpilsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVSpilsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVSpilsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVSpilsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVSpilsGetReturnFlagName(flag::Int)
+    ccall((:CVSpilsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
+end
+
+function CVSpilsSetPrecTypeB(cvode_mem::Ptr{Void},which::Int,pretypeB::Int)
+    ccall((:CVSpilsSetPrecTypeB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,pretypeB)
+end
+
+function CVSpilsSetGSTypeB(cvode_mem::Ptr{Void},which::Int,gstypeB::Int)
+    ccall((:CVSpilsSetGSTypeB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,gstypeB)
+end
+
+function CVSpilsSetEpsLinB(cvode_mem::Ptr{Void},which::Int,eplifacB::realtype)
+    ccall((:CVSpilsSetEpsLinB,libsundials_cvode),Cint,(Ptr{Void},Cint,realtype),cvode_mem,which,eplifacB)
+end
+
+function CVSpilsSetMaxlB(cvode_mem::Ptr{Void},which::Int,maxlB::Int)
+    ccall((:CVSpilsSetMaxlB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,maxlB)
+end
+
+function CVSpilsSetPreconditionerB(cvode_mem::Ptr{Void},which::Int,psetB::CVSpilsPrecSetupFnB,psolveB::CVSpilsPrecSolveFnB)
+    ccall((:CVSpilsSetPreconditionerB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsPrecSetupFnB,CVSpilsPrecSolveFnB),cvode_mem,which,psetB,psolveB)
+end
+
+function CVSpilsSetPreconditionerBS(cvode_mem::Ptr{Void},which::Int,psetBS::CVSpilsPrecSetupFnBS,psolveBS::CVSpilsPrecSolveFnBS)
+    ccall((:CVSpilsSetPreconditionerBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsPrecSetupFnBS,CVSpilsPrecSolveFnBS),cvode_mem,which,psetBS,psolveBS)
+end
 
 function CVSpilsSetJacTimesVecFnB(cvode_mem::Ptr{Void},which::Int,jtvB::CVSpilsJacTimesVecFnB)
     ccall((:CVSpilsSetJacTimesVecFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsJacTimesVecFnB),cvode_mem,which,jtvB)
 end
 
+function CVSpilsSetJacTimesVecFnBS(cvode_mem::Ptr{Void},which::Int,jtvBS::CVSpilsJacTimesVecFnBS)
+    ccall((:CVSpilsSetJacTimesVecFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsJacTimesVecFnBS),cvode_mem,which,jtvBS)
+end
+
+function SpbcgMalloc(l_max::Int,vec_tmpl::N_Vector)
+    ccall((:SpbcgMalloc,sundials_spbcgs),SpbcgMem,(Cint,N_Vector),l_max,vec_tmpl)
+end
+
+function SpbcgSolve(mem::SpbcgMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
+    ccall((:SpbcgSolve,sundials_spbcgs),Cint,(SpbcgMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
+end
+
+function SpbcgFree(mem::SpbcgMem)
+    ccall((:SpbcgFree,sundials_spbcgs),Void,(SpbcgMem,),mem)
+end
+
+function CVSpbcg(cvode_mem::Ptr{Void},pretype::Int,maxl::Int)
+    ccall((:CVSpbcglibsundials_cvodes_spbcgs),Cint,(Ptr{Void},Cint,Cint),cvode_mem,pretype,maxl)
+end
+
+function CVSpbcgB(cvode_mem::Ptr{Void},which::Int,pretypeB::Int,maxlB::Int)
+    ccall((:CVSpbcgBlibsundials_cvodes_spbcgs),Cint,(Ptr{Void},Cint,Cint,Cint),cvode_mem,which,pretypeB,maxlB)
+end
+# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_spgmr.h
+# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function ModifiedGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype})
+    ccall((:ModifiedGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype}),v,h,k,p,new_vk_norm)
+end
+
+function ClassicalGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype},temp::N_Vector,s::Vector{realtype})
+    ccall((:ClassicalGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype},N_Vector,Ptr{realtype}),v,h,k,p,new_vk_norm,temp,s)
+end
+
+function QRfact(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},job::Int)
+    ccall((:QRfact,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Cint),n,h,q,job)
+end
+
+function QRsol(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},b::Vector{realtype})
+    ccall((:QRsol,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype}),n,h,q,b)
+end
+
+function CVSpilsSetPrecType(cvode_mem::Ptr{Void},pretype::Int)
+    ccall((:CVSpilsSetPrecType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,pretype)
+end
+
+function CVSpilsSetGSType(cvode_mem::Ptr{Void},gstype::Int)
+    ccall((:CVSpilsSetGSType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,gstype)
+end
+
+function CVSpilsSetMaxl(cvode_mem::Ptr{Void},maxl::Int)
+    ccall((:CVSpilsSetMaxl,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxl)
+end
+
+function CVSpilsSetEpsLin(cvode_mem::Ptr{Void},eplifac::realtype)
+    ccall((:CVSpilsSetEpsLin,libsundials_cvode),Cint,(Ptr{Void},realtype),cvode_mem,eplifac)
+end
+
+function CVSpilsSetPreconditioner(cvode_mem::Ptr{Void},pset::CVSpilsPrecSetupFn,psolve::CVSpilsPrecSolveFn)
+    ccall((:CVSpilsSetPreconditioner,libsundials_cvode),Cint,(Ptr{Void},CVSpilsPrecSetupFn,CVSpilsPrecSolveFn),cvode_mem,pset,psolve)
+end
+
+function CVSpilsSetJacTimesVecFn(cvode_mem::Ptr{Void},jtv::CVSpilsJacTimesVecFn)
+    ccall((:CVSpilsSetJacTimesVecFn,libsundials_cvode),Cint,(Ptr{Void},CVSpilsJacTimesVecFn),cvode_mem,jtv)
+end
+
+function CVSpilsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVSpilsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVSpilsGetNumPrecEvals(cvode_mem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npevals)
+end
+
+function CVSpilsGetNumPrecSolves(cvode_mem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecSolves,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npsolves)
+end
+
+function CVSpilsGetNumLinIters(cvode_mem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:CVSpilsGetNumLinIters,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nliters)
+end
+
+function CVSpilsGetNumConvFails(cvode_mem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:CVSpilsGetNumConvFails,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nlcfails)
+end
+
+function CVSpilsGetNumJtimesEvals(cvode_mem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumJtimesEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njvevals)
+end
+
+function CVSpilsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVSpilsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVSpilsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVSpilsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVSpilsGetReturnFlagName(flag::Int)
+    ccall((:CVSpilsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
+end
+
+function CVSpilsSetPrecTypeB(cvode_mem::Ptr{Void},which::Int,pretypeB::Int)
+    ccall((:CVSpilsSetPrecTypeB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,pretypeB)
+end
+
+function CVSpilsSetGSTypeB(cvode_mem::Ptr{Void},which::Int,gstypeB::Int)
+    ccall((:CVSpilsSetGSTypeB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,gstypeB)
+end
+
+function CVSpilsSetEpsLinB(cvode_mem::Ptr{Void},which::Int,eplifacB::realtype)
+    ccall((:CVSpilsSetEpsLinB,libsundials_cvode),Cint,(Ptr{Void},Cint,realtype),cvode_mem,which,eplifacB)
+end
+
+function CVSpilsSetMaxlB(cvode_mem::Ptr{Void},which::Int,maxlB::Int)
+    ccall((:CVSpilsSetMaxlB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,maxlB)
+end
+
+function CVSpilsSetPreconditionerB(cvode_mem::Ptr{Void},which::Int,psetB::CVSpilsPrecSetupFnB,psolveB::CVSpilsPrecSolveFnB)
+    ccall((:CVSpilsSetPreconditionerB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsPrecSetupFnB,CVSpilsPrecSolveFnB),cvode_mem,which,psetB,psolveB)
+end
+
+function CVSpilsSetPreconditionerBS(cvode_mem::Ptr{Void},which::Int,psetBS::CVSpilsPrecSetupFnBS,psolveBS::CVSpilsPrecSolveFnBS)
+    ccall((:CVSpilsSetPreconditionerBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsPrecSetupFnBS,CVSpilsPrecSolveFnBS),cvode_mem,which,psetBS,psolveBS)
+end
+
+function CVSpilsSetJacTimesVecFnB(cvode_mem::Ptr{Void},which::Int,jtvB::CVSpilsJacTimesVecFnB)
+    ccall((:CVSpilsSetJacTimesVecFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsJacTimesVecFnB),cvode_mem,which,jtvB)
+end
+
+function CVSpilsSetJacTimesVecFnBS(cvode_mem::Ptr{Void},which::Int,jtvBS::CVSpilsJacTimesVecFnBS)
+    ccall((:CVSpilsSetJacTimesVecFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsJacTimesVecFnBS),cvode_mem,which,jtvBS)
+end
+
+function SpgmrMalloc(l_max::Int,vec_tmpl::N_Vector)
+    ccall((:SpgmrMalloc,sundials_spgmr),SpgmrMem,(Cint,N_Vector),l_max,vec_tmpl)
+end
+
+function SpgmrSolve(mem::SpgmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,gstype::Int,delta::realtype,max_restarts::Int,P_data::Ptr{Void},s1::N_Vector,s2::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
+    ccall((:SpgmrSolve,sundials_spgmr),Cint,(SpgmrMem,Ptr{Void},N_Vector,N_Vector,Cint,Cint,realtype,Cint,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,gstype,delta,max_restarts,P_data,s1,s2,atimes,psolve,res_norm,nli,nps)
+end
+
+function SpgmrFree(mem::SpgmrMem)
+    ccall((:SpgmrFree,sundials_spgmr),Void,(SpgmrMem,),mem)
+end
+
+function CVSpgmr(cvode_mem::Ptr{Void},pretype::Int,maxl::Int)
+    ccall((:CVSpgmrlibsundials_cvodes_spgmr),Cint,(Ptr{Void},Cint,Cint),cvode_mem,pretype,maxl)
+end
+
+function CVSpgmrB(cvode_mem::Ptr{Void},which::Int,pretypeB::Int,maxlB::Int)
+    ccall((:CVSpgmrBlibsundials_cvodes_spgmr),Cint,(Ptr{Void},Cint,Cint,Cint),cvode_mem,which,pretypeB,maxlB)
+end
+# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvodes/cvodes_sptfqmr.h
+# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function ModifiedGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype})
+    ccall((:ModifiedGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype}),v,h,k,p,new_vk_norm)
+end
+
+function ClassicalGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype},temp::N_Vector,s::Vector{realtype})
+    ccall((:ClassicalGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype},N_Vector,Ptr{realtype}),v,h,k,p,new_vk_norm,temp,s)
+end
+
+function QRfact(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},job::Int)
+    ccall((:QRfact,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Cint),n,h,q,job)
+end
+
+function QRsol(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},b::Vector{realtype})
+    ccall((:QRsol,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype}),n,h,q,b)
+end
+
+function CVSpilsSetPrecType(cvode_mem::Ptr{Void},pretype::Int)
+    ccall((:CVSpilsSetPrecType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,pretype)
+end
+
+function CVSpilsSetGSType(cvode_mem::Ptr{Void},gstype::Int)
+    ccall((:CVSpilsSetGSType,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,gstype)
+end
+
+function CVSpilsSetMaxl(cvode_mem::Ptr{Void},maxl::Int)
+    ccall((:CVSpilsSetMaxl,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxl)
+end
+
+function CVSpilsSetEpsLin(cvode_mem::Ptr{Void},eplifac::realtype)
+    ccall((:CVSpilsSetEpsLin,libsundials_cvode),Cint,(Ptr{Void},realtype),cvode_mem,eplifac)
+end
+
+function CVSpilsSetPreconditioner(cvode_mem::Ptr{Void},pset::CVSpilsPrecSetupFn,psolve::CVSpilsPrecSolveFn)
+    ccall((:CVSpilsSetPreconditioner,libsundials_cvode),Cint,(Ptr{Void},CVSpilsPrecSetupFn,CVSpilsPrecSolveFn),cvode_mem,pset,psolve)
+end
+
+function CVSpilsSetJacTimesVecFn(cvode_mem::Ptr{Void},jtv::CVSpilsJacTimesVecFn)
+    ccall((:CVSpilsSetJacTimesVecFn,libsundials_cvode),Cint,(Ptr{Void},CVSpilsJacTimesVecFn),cvode_mem,jtv)
+end
+
+function CVSpilsGetWorkSpace(cvode_mem::Ptr{Void},lenrwLS::Ptr{Clong},leniwLS::Ptr{Clong})
+    ccall((:CVSpilsGetWorkSpace,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,lenrwLS,leniwLS)
+end
+
+function CVSpilsGetNumPrecEvals(cvode_mem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npevals)
+end
+
+function CVSpilsGetNumPrecSolves(cvode_mem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:CVSpilsGetNumPrecSolves,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,npsolves)
+end
+
+function CVSpilsGetNumLinIters(cvode_mem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:CVSpilsGetNumLinIters,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nliters)
+end
+
+function CVSpilsGetNumConvFails(cvode_mem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:CVSpilsGetNumConvFails,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nlcfails)
+end
+
+function CVSpilsGetNumJtimesEvals(cvode_mem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:CVSpilsGetNumJtimesEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,njvevals)
+end
+
+function CVSpilsGetNumRhsEvals(cvode_mem::Ptr{Void},nfevalsLS::Ptr{Clong})
+    ccall((:CVSpilsGetNumRhsEvals,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,nfevalsLS)
+end
+
+function CVSpilsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:CVSpilsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
+end
+
+function CVSpilsGetReturnFlagName(flag::Int)
+    ccall((:CVSpilsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
+end
+
+function CVSpilsSetPrecTypeB(cvode_mem::Ptr{Void},which::Int,pretypeB::Int)
+    ccall((:CVSpilsSetPrecTypeB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,pretypeB)
+end
+
+function CVSpilsSetGSTypeB(cvode_mem::Ptr{Void},which::Int,gstypeB::Int)
+    ccall((:CVSpilsSetGSTypeB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,gstypeB)
+end
+
+function CVSpilsSetEpsLinB(cvode_mem::Ptr{Void},which::Int,eplifacB::realtype)
+    ccall((:CVSpilsSetEpsLinB,libsundials_cvode),Cint,(Ptr{Void},Cint,realtype),cvode_mem,which,eplifacB)
+end
+
+function CVSpilsSetMaxlB(cvode_mem::Ptr{Void},which::Int,maxlB::Int)
+    ccall((:CVSpilsSetMaxlB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,which,maxlB)
+end
+
+function CVSpilsSetPreconditionerB(cvode_mem::Ptr{Void},which::Int,psetB::CVSpilsPrecSetupFnB,psolveB::CVSpilsPrecSolveFnB)
+    ccall((:CVSpilsSetPreconditionerB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsPrecSetupFnB,CVSpilsPrecSolveFnB),cvode_mem,which,psetB,psolveB)
+end
+
+function CVSpilsSetPreconditionerBS(cvode_mem::Ptr{Void},which::Int,psetBS::CVSpilsPrecSetupFnBS,psolveBS::CVSpilsPrecSolveFnBS)
+    ccall((:CVSpilsSetPreconditionerBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsPrecSetupFnBS,CVSpilsPrecSolveFnBS),cvode_mem,which,psetBS,psolveBS)
+end
+
+function CVSpilsSetJacTimesVecFnB(cvode_mem::Ptr{Void},which::Int,jtvB::CVSpilsJacTimesVecFnB)
+    ccall((:CVSpilsSetJacTimesVecFnB,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsJacTimesVecFnB),cvode_mem,which,jtvB)
+end
+
+function CVSpilsSetJacTimesVecFnBS(cvode_mem::Ptr{Void},which::Int,jtvBS::CVSpilsJacTimesVecFnBS)
+    ccall((:CVSpilsSetJacTimesVecFnBS,libsundials_cvode),Cint,(Ptr{Void},Cint,CVSpilsJacTimesVecFnBS),cvode_mem,which,jtvBS)
+end
+
+function SptfqmrMalloc(l_max::Int,vec_tmpl::N_Vector)
+    ccall((:SptfqmrMalloc,sundials_sptfqmr),SptfqmrMem,(Cint,N_Vector),l_max,vec_tmpl)
+end
+
+function SptfqmrSolve(mem::SptfqmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
+    ccall((:SptfqmrSolve,sundials_sptfqmr),Cint,(SptfqmrMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
+end
+
+function SptfqmrFree(mem::SptfqmrMem)
+    ccall((:SptfqmrFree,sundials_sptfqmr),Void,(SptfqmrMem,),mem)
+end
+
 function CVSptfqmr(cvode_mem::Ptr{Void},pretype::Int,maxl::Int)
-    ccall((:CVSptfqmr,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint),cvode_mem,pretype,maxl)
+    ccall((:CVSptfqmrlibsundials_cvodes_sptfqmr),Cint,(Ptr{Void},Cint,Cint),cvode_mem,pretype,maxl)
 end
 
 function CVSptfqmrB(cvode_mem::Ptr{Void},which::Int,pretypeB::Int,maxlB::Int)
-    ccall((:CVSptfqmrB,libsundials_cvode),Cint,(Ptr{Void},Cint,Cint,Cint),cvode_mem,which,pretypeB,maxlB)
+    ccall((:CVSptfqmrBlibsundials_cvodes_sptfqmr),Cint,(Ptr{Void},Cint,Cint,Cint),cvode_mem,which,pretypeB,maxlB)
 end

@@ -3,9 +3,8 @@
 using Compat
 
 const OBJC_NEW_PROPERTIES = 1
-const SUNDIALS_PACKAGE_VERSION = "2.5.0"
+const SUNDIALS_PACKAGE_VERSION = "2.6.2"
 const SUNDIALS_DOUBLE_PRECISION = 1
-const SUNDIALS_BLAS_LAPACK = 0
 # const FLT_EVAL_METHOD = __FLT_EVAL_METHOD__
 
 # Skipping MacroDefinition: FLT_ROUNDS ( __builtin_flt_rounds ( ) )
@@ -62,16 +61,16 @@ const SUNDIALS_BAND = 2
 typealias realtype Cdouble
 
 type _DlsMat
-    _type::Cint
-    M::Clong
-    N::Clong
-    ldim::Clong
-    mu::Clong
-    ml::Clong
-    s_mu::Clong
-    data::Ptr{realtype}
-    ldata::Clong
-    cols::Ptr{Ptr{realtype}}
+    _type::Int
+    M::Int
+    N::Int
+    ldim::Int
+    mu::Int
+    ml::Int
+    s_mu::Int
+    data::Vector{realtype}
+    ldata::Int
+    cols::Vector{Ptr{realtype}}
 end
 
 typealias DlsMat Ptr{_DlsMat}
@@ -122,13 +121,13 @@ const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
 # end enum ANONYMOUS_1
 
-# begin enum ANONYMOUS_47
-typealias ANONYMOUS_47 UInt32
+# begin enum ANONYMOUS_67
+typealias ANONYMOUS_67 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_47
+# end enum ANONYMOUS_67
 
 # begin enum ANONYMOUS_2
 typealias ANONYMOUS_2 UInt32
@@ -136,27 +135,25 @@ const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
 # end enum ANONYMOUS_2
 
-# begin enum ANONYMOUS_48
-typealias ANONYMOUS_48 UInt32
+# begin enum ANONYMOUS_68
+typealias ANONYMOUS_68 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_48
+# end enum ANONYMOUS_68
 
 typealias ATimesFn Ptr{Void}
 typealias PSolveFn Ptr{Void}
 
-const SPBCG_SUCCESS = 0
-const SPBCG_RES_REDUCED = 1
-const SPBCG_CONV_FAIL = 2
-const SPBCG_PSOLVE_FAIL_REC = 3
-const SPBCG_ATIMES_FAIL_REC = 4
-const SPBCG_PSET_FAIL_REC = 5
-const SPBCG_MEM_NULL = -1
-const SPBCG_ATIMES_FAIL_UNREC = -2
-const SPBCG_PSOLVE_FAIL_UNREC = -3
-const SPBCG_PSET_FAIL_UNREC = -4
-
-# Skipping MacroDefinition: SPBCG_VTEMP ( mem ) ( mem -> r )
+const PCG_SUCCESS = 0
+const PCG_RES_REDUCED = 1
+const PCG_CONV_FAIL = 2
+const PCG_PSOLVE_FAIL_REC = 3
+const PCG_ATIMES_FAIL_REC = 4
+const PCG_PSET_FAIL_REC = 5
+const PCG_MEM_NULL = -1
+const PCG_ATIMES_FAIL_UNREC = -2
+const PCG_PSOLVE_FAIL_UNREC = -3
+const PCG_PSET_FAIL_UNREC = -4
 
 # begin enum ANONYMOUS_3
 typealias ANONYMOUS_3 UInt32
@@ -172,8 +169,56 @@ const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
 # end enum ANONYMOUS_4
 
+type PcgMemRec
+    l_max::Int
+    r::N_Vector
+    p::N_Vector
+    z::N_Vector
+    Ap::N_Vector
+end
+
+typealias PcgMem Ptr{Void}
+
+type _SlsMat
+    M::Int
+    N::Int
+    NNZ::Int
+    data::Vector{realtype}
+    rowvals::Ptr{Cint}
+    colptrs::Ptr{Cint}
+end
+
+typealias SlsMat Ptr{_SlsMat}
+
+const SPBCG_SUCCESS = 0
+const SPBCG_RES_REDUCED = 1
+const SPBCG_CONV_FAIL = 2
+const SPBCG_PSOLVE_FAIL_REC = 3
+const SPBCG_ATIMES_FAIL_REC = 4
+const SPBCG_PSET_FAIL_REC = 5
+const SPBCG_MEM_NULL = -1
+const SPBCG_ATIMES_FAIL_UNREC = -2
+const SPBCG_PSOLVE_FAIL_UNREC = -3
+const SPBCG_PSET_FAIL_UNREC = -4
+
+# Skipping MacroDefinition: SPBCG_VTEMP ( mem ) ( mem -> r )
+
+# begin enum ANONYMOUS_5
+typealias ANONYMOUS_5 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_5
+
+# begin enum ANONYMOUS_6
+typealias ANONYMOUS_6 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_6
+
 type SpbcgMemRec
-    l_max::Cint
+    l_max::Int
     r_star::N_Vector
     r::N_Vector
     p::N_Vector
@@ -184,6 +229,60 @@ type SpbcgMemRec
 end
 
 typealias SpbcgMem Ptr{Void}
+
+const SPFGMR_SUCCESS = 0
+const SPFGMR_RES_REDUCED = 1
+const SPFGMR_CONV_FAIL = 2
+const SPFGMR_QRFACT_FAIL = 3
+const SPFGMR_PSOLVE_FAIL_REC = 4
+const SPFGMR_ATIMES_FAIL_REC = 5
+const SPFGMR_PSET_FAIL_REC = 6
+const SPFGMR_MEM_NULL = -1
+const SPFGMR_ATIMES_FAIL_UNREC = -2
+const SPFGMR_PSOLVE_FAIL_UNREC = -3
+const SPFGMR_GS_FAIL = -4
+const SPFGMR_QRSOL_FAIL = -5
+const SPFGMR_PSET_FAIL_UNREC = -6
+
+# Skipping MacroDefinition: SPFGMR_VTEMP ( mem ) ( mem -> vtemp )
+
+# begin enum ANONYMOUS_7
+typealias ANONYMOUS_7 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_7
+
+# begin enum ANONYMOUS_8
+typealias ANONYMOUS_8 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_8
+
+type _SpfgmrMemRec
+    l_max::Int
+    V::Ptr{N_Vector}
+    Z::Ptr{N_Vector}
+    Hes::Vector{Ptr{realtype}}
+    givens::Vector{realtype}
+    xcor::N_Vector
+    yg::Vector{realtype}
+    vtemp::N_Vector
+end
+
+type SpfgmrMemRec
+    l_max::Int
+    V::Ptr{N_Vector}
+    Z::Ptr{N_Vector}
+    Hes::Vector{Ptr{realtype}}
+    givens::Vector{realtype}
+    xcor::N_Vector
+    yg::Vector{realtype}
+    vtemp::N_Vector
+end
+
+typealias SpfgmrMem Ptr{_SpfgmrMemRec}
 
 const SPGMR_SUCCESS = 0
 const SPGMR_RES_REDUCED = 1
@@ -201,37 +300,37 @@ const SPGMR_PSET_FAIL_UNREC = -6
 
 # Skipping MacroDefinition: SPGMR_VTEMP ( mem ) ( mem -> vtemp )
 
-# begin enum ANONYMOUS_5
-typealias ANONYMOUS_5 UInt32
+# begin enum ANONYMOUS_9
+typealias ANONYMOUS_9 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_5
+# end enum ANONYMOUS_9
 
-# begin enum ANONYMOUS_6
-typealias ANONYMOUS_6 UInt32
+# begin enum ANONYMOUS_10
+typealias ANONYMOUS_10 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_6
+# end enum ANONYMOUS_10
 
 type _SpgmrMemRec
-    l_max::Cint
+    l_max::Int
     V::Ptr{N_Vector}
-    Hes::Ptr{Ptr{realtype}}
-    givens::Ptr{realtype}
+    Hes::Vector{Ptr{realtype}}
+    givens::Vector{realtype}
     xcor::N_Vector
-    yg::Ptr{realtype}
+    yg::Vector{realtype}
     vtemp::N_Vector
 end
 
 type SpgmrMemRec
-    l_max::Cint
+    l_max::Int
     V::Ptr{N_Vector}
-    Hes::Ptr{Ptr{realtype}}
-    givens::Ptr{realtype}
+    Hes::Vector{Ptr{realtype}}
+    givens::Vector{realtype}
     xcor::N_Vector
-    yg::Ptr{realtype}
+    yg::Vector{realtype}
     vtemp::N_Vector
 end
 
@@ -250,22 +349,22 @@ const SPTFQMR_PSET_FAIL_UNREC = -4
 
 # Skipping MacroDefinition: SPTFQMR_VTEMP ( mem ) ( mem -> vtemp1 )
 
-# begin enum ANONYMOUS_7
-typealias ANONYMOUS_7 UInt32
+# begin enum ANONYMOUS_11
+typealias ANONYMOUS_11 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_7
+# end enum ANONYMOUS_11
 
-# begin enum ANONYMOUS_8
-typealias ANONYMOUS_8 UInt32
+# begin enum ANONYMOUS_12
+typealias ANONYMOUS_12 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_8
+# end enum ANONYMOUS_12
 
 type SptfqmrMemRec
-    l_max::Cint
+    l_max::Int
     r_star::N_Vector
     q::N_Vector
     d::N_Vector
@@ -406,7 +505,7 @@ zero(::Type{Array_56_UInt8}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wr
     end
 
 type _opaque_pthread_attr_t
-    __sig::Clong
+    __sig::Int
     __opaque::Array_56_UInt8
 end
 
@@ -458,7 +557,7 @@ zero(::Type{Array_40_UInt8}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wr
     end
 
 type _opaque_pthread_cond_t
-    __sig::Clong
+    __sig::Int
     __opaque::Array_40_UInt8
 end
 
@@ -478,22 +577,22 @@ zero(::Type{Array_8_UInt8}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wra
     end
 
 type _opaque_pthread_condattr_t
-    __sig::Clong
+    __sig::Int
     __opaque::Array_8_UInt8
 end
 
 type _opaque_pthread_mutex_t
-    __sig::Clong
+    __sig::Int
     __opaque::Array_56_UInt8
 end
 
 type _opaque_pthread_mutexattr_t
-    __sig::Clong
+    __sig::Int
     __opaque::Array_8_UInt8
 end
 
 type _opaque_pthread_once_t
-    __sig::Clong
+    __sig::Int
     __opaque::Array_8_UInt8
 end
 
@@ -697,7 +796,7 @@ zero(::Type{Array_192_UInt8}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/w
     end
 
 type _opaque_pthread_rwlock_t
-    __sig::Clong
+    __sig::Int
     __opaque::Array_192_UInt8
 end
 
@@ -724,6 +823,11 @@ zero(::Type{Array_16_UInt8}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wr
         Array_16_UInt8(fill(zero(UInt8),16)...)
     end
 
+type _opaque_pthread_rwlockattr_t
+    __sig::Int
+    __opaque::Array_16_UInt8
+end
+
 immutable Array_3_Cuchar
     d1::Cuchar
     d2::Cuchar
@@ -742,31 +846,6 @@ zero(::Type{Array_1_Cuchar}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wr
         Array_1_Cuchar(fill(zero(Cuchar),1)...)
     end
 
-# type FILE
-#     _p::Ptr{Cuchar}
-#     _r::Cint
-#     _w::Cint
-#     _flags::Int16
-#     _file::Int16
-#     _bf::__sbuf
-#     _lbfsize::Cint
-#     _cookie::Ptr{Void}
-#     _close::Ptr{Void}
-#     _read::Ptr{Void}
-#     _seek::Ptr{Void}
-#     _write::Ptr{Void}
-#     _ub::__sbuf
-#     _extra::Ptr{__sFILEX}
-#     _ur::Cint
-#     _ubuf::Array_3_Cuchar
-#     _nbuf::Array_1_Cuchar
-#     _lb::__sbuf
-#     _blksize::Cint
-#     _offset::fpos_t
-# end
-# 
-# typealias off_t __darwin_off_t
-# typealias ssize_t __darwin_ssize_t
 typealias CVRhsFn Ptr{Void}
 typealias CVRootFn Ptr{Void}
 typealias CVEwtFn Ptr{Void}
@@ -795,19 +874,19 @@ const CVSPILS_MSBPRE = 50
 # Skipping MacroDefinition: CVSPILS_DGMAX RCONST ( 0.2 )
 # Skipping MacroDefinition: CVSPILS_EPLIN RCONST ( 0.05 )
 
-# begin enum ANONYMOUS_9
-typealias ANONYMOUS_9 UInt32
+# begin enum ANONYMOUS_13
+typealias ANONYMOUS_13 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_9
+# end enum ANONYMOUS_13
 
-# begin enum ANONYMOUS_10
-typealias ANONYMOUS_10 UInt32
+# begin enum ANONYMOUS_14
+typealias ANONYMOUS_14 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_10
+# end enum ANONYMOUS_14
 
 typealias CVSpilsPrecSetupFn Ptr{Void}
 typealias CVSpilsPrecSolveFn Ptr{Void}
@@ -858,8 +937,8 @@ type CVadjCheckPointRec
     next_addr::Ptr{Void}
     t0::realtype
     t1::realtype
-    nstep::Clong
-    order::Cint
+    nstep::Int
+    order::Int
     step::realtype
 end
 
@@ -867,28 +946,33 @@ const CVDLS_NO_ADJ = -101
 const CVDLS_LMEMB_NULL = -102
 
 typealias CVDlsDenseJacFnB Ptr{Void}
+typealias CVDlsDenseJacFnBS Ptr{Void}
 typealias CVDlsBandJacFnB Ptr{Void}
+typealias CVDlsBandJacFnBS Ptr{Void}
 
 const CVSPILS_NO_ADJ = -101
 const CVSPILS_LMEMB_NULL = -102
 
-# begin enum ANONYMOUS_11
-typealias ANONYMOUS_11 UInt32
+# begin enum ANONYMOUS_15
+typealias ANONYMOUS_15 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_11
+# end enum ANONYMOUS_15
 
-# begin enum ANONYMOUS_12
-typealias ANONYMOUS_12 UInt32
+# begin enum ANONYMOUS_16
+typealias ANONYMOUS_16 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_12
+# end enum ANONYMOUS_16
 
 typealias CVSpilsPrecSetupFnB Ptr{Void}
+typealias CVSpilsPrecSetupFnBS Ptr{Void}
 typealias CVSpilsPrecSolveFnB Ptr{Void}
+typealias CVSpilsPrecSolveFnBS Ptr{Void}
 typealias CVSpilsJacTimesVecFnB Ptr{Void}
+typealias CVSpilsJacTimesVecFnBS Ptr{Void}
 
 const IDA_NORMAL = 1
 const IDA_ONE_STEP = 2
@@ -944,19 +1028,19 @@ const IDASPILS_ILL_INPUT = -3
 const IDASPILS_MEM_FAIL = -4
 const IDASPILS_PMEM_NULL = -5
 
-# begin enum ANONYMOUS_13
-typealias ANONYMOUS_13 UInt32
+# begin enum ANONYMOUS_17
+typealias ANONYMOUS_17 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_13
+# end enum ANONYMOUS_17
 
-# begin enum ANONYMOUS_14
-typealias ANONYMOUS_14 UInt32
+# begin enum ANONYMOUS_18
+typealias ANONYMOUS_18 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_14
+# end enum ANONYMOUS_18
 
 typealias IDASpilsPrecSetupFn Ptr{Void}
 typealias IDASpilsPrecSolveFn Ptr{Void}
@@ -1001,8 +1085,8 @@ type IDAadjCheckPointRec
     next_addr::Ptr{Void}
     t0::realtype
     t1::realtype
-    nstep::Clong
-    order::Cint
+    nstep::Int
+    order::Int
     step::realtype
 end
 
@@ -1010,28 +1094,33 @@ const IDADLS_NO_ADJ = -101
 const IDADLS_LMEMB_NULL = -102
 
 typealias IDADlsDenseJacFnB Ptr{Void}
+typealias IDADlsDenseJacFnBS Ptr{Void}
 typealias IDADlsBandJacFnB Ptr{Void}
+typealias IDADlsBandJacFnBS Ptr{Void}
 
 const IDASPILS_NO_ADJ = -101
 const IDASPILS_LMEMB_NULL = -102
 
-# begin enum ANONYMOUS_15
-typealias ANONYMOUS_15 UInt32
+# begin enum ANONYMOUS_19
+typealias ANONYMOUS_19 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_15
+# end enum ANONYMOUS_19
 
-# begin enum ANONYMOUS_16
-typealias ANONYMOUS_16 UInt32
+# begin enum ANONYMOUS_20
+typealias ANONYMOUS_20 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_16
+# end enum ANONYMOUS_20
 
 typealias IDASpilsPrecSetupFnB Ptr{Void}
+typealias IDASpilsPrecSetupFnBS Ptr{Void}
 typealias IDASpilsPrecSolveFnB Ptr{Void}
+typealias IDASpilsPrecSolveFnBS Ptr{Void}
 typealias IDASpilsJacTimesVecFnB Ptr{Void}
+typealias IDASpilsJacTimesVecFnBS Ptr{Void}
 
 const KIN_SUCCESS = 0
 const KIN_INITIAL_GUESS_OK = 1
@@ -1057,6 +1146,8 @@ const KIN_ETACHOICE2 = 2
 const KIN_ETACONSTANT = 3
 const KIN_NONE = 0
 const KIN_LINESEARCH = 1
+const KIN_PICARD = 2
+const KIN_FP = 3
 
 typealias KINSysFn Ptr{Void}
 typealias KINErrHandlerFn Ptr{Void}
@@ -1081,23 +1172,119 @@ const KINSPILS_MEM_FAIL = -4
 const KINSPILS_PMEM_NULL = -5
 const KINSPILS_MAXL = 10
 
-# begin enum ANONYMOUS_17
-typealias ANONYMOUS_17 UInt32
+# begin enum ANONYMOUS_21
+typealias ANONYMOUS_21 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_17
+# end enum ANONYMOUS_21
 
-# begin enum ANONYMOUS_18
-typealias ANONYMOUS_18 UInt32
+# begin enum ANONYMOUS_22
+typealias ANONYMOUS_22 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_18
+# end enum ANONYMOUS_22
 
 typealias KINSpilsPrecSetupFn Ptr{Void}
 typealias KINSpilsPrecSolveFn Ptr{Void}
 typealias KINSpilsJacTimesVecFn Ptr{Void}
+
+const ARK_S_MAX = 8
+
+# Skipping MacroDefinition: ARK_A ( A , i , j ) ( A [ i * ARK_S_MAX + j ] )
+
+const ARK_NORMAL = 1
+const ARK_ONE_STEP = 2
+const ARK_SUCCESS = 0
+const ARK_TSTOP_RETURN = 1
+const ARK_ROOT_RETURN = 2
+const ARK_WARNING = 99
+const ARK_TOO_MUCH_WORK = -1
+const ARK_TOO_MUCH_ACC = -2
+const ARK_ERR_FAILURE = -3
+const ARK_CONV_FAILURE = -4
+const ARK_LINIT_FAIL = -5
+const ARK_LSETUP_FAIL = -6
+const ARK_LSOLVE_FAIL = -7
+const ARK_RHSFUNC_FAIL = -8
+const ARK_FIRST_RHSFUNC_ERR = -9
+const ARK_REPTD_RHSFUNC_ERR = -10
+const ARK_UNREC_RHSFUNC_ERR = -11
+const ARK_RTFUNC_FAIL = -12
+const ARK_LFREE_FAIL = -13
+const ARK_MASSINIT_FAIL = -14
+const ARK_MASSSETUP_FAIL = -15
+const ARK_MASSSOLVE_FAIL = -16
+const ARK_MASSFREE_FAIL = -17
+const ARK_MASSMULT_FAIL = -18
+const ARK_MEM_FAIL = -20
+const ARK_MEM_NULL = -21
+const ARK_ILL_INPUT = -22
+const ARK_NO_MALLOC = -23
+const ARK_BAD_K = -24
+const ARK_BAD_T = -25
+const ARK_BAD_DKY = -26
+const ARK_TOO_CLOSE = -27
+
+typealias ARKRhsFn Ptr{Void}
+typealias ARKRootFn Ptr{Void}
+typealias ARKEwtFn Ptr{Void}
+typealias ARKRwtFn Ptr{Void}
+typealias ARKErrHandlerFn Ptr{Void}
+typealias ARKAdaptFn Ptr{Void}
+typealias ARKExpStabFn Ptr{Void}
+typealias ARKVecResizeFn Ptr{Void}
+
+const ARKDLS_SUCCESS = 0
+const ARKDLS_MEM_NULL = -1
+const ARKDLS_LMEM_NULL = -2
+const ARKDLS_ILL_INPUT = -3
+const ARKDLS_MEM_FAIL = -4
+const ARKDLS_MASSMEM_NULL = -5
+const ARKDLS_JACFUNC_UNRECVR = -6
+const ARKDLS_JACFUNC_RECVR = -7
+const ARKDLS_MASSFUNC_UNRECVR = -8
+const ARKDLS_MASSFUNC_RECVR = -9
+
+typealias ARKDlsDenseJacFn Ptr{Void}
+typealias ARKDlsDenseMassFn Ptr{Void}
+typealias ARKDlsBandJacFn Ptr{Void}
+typealias ARKDlsBandMassFn Ptr{Void}
+
+const ARKSPILS_SUCCESS = 0
+const ARKSPILS_MEM_NULL = -1
+const ARKSPILS_LMEM_NULL = -2
+const ARKSPILS_ILL_INPUT = -3
+const ARKSPILS_MEM_FAIL = -4
+const ARKSPILS_PMEM_NULL = -5
+const ARKSPILS_MASSMEM_NULL = -6
+const ARKSPILS_MAXL = 5
+const ARKSPILS_MSBPRE = 50
+
+# Skipping MacroDefinition: ARKSPILS_DGMAX RCONST ( 0.2 )
+# Skipping MacroDefinition: ARKSPILS_EPLIN RCONST ( 0.05 )
+
+# begin enum ANONYMOUS_23
+typealias ANONYMOUS_23 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_23
+
+# begin enum ANONYMOUS_24
+typealias ANONYMOUS_24 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_24
+
+typealias ARKSpilsPrecSetupFn Ptr{Void}
+typealias ARKSpilsPrecSolveFn Ptr{Void}
+typealias ARKSpilsJacTimesVecFn Ptr{Void}
+typealias ARKSpilsMassTimesVecFn Ptr{Void}
+typealias ARKSpilsMassPrecSetupFn Ptr{Void}
+typealias ARKSpilsMassPrecSolveFn Ptr{Void}
 
 # Skipping MacroDefinition: NV_CONTENT_S ( v ) ( ( N_VectorContent_Serial ) ( v -> content ) )
 # Skipping MacroDefinition: NV_LENGTH_S ( v ) ( NV_CONTENT_S ( v ) -> length )
@@ -1106,9 +1293,9 @@ typealias KINSpilsJacTimesVecFn Ptr{Void}
 # Skipping MacroDefinition: NV_Ith_S ( v , i ) ( NV_DATA_S ( v ) [ i ] )
 
 type _N_VectorContent_Serial
-    length::Clong
-    own_data::Cint
-    data::Ptr{realtype}
+    length::Int
+    own_data::Int
+    data::Vector{realtype}
 end
 
 typealias N_VectorContent_Serial Ptr{_N_VectorContent_Serial}
@@ -1116,14 +1303,11 @@ typealias N_VectorContent_Serial Ptr{_N_VectorContent_Serial}
 const FCMIX_CVODE = 1
 const FCMIX_IDA = 2
 const FCMIX_KINSOL = 3
+const FCMIX_ARKODE = 4
 
-# Skipping MacroDefinition: MIN ( A , B ) ( ( A ) < ( B ) ? ( A ) : ( B ) )
-# Skipping MacroDefinition: MAX ( A , B ) ( ( A ) > ( B ) ? ( A ) : ( B ) )
-# Skipping MacroDefinition: SQR ( A ) ( ( A ) * ( A ) )
-
-# const ABS = RAbs
-# const SQRT = RSqrt
-# const EXP = RExp
+# Skipping MacroDefinition: SUNMIN ( A , B ) ( ( A ) < ( B ) ? ( A ) : ( B ) )
+# Skipping MacroDefinition: SUNMAX ( A , B ) ( ( A ) > ( B ) ? ( A ) : ( B ) )
+# Skipping MacroDefinition: SUNSQR ( A ) ( ( A ) * ( A ) )
 
 typealias CVLocalFn Ptr{Void}
 typealias CVCommFn Ptr{Void}
@@ -1156,9 +1340,9 @@ const MXSTEP_DEFAULT = 500
 const CV_NO_FAILURES = 0
 const CV_FAIL_BAD_J = 1
 const CV_FAIL_OTHER = 2
-const MSG_TIME = "t = %lg, "
-const MSG_TIME_H = "t = %lg and h = %lg, "
-const MSG_TIME_INT = "t = %lg is not between tcur - hu = %lg and tcur = %lg."
+const MSG_TIME = "t = %lg"
+const MSG_TIME_H = "t = %lg and h = %lg"
+const MSG_TIME_INT = "t = %lg is not between tcur - hold = %lg and tcur = %lg."
 const MSG_TIME_TOUT = "tout = %lg"
 const MSG_TIME_TSTOP = "tstop = %lg"
 const MSGCV_NO_MEM = "cvode_mem = NULL illegal."
@@ -1326,13 +1510,13 @@ type CVodeMemRec
     cv_uround::realtype
     cv_f::CVRhsFn
     cv_user_data::Ptr{Void}
-    cv_lmm::Cint
-    cv_iter::Cint
-    cv_itol::Cint
+    cv_lmm::Int
+    cv_iter::Int
+    cv_itol::Int
     cv_reltol::realtype
     cv_Sabstol::realtype
     cv_Vabstol::N_Vector
-    cv_user_efun::Cint
+    cv_user_efun::Int
     cv_efun::CVEwtFn
     cv_e_data::Ptr{Void}
     cv_zn::Array_13_N_Vector
@@ -1341,13 +1525,13 @@ type CVodeMemRec
     cv_acor::N_Vector
     cv_tempv::N_Vector
     cv_ftemp::N_Vector
-    cv_tstopset::Cint
+    cv_tstopset::Int
     cv_tstop::realtype
-    cv_q::Cint
-    cv_qprime::Cint
-    cv_next_q::Cint
-    cv_qwait::Cint
-    cv_L::Cint
+    cv_q::Int
+    cv_qprime::Int
+    cv_next_q::Int
+    cv_qwait::Int
+    cv_L::Int
     cv_hin::realtype
     cv_h::realtype
     cv_hprime::realtype
@@ -1366,117 +1550,130 @@ type CVodeMemRec
     cv_crate::realtype
     cv_acnrm::realtype
     cv_nlscoef::realtype
-    cv_mnewt::Cint
-    cv_qmax::Cint
-    cv_mxstep::Clong
-    cv_maxcor::Cint
-    cv_mxhnil::Cint
-    cv_maxnef::Cint
-    cv_maxncf::Cint
+    cv_mnewt::Int
+    cv_qmax::Int
+    cv_mxstep::Int
+    cv_maxcor::Int
+    cv_mxhnil::Int
+    cv_maxnef::Int
+    cv_maxncf::Int
     cv_hmin::realtype
     cv_hmax_inv::realtype
     cv_etamax::realtype
-    cv_nst::Clong
-    cv_nfe::Clong
-    cv_ncfn::Clong
-    cv_netf::Clong
-    cv_nni::Clong
-    cv_nsetups::Clong
-    cv_nhnil::Cint
+    cv_nst::Int
+    cv_nfe::Int
+    cv_ncfn::Int
+    cv_netf::Int
+    cv_nni::Int
+    cv_nsetups::Int
+    cv_nhnil::Int
     cv_etaqm1::realtype
     cv_etaq::realtype
     cv_etaqp1::realtype
-    cv_lrw1::Clong
-    cv_liw1::Clong
-    cv_lrw::Clong
-    cv_liw::Clong
+    cv_lrw1::Int
+    cv_liw1::Int
+    cv_lrw::Int
+    cv_liw::Int
     cv_linit::Ptr{Void}
     cv_lsetup::Ptr{Void}
     cv_lsolve::Ptr{Void}
     cv_lfree::Ptr{Void}
     cv_lmem::Ptr{Void}
-    cv_qu::Cint
-    cv_nstlp::Clong
+    cv_qu::Int
+    cv_nstlp::Int
     cv_h0u::realtype
     cv_hu::realtype
     cv_saved_tq5::realtype
-    cv_jcur::Cint
+    cv_jcur::Int
     cv_tolsf::realtype
-    cv_qmax_alloc::Cint
-    cv_indx_acor::Cint
-    cv_setupNonNull::Cint
-    cv_VabstolMallocDone::Cint
-    cv_MallocDone::Cint
+    cv_qmax_alloc::Int
+    cv_indx_acor::Int
+    cv_setupNonNull::Int
+    cv_VabstolMallocDone::Int
+    cv_MallocDone::Int
     cv_ehfun::CVErrHandlerFn
     cv_eh_data::Ptr{Void}
-    # cv_errfp::Ptr{Void}
     cv_errfp::Ptr{Void}
-    cv_sldeton::Cint
+    cv_sldeton::Int
     cv_ssdat::Array_6_Array_4_realtype
-    cv_nscon::Cint
-    cv_nor::Clong
+    cv_nscon::Int
+    cv_nor::Int
     cv_gfun::CVRootFn
-    cv_nrtfn::Cint
+    cv_nrtfn::Int
     cv_iroots::Ptr{Cint}
     cv_rootdir::Ptr{Cint}
     cv_tlo::realtype
     cv_thi::realtype
     cv_trout::realtype
-    cv_glo::Ptr{realtype}
-    cv_ghi::Ptr{realtype}
-    cv_grout::Ptr{realtype}
+    cv_glo::Vector{realtype}
+    cv_ghi::Vector{realtype}
+    cv_grout::Vector{realtype}
     cv_toutc::realtype
     cv_ttol::realtype
-    cv_taskc::Cint
-    cv_irfnd::Cint
-    cv_nge::Clong
+    cv_taskc::Int
+    cv_irfnd::Int
+    cv_nge::Int
     cv_gactive::Ptr{Cint}
-    cv_mxgnull::Cint
+    cv_mxgnull::Int
 end
 
 typealias CVodeMem Ptr{CVodeMemRec}
 
-# begin enum ANONYMOUS_19
-typealias ANONYMOUS_19 UInt32
+const CVSLS_SUCCESS = 0
+const CVSLS_MEM_NULL = -1
+const CVSLS_LMEM_NULL = -2
+const CVSLS_ILL_INPUT = -3
+const CVSLS_MEM_FAIL = -4
+const CVSLS_JAC_NOSET = -5
+const CVSLS_PACKAGE_FAIL = -6
+const CVSLS_JACFUNC_UNRECVR = -7
+const CVSLS_JACFUNC_RECVR = -8
+const CVSLS_NO_ADJ = -101
+const CVSLS_LMEMB_NULL = -102
+
+typealias CVSlsSparseJacFn Ptr{Void}
+
+# begin enum ANONYMOUS_25
+typealias ANONYMOUS_25 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_19
+# end enum ANONYMOUS_25
 
-# begin enum ANONYMOUS_20
-typealias ANONYMOUS_20 UInt32
+# begin enum ANONYMOUS_26
+typealias ANONYMOUS_26 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_20
+# end enum ANONYMOUS_26
 
-# begin enum ANONYMOUS_21
-typealias ANONYMOUS_21 UInt32
+# begin enum ANONYMOUS_27
+typealias ANONYMOUS_27 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_21
+# end enum ANONYMOUS_27
 
-# begin enum ANONYMOUS_22
-typealias ANONYMOUS_22 UInt32
+# begin enum ANONYMOUS_28
+typealias ANONYMOUS_28 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_22
+# end enum ANONYMOUS_28
 
-# begin enum ANONYMOUS_23
-typealias ANONYMOUS_23 UInt32
+# begin enum ANONYMOUS_29
+typealias ANONYMOUS_29 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_23
+# end enum ANONYMOUS_29
 
-# begin enum ANONYMOUS_24
-typealias ANONYMOUS_24 UInt32
+# begin enum ANONYMOUS_30
+typealias ANONYMOUS_30 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_24
+# end enum ANONYMOUS_30
 
 typealias CVLocalFnB Ptr{Void}
 typealias CVCommFnB Ptr{Void}
@@ -1554,11 +1751,11 @@ const MSGCV_BAD_TINTERP = "Bad t = %g for interpolation."
 const MSGCV_WRONG_INTERP = "This function cannot be called for the specified interp type."
 
 type CVodeBMemRec
-    cv_index::Cint
+    cv_index::Int
     cv_t0::realtype
     cv_mem::CVodeMem
-    cv_f_withSensi::Cint
-    cv_fQ_withSensi::Cint
+    cv_f_withSensi::Int
+    cv_fQ_withSensi::Int
     cv_f::CVRhsFnB
     cv_fs::CVRhsFnBS
     cv_fQ::CVQuadRhsFnB
@@ -1597,20 +1794,20 @@ type CkpntMemRec
     ck_t0::realtype
     ck_t1::realtype
     ck_zn::Array_13_N_Vector
-    ck_quadr::Cint
+    ck_quadr::Int
     ck_znQ::Array_13_N_Vector
-    ck_sensi::Cint
-    ck_Ns::Cint
+    ck_sensi::Int
+    ck_Ns::Int
     ck_znS::Array_13_Ptr
-    ck_quadr_sensi::Cint
+    ck_quadr_sensi::Int
     ck_znQS::Array_13_Ptr
-    ck_zqm::Cint
-    ck_nst::Clong
+    ck_zqm::Int
+    ck_nst::Int
     ck_tretlast::realtype
-    ck_q::Cint
-    ck_qprime::Cint
-    ck_qwait::Cint
-    ck_L::Cint
+    ck_q::Int
+    ck_qprime::Int
+    ck_qwait::Int
+    ck_L::Int
     ck_gammap::realtype
     ck_h::realtype
     ck_hprime::realtype
@@ -1637,28 +1834,28 @@ typealias cvaIMGetYFn Ptr{Void}
 type CVadjMemRec
     ca_tinitial::realtype
     ca_tfinal::realtype
-    ca_firstCVodeFcall::Cint
-    ca_tstopCVodeFcall::Cint
+    ca_firstCVodeFcall::Int
+    ca_tstopCVodeFcall::Int
     ca_tstopCVodeF::realtype
     cvB_mem::Ptr{CVodeBMemRec}
-    ca_nbckpbs::Cint
+    ca_nbckpbs::Int
     ca_bckpbCrt::Ptr{CVodeBMemRec}
-    ca_firstCVodeBcall::Cint
+    ca_firstCVodeBcall::Int
     ck_mem::Ptr{CkpntMemRec}
-    ca_nckpnts::Cint
+    ca_nckpnts::Int
     ca_ckpntData::Ptr{CkpntMemRec}
-    ca_nsteps::Clong
-    dt_mem::Ptr{Ptr{DtpntMemRec}}
-    ca_np::Clong
-    ca_IMtype::Cint
+    ca_nsteps::Int
+    dt_mem::Vector{Ptr{DtpntMemRec}}
+    ca_np::Int
+    ca_IMtype::Int
     ca_IMmalloc::cvaIMMallocFn
     ca_IMfree::cvaIMFreeFn
     ca_IMstore::cvaIMStorePntFn
     ca_IMget::cvaIMGetYFn
-    ca_IMmallocDone::Cint
-    ca_IMnewData::Cint
-    ca_IMstoreSensi::Cint
-    ca_IMinterpSensi::Cint
+    ca_IMmallocDone::Int
+    ca_IMnewData::Int
+    ca_IMstoreSensi::Int
+    ca_IMinterpSensi::Int
     ca_Y::Array_13_N_Vector
     ca_YS::Array_13_Ptr
     ca_T::Array_13_realtype
@@ -1683,52 +1880,54 @@ typealias HermiteDataMem Ptr{HermiteDataMemRec}
 type PolynomialDataMemRec
     y::N_Vector
     yS::Ptr{N_Vector}
-    order::Cint
+    order::Int
 end
 
 typealias PolynomialDataMem Ptr{PolynomialDataMemRec}
+typealias CVSlsSparseJacFnB Ptr{Void}
+typealias CVSlsSparseJacFnBS Ptr{Void}
 
-# begin enum ANONYMOUS_25
-typealias ANONYMOUS_25 UInt32
+# begin enum ANONYMOUS_31
+typealias ANONYMOUS_31 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_25
+# end enum ANONYMOUS_31
 
-# begin enum ANONYMOUS_26
-typealias ANONYMOUS_26 UInt32
+# begin enum ANONYMOUS_32
+typealias ANONYMOUS_32 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_26
+# end enum ANONYMOUS_32
 
-# begin enum ANONYMOUS_27
-typealias ANONYMOUS_27 UInt32
+# begin enum ANONYMOUS_33
+typealias ANONYMOUS_33 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_27
+# end enum ANONYMOUS_33
 
-# begin enum ANONYMOUS_28
-typealias ANONYMOUS_28 UInt32
+# begin enum ANONYMOUS_34
+typealias ANONYMOUS_34 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_28
+# end enum ANONYMOUS_34
 
-# begin enum ANONYMOUS_29
-typealias ANONYMOUS_29 UInt32
+# begin enum ANONYMOUS_35
+typealias ANONYMOUS_35 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_29
+# end enum ANONYMOUS_35
 
-# begin enum ANONYMOUS_30
-typealias ANONYMOUS_30 UInt32
+# begin enum ANONYMOUS_36
+typealias ANONYMOUS_36 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_30
+# end enum ANONYMOUS_36
 
 typealias IDABBDLocalFn Ptr{Void}
 typealias IDABBDCommFn Ptr{Void}
@@ -1826,16 +2025,16 @@ type IDAMemRec
     ida_uround::realtype
     ida_res::IDAResFn
     ida_user_data::Ptr{Void}
-    ida_itol::Cint
+    ida_itol::Int
     ida_rtol::realtype
     ida_Satol::realtype
     ida_Vatol::N_Vector
-    ida_user_efun::Cint
+    ida_user_efun::Int
     ida_efun::IDAEwtFn
     ida_edata::Ptr{Void}
-    ida_setupNonNull::Cint
-    ida_constraintsSet::Cint
-    ida_suppressalg::Cint
+    ida_setupNonNull::Int
+    ida_constraintsSet::Int
+    ida_suppressalg::Int
     ida_phi::Array_6_N_Vector
     ida_psi::Array_6_realtype
     ida_alpha::Array_6_realtype
@@ -1860,23 +2059,23 @@ type IDAMemRec
     ida_t0::realtype
     ida_yy0::N_Vector
     ida_yp0::N_Vector
-    ida_icopt::Cint
-    ida_lsoff::Cint
-    ida_maxnh::Cint
-    ida_maxnj::Cint
-    ida_maxnit::Cint
-    ida_nbacktr::Cint
-    ida_sysindex::Cint
+    ida_icopt::Int
+    ida_lsoff::Int
+    ida_maxnh::Int
+    ida_maxnj::Int
+    ida_maxnit::Int
+    ida_nbacktr::Int
+    ida_sysindex::Int
     ida_epiccon::realtype
     ida_steptol::realtype
     ida_tscale::realtype
-    ida_tstopset::Cint
+    ida_tstopset::Int
     ida_tstop::realtype
-    ida_kk::Cint
-    ida_kused::Cint
-    ida_knew::Cint
-    ida_phase::Cint
-    ida_ns::Cint
+    ida_kk::Int
+    ida_kused::Int
+    ida_knew::Int
+    ida_phase::Int
+    ida_ns::Int
     ida_hin::realtype
     ida_h0u::realtype
     ida_hh::realtype
@@ -1892,102 +2091,101 @@ type IDAMemRec
     ida_epsNewt::realtype
     ida_epcon::realtype
     ida_toldel::realtype
-    ida_maxncf::Cint
-    ida_maxcor::Cint
-    ida_maxnef::Cint
-    ida_maxord::Cint
-    ida_maxord_alloc::Cint
-    ida_mxstep::Clong
+    ida_maxncf::Int
+    ida_maxcor::Int
+    ida_maxnef::Int
+    ida_maxord::Int
+    ida_maxord_alloc::Int
+    ida_mxstep::Int
     ida_hmax_inv::realtype
-    ida_nst::Clong
-    ida_nre::Clong
-    ida_ncfn::Clong
-    ida_netf::Clong
-    ida_nni::Clong
-    ida_nsetups::Clong
-    ida_lrw1::Clong
-    ida_liw1::Clong
-    ida_lrw::Clong
-    ida_liw::Clong
+    ida_nst::Int
+    ida_nre::Int
+    ida_ncfn::Int
+    ida_netf::Int
+    ida_nni::Int
+    ida_nsetups::Int
+    ida_lrw1::Int
+    ida_liw1::Int
+    ida_lrw::Int
+    ida_liw::Int
     ida_tolsf::realtype
     ida_ehfun::IDAErrHandlerFn
     ida_eh_data::Ptr{Void}
-    # ida_errfp::Ptr{Void}
     ida_errfp::Ptr{Void}
-    ida_SetupDone::Cint
-    ida_VatolMallocDone::Cint
-    ida_constraintsMallocDone::Cint
-    ida_idMallocDone::Cint
-    ida_MallocDone::Cint
+    ida_SetupDone::Int
+    ida_VatolMallocDone::Int
+    ida_constraintsMallocDone::Int
+    ida_idMallocDone::Int
+    ida_MallocDone::Int
     ida_linit::Ptr{Void}
     ida_lsetup::Ptr{Void}
     ida_lsolve::Ptr{Void}
     ida_lperf::Ptr{Void}
     ida_lfree::Ptr{Void}
     ida_lmem::Ptr{Void}
-    ida_linitOK::Cint
+    ida_linitOK::Int
     ida_gfun::IDARootFn
-    ida_nrtfn::Cint
+    ida_nrtfn::Int
     ida_iroots::Ptr{Cint}
     ida_rootdir::Ptr{Cint}
     ida_tlo::realtype
     ida_thi::realtype
     ida_trout::realtype
-    ida_glo::Ptr{realtype}
-    ida_ghi::Ptr{realtype}
-    ida_grout::Ptr{realtype}
+    ida_glo::Vector{realtype}
+    ida_ghi::Vector{realtype}
+    ida_grout::Vector{realtype}
     ida_toutc::realtype
     ida_ttol::realtype
-    ida_taskc::Cint
-    ida_irfnd::Cint
-    ida_nge::Clong
+    ida_taskc::Int
+    ida_irfnd::Int
+    ida_nge::Int
     ida_gactive::Ptr{Cint}
-    ida_mxgnull::Cint
+    ida_mxgnull::Int
 end
 
 typealias IDAMem Ptr{IDAMemRec}
 
-# begin enum ANONYMOUS_31
-typealias ANONYMOUS_31 UInt32
+# begin enum ANONYMOUS_37
+typealias ANONYMOUS_37 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_31
+# end enum ANONYMOUS_37
 
-# begin enum ANONYMOUS_32
-typealias ANONYMOUS_32 UInt32
+# begin enum ANONYMOUS_38
+typealias ANONYMOUS_38 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_32
+# end enum ANONYMOUS_38
 
-# begin enum ANONYMOUS_33
-typealias ANONYMOUS_33 UInt32
+# begin enum ANONYMOUS_39
+typealias ANONYMOUS_39 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_33
+# end enum ANONYMOUS_39
 
-# begin enum ANONYMOUS_34
-typealias ANONYMOUS_34 UInt32
+# begin enum ANONYMOUS_40
+typealias ANONYMOUS_40 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_34
+# end enum ANONYMOUS_40
 
-# begin enum ANONYMOUS_35
-typealias ANONYMOUS_35 UInt32
+# begin enum ANONYMOUS_41
+typealias ANONYMOUS_41 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_35
+# end enum ANONYMOUS_41
 
-# begin enum ANONYMOUS_36
-typealias ANONYMOUS_36 UInt32
+# begin enum ANONYMOUS_42
+typealias ANONYMOUS_42 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_36
+# end enum ANONYMOUS_42
 
 typealias IDABBDLocalFnB Ptr{Void}
 typealias IDABBDCommFnB Ptr{Void}
@@ -2081,11 +2279,11 @@ zero(::Type{Array_6_Ptr}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wrap_
     end
 
 type IDABMemRec
-    ida_index::Cint
+    ida_index::Int
     ida_t0::realtype
     IDA_mem::IDAMem
-    ida_res_withSensi::Cint
-    ida_rhsQ_withSensi::Cint
+    ida_res_withSensi::Int
+    ida_rhsQ_withSensi::Int
     ida_res::IDAResFnB
     ida_resS::IDAResFnBS
     ida_rhsQ::IDAQuadRhsFnB
@@ -2109,29 +2307,29 @@ typealias IDAAMFreeFn Ptr{Void}
 type IDAadjMemRec
     ia_tinitial::realtype
     ia_tfinal::realtype
-    ia_firstIDAFcall::Cint
-    ia_tstopIDAFcall::Cint
+    ia_firstIDAFcall::Int
+    ia_tstopIDAFcall::Int
     ia_tstopIDAF::realtype
     IDAB_mem::Ptr{IDABMemRec}
-    ia_nbckpbs::Cint
+    ia_nbckpbs::Int
     ia_bckpbCrt::Ptr{IDABMemRec}
-    ia_firstIDABcall::Cint
+    ia_firstIDABcall::Int
     ck_mem::Ptr{CkpntMemRec}
     ia_ckpntData::Ptr{CkpntMemRec}
-    ia_nckpnts::Cint
-    ia_nsteps::Clong
-    dt_mem::Ptr{Ptr{DtpntMemRec}}
-    ia_np::Clong
-    ia_interpType::Cint
+    ia_nckpnts::Int
+    ia_nsteps::Int
+    dt_mem::Vector{Ptr{DtpntMemRec}}
+    ia_np::Int
+    ia_interpType::Int
     ia_storePnt::IDAAStorePntFn
     ia_getY::IDAAGetYFn
     ia_malloc::IDAAMMallocFn
     ia_free::IDAAMFreeFn
-    ia_mallocDone::Cint
-    ia_newData::Cint
-    ia_storeSensi::Cint
-    ia_interpSensi::Cint
-    ia_noInterp::Cint
+    ia_mallocDone::Int
+    ia_newData::Int
+    ia_storeSensi::Int
+    ia_interpSensi::Int
+    ia_noInterp::Int
     ia_Y::Array_6_N_Vector
     ia_YS::Array_6_Ptr
     ia_T::Array_6_realtype
@@ -2144,47 +2342,63 @@ end
 typealias IDAadjMem Ptr{IDAadjMemRec}
 typealias IDABMem Ptr{IDABMemRec}
 
-# begin enum ANONYMOUS_37
-typealias ANONYMOUS_37 UInt32
+const IDASLS_SUCCESS = 0
+const IDASLS_MEM_NULL = -1
+const IDASLS_LMEM_NULL = -2
+const IDASLS_ILL_INPUT = -3
+const IDASLS_MEM_FAIL = -4
+const IDASLS_JAC_NOSET = -5
+const IDASLS_PACKAGE_FAIL = -6
+const IDASLS_JACFUNC_UNRECVR = -7
+const IDASLS_JACFUNC_RECVR = -8
+const IDASLS_NO_ADJ = -101
+const IDASLS_LMEMB_NULL = -102
+
+typealias IDASlsSparseJacFn Ptr{Void}
+typealias IDASlsSparseJacFnB Ptr{Void}
+typealias IDASlsSparseJacFnBS Ptr{Void}
+
+# begin enum ANONYMOUS_43
+typealias ANONYMOUS_43 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_37
+# end enum ANONYMOUS_43
 
-# begin enum ANONYMOUS_38
-typealias ANONYMOUS_38 UInt32
+# begin enum ANONYMOUS_44
+typealias ANONYMOUS_44 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_38
+# end enum ANONYMOUS_44
 
-# begin enum ANONYMOUS_39
-typealias ANONYMOUS_39 UInt32
+# begin enum ANONYMOUS_45
+typealias ANONYMOUS_45 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_39
+# end enum ANONYMOUS_45
 
-# begin enum ANONYMOUS_40
-typealias ANONYMOUS_40 UInt32
+# begin enum ANONYMOUS_46
+typealias ANONYMOUS_46 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_40
+# end enum ANONYMOUS_46
 
-# begin enum ANONYMOUS_41
-typealias ANONYMOUS_41 UInt32
+# begin enum ANONYMOUS_47
+typealias ANONYMOUS_47 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_41
+# end enum ANONYMOUS_47
 
-# begin enum ANONYMOUS_42
-typealias ANONYMOUS_42 UInt32
+# begin enum ANONYMOUS_48
+typealias ANONYMOUS_48 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_42
+# end enum ANONYMOUS_48
 
 const KINBBDPRE_SUCCESS = 0
 const KINBBDPRE_PDATA_NULL = -11
@@ -2218,6 +2432,8 @@ const MSG_BAD_SCSTEPTOL = "scsteptol < 0 illegal."
 const MSG_BAD_MXNBCF = "mxbcf < 0 illegal."
 const MSG_BAD_CONSTRAINTS = "Illegal values in constraints vector."
 const MSG_BAD_OMEGA = "scalars < 0 illegal."
+const MSG_BAD_MAA = "maa < 0 illegal."
+const MSG_ZERO_MAA = "maa = 0 illegal."
 const MSG_LSOLV_NO_MEM = "The linear solver memory pointer is NULL."
 const MSG_UU_NULL = "uu = NULL illegal."
 const MSG_BAD_GLSTRAT = "Illegal value for global strategy."
@@ -2225,6 +2441,7 @@ const MSG_BAD_USCALE = "uscale = NULL illegal."
 const MSG_USCALE_NONPOSITIVE = "uscale has nonpositive elements."
 const MSG_BAD_FSCALE = "fscale = NULL illegal."
 const MSG_FSCALE_NONPOSITIVE = "fscale has nonpositive elements."
+const MSG_CONSTRAINTS_NOTOK = "Constraints not allowed with fixed point or Picard iterations"
 const MSG_INITIAL_CNSTRNT = "Initial guess does NOT meet constraints."
 const MSG_SYSFUNC_FAILED = "The system function failed in an unrecoverable manner."
 const MSG_SYSFUNC_FIRST = "The system function failed at the first call."
@@ -2236,6 +2453,7 @@ const MSG_LINESEARCH_BCFAIL = "The line search algorithm was unable to satisfy t
 const MSG_MAXITER_REACHED = "The maximum number of iterations was reached before convergence."
 const MSG_MXNEWT_5X_EXCEEDED = "Five consecutive steps have been taken that satisfy a scaled step length test."
 const MSG_SYSFUNC_REPTD = "Unable to correct repeated recoverable system function errors."
+const MSG_NOL_FAIL = "Unable to find user's Linear Jacobian, which is required for the KIN_PICARD Strategy"
 const INFO_RETVAL = "Return value: %d"
 const INFO_ADJ = "no. of lambda adjustments = %ld"
 const INFO_NNI = "nni = %4ld   nfe = %6ld   fnorm = %26.16lg"
@@ -2255,22 +2473,23 @@ type KINMemRec
     kin_user_data::Ptr{Void}
     kin_fnormtol::realtype
     kin_scsteptol::realtype
-    kin_globalstrategy::Cint
-    kin_printfl::Cint
-    kin_mxiter::Clong
-    kin_msbset::Clong
-    kin_msbset_sub::Clong
-    kin_mxnbcf::Clong
-    kin_etaflag::Cint
-    kin_noMinEps::Cint
-    kin_setupNonNull::Cint
-    kin_constraintsSet::Cint
-    kin_jacCurrent::Cint
-    kin_callForcingTerm::Cint
-    kin_noResMon::Cint
-    kin_retry_nni::Cint
-    kin_update_fnorm_sub::Cint
+    kin_globalstrategy::Int
+    kin_printfl::Int
+    kin_mxiter::Int
+    kin_msbset::Int
+    kin_msbset_sub::Int
+    kin_mxnbcf::Int
+    kin_etaflag::Int
+    kin_noMinEps::Int
+    kin_setupNonNull::Int
+    kin_constraintsSet::Int
+    kin_jacCurrent::Int
+    kin_callForcingTerm::Int
+    kin_noResMon::Int
+    kin_retry_nni::Int
+    kin_update_fnorm_sub::Int
     kin_mxnewtstep::realtype
+    kin_mxnstepin::realtype
     kin_sqrt_relfunc::realtype
     kin_stepl::realtype
     kin_stepmul::realtype
@@ -2278,81 +2497,661 @@ type KINMemRec
     kin_eta::realtype
     kin_eta_gamma::realtype
     kin_eta_alpha::realtype
-    kin_noInitSetup::Cint
+    kin_noInitSetup::Int
     kin_sthrsh::realtype
-    kin_nni::Clong
-    kin_nfe::Clong
-    kin_nnilset::Clong
-    kin_nnilset_sub::Clong
-    kin_nbcf::Clong
-    kin_nbktrk::Clong
-    kin_ncscmx::Clong
+    kin_nni::Int
+    kin_nfe::Int
+    kin_nnilset::Int
+    kin_nnilset_sub::Int
+    kin_nbcf::Int
+    kin_nbktrk::Int
+    kin_ncscmx::Int
     kin_uu::N_Vector
     kin_unew::N_Vector
     kin_fval::N_Vector
+    kin_gval::N_Vector
     kin_uscale::N_Vector
     kin_fscale::N_Vector
     kin_pp::N_Vector
     kin_constraints::N_Vector
     kin_vtemp1::N_Vector
     kin_vtemp2::N_Vector
-    kin_lrw1::Clong
-    kin_liw1::Clong
-    kin_lrw::Clong
-    kin_liw::Clong
+    kin_fold_aa::N_Vector
+    kin_gold_aa::N_Vector
+    kin_df_aa::Ptr{N_Vector}
+    kin_dg_aa::Ptr{N_Vector}
+    kin_q_aa::Ptr{N_Vector}
+    kin_gamma_aa::Vector{realtype}
+    kin_R_aa::Vector{realtype}
+    kin_ipt_map::Ptr{Cint}
+    kin_m_aa::Int
+    kin_aamem_aa::Int
+    kin_setstop_aa::Int
+    kin_lrw1::Int
+    kin_liw1::Int
+    kin_lrw::Int
+    kin_liw::Int
     kin_linit::Ptr{Void}
     kin_lsetup::Ptr{Void}
     kin_lsolve::Ptr{Void}
     kin_lfree::Ptr{Void}
-    kin_inexact_ls::Cint
+    kin_inexact_ls::Int
     kin_lmem::Ptr{Void}
     kin_fnorm::realtype
     kin_f1norm::realtype
-    kin_res_norm::realtype
-    kin_sfdotJp::realtype
+    kin_sFdotJp::realtype
     kin_sJpnorm::realtype
     kin_fnorm_sub::realtype
-    kin_eval_omega::Cint
+    kin_eval_omega::Int
     kin_omega::realtype
     kin_omega_min::realtype
     kin_omega_max::realtype
-    kin_MallocDone::Cint
+    kin_MallocDone::Int
     kin_ehfun::KINErrHandlerFn
     kin_eh_data::Ptr{Void}
-    # kin_errfp::Ptr{Void}
     kin_errfp::Ptr{Void}
     kin_ihfun::KINInfoHandlerFn
     kin_ih_data::Ptr{Void}
-    # kin_infofp::Ptr{Void}
     kin_infofp::Ptr{Void}
 end
 
 typealias KINMem Ptr{KINMemRec}
 
-# begin enum ANONYMOUS_43
-typealias ANONYMOUS_43 UInt32
+# begin enum ANONYMOUS_49
+typealias ANONYMOUS_49 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_43
+# end enum ANONYMOUS_49
 
-# begin enum ANONYMOUS_44
-typealias ANONYMOUS_44 UInt32
+# begin enum ANONYMOUS_50
+typealias ANONYMOUS_50 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_44
+# end enum ANONYMOUS_50
 
-# begin enum ANONYMOUS_45
-typealias ANONYMOUS_45 UInt32
+# begin enum ANONYMOUS_51
+typealias ANONYMOUS_51 UInt32
 const PREC_NONE = (UInt32)(0)
 const PREC_LEFT = (UInt32)(1)
 const PREC_RIGHT = (UInt32)(2)
 const PREC_BOTH = (UInt32)(3)
-# end enum ANONYMOUS_45
+# end enum ANONYMOUS_51
 
-# begin enum ANONYMOUS_46
-typealias ANONYMOUS_46 UInt32
+# begin enum ANONYMOUS_52
+typealias ANONYMOUS_52 UInt32
 const MODIFIED_GS = (UInt32)(1)
 const CLASSICAL_GS = (UInt32)(2)
-# end enum ANONYMOUS_46
+# end enum ANONYMOUS_52
+
+# begin enum ANONYMOUS_53
+typealias ANONYMOUS_53 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_53
+
+# begin enum ANONYMOUS_54
+typealias ANONYMOUS_54 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_54
+
+# begin enum ANONYMOUS_55
+typealias ANONYMOUS_55 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_55
+
+# begin enum ANONYMOUS_56
+typealias ANONYMOUS_56 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_56
+
+typealias ARKLocalFn Ptr{Void}
+typealias ARKCommFn Ptr{Void}
+
+const Q_DEFAULT = 4
+const QDENSE_DEF = 3
+const MAXNEF = 7
+const MAXNCF = 10
+const MXHNIL = 10
+const MAXCOR = 3
+const FP_ACCEL_M = 3
+
+# Skipping MacroDefinition: ZERO RCONST ( 0.0 )
+# Skipping MacroDefinition: TINY RCONST ( 1.0e-10 )
+# Skipping MacroDefinition: TENTH RCONST ( 0.1 )
+# Skipping MacroDefinition: POINT2 RCONST ( 0.2 )
+# Skipping MacroDefinition: FOURTH RCONST ( 0.25 )
+# Skipping MacroDefinition: HALF RCONST ( 0.5 )
+# Skipping MacroDefinition: ONE RCONST ( 1.0 )
+# Skipping MacroDefinition: TWO RCONST ( 2.0 )
+# Skipping MacroDefinition: THREE RCONST ( 3.0 )
+# Skipping MacroDefinition: FOUR RCONST ( 4.0 )
+# Skipping MacroDefinition: FIVE RCONST ( 5.0 )
+# Skipping MacroDefinition: SIX RCONST ( 6.0 )
+# Skipping MacroDefinition: SEVEN RCONST ( 7.0 )
+# Skipping MacroDefinition: TWELVE RCONST ( 12.0 )
+# Skipping MacroDefinition: HUND RCONST ( 100.0 )
+# Skipping MacroDefinition: CFLFAC RCONST ( 0.5 )
+# Skipping MacroDefinition: SAFETY RCONST ( 0.96 )
+# Skipping MacroDefinition: BIAS RCONST ( 1.5 )
+# Skipping MacroDefinition: GROWTH RCONST ( 20.0 )
+# Skipping MacroDefinition: HFIXED_LB RCONST ( 1.0 )
+# Skipping MacroDefinition: HFIXED_UB RCONST ( 1.5 )
+# Skipping MacroDefinition: AD0_K1 RCONST ( 0.58 )
+# Skipping MacroDefinition: AD0_K2 RCONST ( 0.21 )
+# Skipping MacroDefinition: AD0_K3 RCONST ( 0.1 )
+# Skipping MacroDefinition: AD1_K1 RCONST ( 0.8 )
+# Skipping MacroDefinition: AD1_K2 RCONST ( 0.31 )
+# Skipping MacroDefinition: AD2_K1 RCONST ( 1.0 )
+# Skipping MacroDefinition: AD3_K1 RCONST ( 0.367 )
+# Skipping MacroDefinition: AD3_K2 RCONST ( 0.268 )
+# Skipping MacroDefinition: AD4_K1 RCONST ( 0.98 )
+# Skipping MacroDefinition: AD4_K2 RCONST ( 0.95 )
+# Skipping MacroDefinition: AD5_K1 RCONST ( 0.367 )
+# Skipping MacroDefinition: AD5_K2 RCONST ( 0.268 )
+# Skipping MacroDefinition: AD5_K3 RCONST ( 0.95 )
+# Skipping MacroDefinition: NLSCOEF RCONST ( 0.1 )
+
+const ARK_SS = 0
+const ARK_SV = 1
+const ARK_WF = 2
+const SOLVE_SUCCESS = 2
+const PREDICT_AGAIN = 3
+const CONV_FAIL = 4
+const TRY_AGAIN = 5
+const FIRST_CALL = 6
+const PREV_CONV_FAIL = 7
+const PREV_ERR_FAIL = 8
+const RHSFUNC_RECVR = 9
+const RTFOUND = 1
+const CLOSERT = 3
+
+# Skipping MacroDefinition: FUZZ_FACTOR RCONST ( 100.0 )
+# Skipping MacroDefinition: H0_LBFACTOR RCONST ( 100.0 )
+# Skipping MacroDefinition: H0_UBFACTOR RCONST ( 0.1 )
+
+# const H0_BIAS = HALF
+const H0_ITERS = 4
+
+# Skipping MacroDefinition: ETAMX1 RCONST ( 10000.0 )
+# Skipping MacroDefinition: ETAMXF RCONST ( 0.3 )
+# Skipping MacroDefinition: ETAMIN RCONST ( 0.1 )
+# Skipping MacroDefinition: ETACF RCONST ( 0.25 )
+# Skipping MacroDefinition: ONEPSM RCONST ( 1.000001 )
+# Skipping MacroDefinition: ONEMSM RCONST ( 0.999999 )
+
+const SMALL_NEF = 2
+
+# Skipping MacroDefinition: CRDOWN RCONST ( 0.3 )
+# Skipping MacroDefinition: DGMAX RCONST ( 0.2 )
+# Skipping MacroDefinition: RDIV RCONST ( 2.3 )
+
+const MSBP = 20
+const ARK_NO_FAILURES = 0
+const ARK_FAIL_BAD_J = 1
+const ARK_FAIL_OTHER = 2
+const MSGARK_NO_MEM = "arkode_mem = NULL illegal."
+const MSGARK_ARKMEM_FAIL = "Allocation of arkode_mem failed."
+const MSGARK_MEM_FAIL = "A memory request failed."
+const MSGARK_NO_MALLOC = "Attempt to call before ARKodeInit."
+const MSGARK_NEG_MAXORD = "maxord <= 0 illegal."
+const MSGARK_BAD_MAXORD = "Illegal attempt to increase maximum method order."
+const MSGARK_NEG_HMIN = "hmin < 0 illegal."
+const MSGARK_NEG_HMAX = "hmax < 0 illegal."
+const MSGARK_BAD_HMIN_HMAX = "Inconsistent step size limits: hmin > hmax."
+const MSGARK_BAD_RELTOL = "reltol < 0 illegal."
+const MSGARK_BAD_ABSTOL = "abstol has negative component(s) (illegal)."
+const MSGARK_NULL_ABSTOL = "abstol = NULL illegal."
+const MSGARK_BAD_RABSTOL = "rabstol has negative component(s) (illegal)."
+const MSGARK_NULL_RABSTOL = "rabstol = NULL illegal."
+const MSGARK_NULL_Y0 = "y0 = NULL illegal."
+const MSGARK_NULL_F = "Must specify at least one of fe, fi (both NULL)."
+const MSGARK_NULL_G = "g = NULL illegal."
+const MSGARK_BAD_NVECTOR = "A required vector operation is not implemented."
+const MSGARK_BAD_K = "Illegal value for k."
+const MSGARK_NULL_DKY = "dky = NULL illegal."
+const MSGARK_BAD_T = "Illegal value for t."
+const MSGARK_NO_ROOT = "Rootfinding was not initialized."
+const MSGARK_LSOLVE_NULL = "The linear solver's solve routine is NULL."
+const MSGARK_YOUT_NULL = "yout = NULL illegal."
+const MSGARK_TRET_NULL = "tret = NULL illegal."
+const MSGARK_BAD_EWT = "Initial ewt has component(s) equal to zero (illegal)."
+
+# Skipping MacroDefinition: MSGARK_EWT_NOW_BAD "At " MSG_TIME ", a component of ewt has become <= 0."
+
+const MSGARK_BAD_RWT = "Initial rwt has component(s) equal to zero (illegal)."
+
+# Skipping MacroDefinition: MSGARK_RWT_NOW_BAD "At " MSG_TIME ", a component of rwt has become <= 0."
+
+const MSGARK_BAD_ITASK = "Illegal value for itask."
+const MSGARK_BAD_H0 = "h0 and tout - t0 inconsistent."
+
+# Skipping MacroDefinition: MSGARK_BAD_TOUT "Trouble interpolating at " MSG_TIME_TOUT ". tout too far back in direction of integration"
+
+const MSGARK_EWT_FAIL = "The user-provide EwtSet function failed."
+
+# Skipping MacroDefinition: MSGARK_EWT_NOW_FAIL "At " MSG_TIME ", the user-provide EwtSet function failed."
+
+const MSGARK_RWT_FAIL = "The user-provide RwtSet function failed."
+
+# Skipping MacroDefinition: MSGARK_RWT_NOW_FAIL "At " MSG_TIME ", the user-provide RwtSet function failed."
+
+const MSGARK_LINIT_FAIL = "The linear solver's init routine failed."
+const MSGARK_LFREE_FAIL = "The linear solver's free routine failed."
+const MSGARK_HNIL_DONE = "The above warning has been issued mxhnil times and will not be issued again for this problem."
+const MSGARK_TOO_CLOSE = "tout too close to t0 to start integration."
+
+# Skipping MacroDefinition: MSGARK_MAX_STEPS "At " MSG_TIME ", mxstep steps taken before reaching tout."
+# Skipping MacroDefinition: MSGARK_TOO_MUCH_ACC "At " MSG_TIME ", too much accuracy requested."
+# Skipping MacroDefinition: MSGARK_HNIL "Internal " MSG_TIME_H " are such that t + h = t on the next step. The solver will continue anyway."
+# Skipping MacroDefinition: MSGARK_ERR_FAILS "At " MSG_TIME_H ", the error test failed repeatedly or with |h| = hmin."
+# Skipping MacroDefinition: MSGARK_CONV_FAILS "At " MSG_TIME_H ", the solver convergence test failed repeatedly or with |h| = hmin."
+# Skipping MacroDefinition: MSGARK_SETUP_FAILED "At " MSG_TIME ", the setup routine failed in an unrecoverable manner."
+# Skipping MacroDefinition: MSGARK_SOLVE_FAILED "At " MSG_TIME ", the solve routine failed in an unrecoverable manner."
+# Skipping MacroDefinition: MSGARK_RHSFUNC_FAILED "At " MSG_TIME ", the right-hand side routine failed in an unrecoverable manner."
+# Skipping MacroDefinition: MSGARK_RHSFUNC_UNREC "At " MSG_TIME ", the right-hand side failed in a recoverable manner, but no recovery is possible."
+# Skipping MacroDefinition: MSGARK_RHSFUNC_REPTD "At " MSG_TIME " repeated recoverable right-hand side function errors."
+
+const MSGARK_RHSFUNC_FIRST = "The right-hand side routine failed at the first call."
+
+# Skipping MacroDefinition: MSGARK_RTFUNC_FAILED "At " MSG_TIME ", the rootfinding routine failed in an unrecoverable manner."
+# Skipping MacroDefinition: MSGARK_CLOSE_ROOTS "Root found at and very near " MSG_TIME "."
+# Skipping MacroDefinition: MSGARK_BAD_TSTOP "The value " MSG_TIME_TSTOP " is behind current " MSG_TIME " in the direction of integration."
+
+const MSGARK_INACTIVE_ROOTS = "At the end of the first step, there are still some root functions identically 0. This warning will not be issued again."
+const MSGARK_MISSING_FE = "Cannot specify that method is explicit without providing a function pointer to fe(t,y)."
+const MSGARK_MISSING_FI = "Cannot specify that method is explicit without providing a function pointer to fe(t,y)."
+const MSGARK_MISSING_F = "Cannot specify that method is ImEx without providing function pointers to fi(t,y) and fe(t,y)."
+const MSGARK_RESIZE_FAIL = "Error in user-supplied resize() function."
+const MSGARK_MASSINIT_FAIL = "The mass matrix solver's init routine failed."
+const MSGARK_MASSSETUP_FAIL = "The mass matrix solver's setup routine failed."
+const MSGARK_MASSSOLVE_NULL = "The mass matrix solver's solve routine is NULL."
+const MSGARK_MASSSOLVE_FAIL = "The mass matrix solver failed."
+const MSGARK_MASSFREE_FAIL = "The mass matrixsolver's free routine failed."
+
+# begin enum ANONYMOUS_57
+typealias ANONYMOUS_57 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_57
+
+# begin enum ANONYMOUS_58
+typealias ANONYMOUS_58 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_58
+
+immutable Array_8_N_Vector
+    d1::N_Vector
+    d2::N_Vector
+    d3::N_Vector
+    d4::N_Vector
+    d5::N_Vector
+    d6::N_Vector
+    d7::N_Vector
+    d8::N_Vector
+end
+
+zero(::Type{Array_8_N_Vector}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wrap_c.jl, line 266:
+        Array_8_N_Vector(fill(zero(N_Vector),8)...)
+    end
+
+immutable Array_64_realtype
+    d1::realtype
+    d2::realtype
+    d3::realtype
+    d4::realtype
+    d5::realtype
+    d6::realtype
+    d7::realtype
+    d8::realtype
+    d9::realtype
+    d10::realtype
+    d11::realtype
+    d12::realtype
+    d13::realtype
+    d14::realtype
+    d15::realtype
+    d16::realtype
+    d17::realtype
+    d18::realtype
+    d19::realtype
+    d20::realtype
+    d21::realtype
+    d22::realtype
+    d23::realtype
+    d24::realtype
+    d25::realtype
+    d26::realtype
+    d27::realtype
+    d28::realtype
+    d29::realtype
+    d30::realtype
+    d31::realtype
+    d32::realtype
+    d33::realtype
+    d34::realtype
+    d35::realtype
+    d36::realtype
+    d37::realtype
+    d38::realtype
+    d39::realtype
+    d40::realtype
+    d41::realtype
+    d42::realtype
+    d43::realtype
+    d44::realtype
+    d45::realtype
+    d46::realtype
+    d47::realtype
+    d48::realtype
+    d49::realtype
+    d50::realtype
+    d51::realtype
+    d52::realtype
+    d53::realtype
+    d54::realtype
+    d55::realtype
+    d56::realtype
+    d57::realtype
+    d58::realtype
+    d59::realtype
+    d60::realtype
+    d61::realtype
+    d62::realtype
+    d63::realtype
+    d64::realtype
+end
+
+zero(::Type{Array_64_realtype}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wrap_c.jl, line 266:
+        Array_64_realtype(fill(zero(realtype),64)...)
+    end
+
+immutable Array_8_realtype
+    d1::realtype
+    d2::realtype
+    d3::realtype
+    d4::realtype
+    d5::realtype
+    d6::realtype
+    d7::realtype
+    d8::realtype
+end
+
+zero(::Type{Array_8_realtype}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wrap_c.jl, line 266:
+        Array_8_realtype(fill(zero(realtype),8)...)
+    end
+
+immutable Array_3_realtype
+    d1::realtype
+    d2::realtype
+    d3::realtype
+end
+
+zero(::Type{Array_3_realtype}) = begin  # /Users/jgoldfar/.julia/v0.4/Clang/src/wrap_c.jl, line 266:
+        Array_3_realtype(fill(zero(realtype),3)...)
+    end
+
+type ARKodeMemRec
+    ark_uround::realtype
+    ark_fe::ARKRhsFn
+    ark_fi::ARKRhsFn
+    ark_user_data::Ptr{Void}
+    ark_expstab::ARKExpStabFn
+    ark_estab_data::Ptr{Void}
+    ark_itol::Int
+    ark_ritol::Int
+    ark_reltol::realtype
+    ark_Sabstol::realtype
+    ark_Vabstol::N_Vector
+    ark_SRabstol::realtype
+    ark_VRabstol::N_Vector
+    ark_user_efun::Int
+    ark_efun::ARKEwtFn
+    ark_e_data::Ptr{Void}
+    ark_user_rfun::Int
+    ark_rfun::ARKRwtFn
+    ark_r_data::Ptr{Void}
+    ark_linear::Int
+    ark_linear_timedep::Int
+    ark_explicit::Int
+    ark_implicit::Int
+    ark_Fe::Array_8_N_Vector
+    ark_Fi::Array_8_N_Vector
+    ark_ewt::N_Vector
+    ark_rwt::N_Vector
+    ark_rwt_is_ewt::Int
+    ark_y::N_Vector
+    ark_ycur::N_Vector
+    ark_sdata::N_Vector
+    ark_tempv::N_Vector
+    ark_acor::N_Vector
+    ark_ftemp::N_Vector
+    ark_fold::N_Vector
+    ark_fnew::N_Vector
+    ark_yold::N_Vector
+    ark_ynew::N_Vector
+    ark_tstopset::Int
+    ark_tstop::realtype
+    ark_q::Int
+    ark_p::Int
+    ark_istage::Int
+    ark_stages::Int
+    ark_dense_q::Int
+    ark_Ae::Array_64_realtype
+    ark_Ai::Array_64_realtype
+    ark_c::Array_8_realtype
+    ark_b::Array_8_realtype
+    ark_b2::Array_8_realtype
+    ark_hin::realtype
+    ark_h::realtype
+    ark_hprime::realtype
+    ark_next_h::realtype
+    ark_eta::realtype
+    ark_tn::realtype
+    ark_tretlast::realtype
+    ark_gamma::realtype
+    ark_gammap::realtype
+    ark_gamrat::realtype
+    ark_crate::realtype
+    ark_eLTE::realtype
+    ark_nlscoef::realtype
+    ark_mnewt::Int
+    ark_fixedstep::Int
+    ark_hadapt::ARKAdaptFn
+    ark_hadapt_data::Ptr{Void}
+    ark_hadapt_ehist::Array_3_realtype
+    ark_hadapt_hhist::Array_3_realtype
+    ark_hadapt_imethod::Int
+    ark_hadapt_cfl::realtype
+    ark_hadapt_safety::realtype
+    ark_hadapt_bias::realtype
+    ark_hadapt_growth::realtype
+    ark_hadapt_lbound::realtype
+    ark_hadapt_ubound::realtype
+    ark_hadapt_pq::Int
+    ark_hadapt_k1::realtype
+    ark_hadapt_k2::realtype
+    ark_hadapt_k3::realtype
+    ark_mxstep::Int
+    ark_maxcor::Int
+    ark_mxhnil::Int
+    ark_maxnef::Int
+    ark_maxncf::Int
+    ark_hmin::realtype
+    ark_hmax_inv::realtype
+    ark_etamax::realtype
+    ark_etamx1::realtype
+    ark_etamxf::realtype
+    ark_small_nef::Int
+    ark_etacf::realtype
+    ark_crdown::realtype
+    ark_rdiv::realtype
+    ark_dgmax::realtype
+    ark_msbp::Int
+    ark_predictor::Int
+    ark_nst::Int
+    ark_nst_acc::Int
+    ark_nst_exp::Int
+    ark_nst_attempts::Int
+    ark_nfe::Int
+    ark_nfi::Int
+    ark_ncfn::Int
+    ark_nmassfails::Int
+    ark_netf::Int
+    ark_nni::Int
+    ark_nsetups::Int
+    ark_nhnil::Int
+    ark_report::Int
+    ark_diagfp::Ptr{Void}
+    ark_lrw1::Int
+    ark_liw1::Int
+    ark_lrw::Int
+    ark_liw::Int
+    ark_use_fp::Int
+    ark_fp_m::Int
+    ark_fp_imap::Ptr{Clong}
+    ark_fp_R::Vector{realtype}
+    ark_fp_gamma::Vector{realtype}
+    ark_fp_df::Ptr{N_Vector}
+    ark_fp_dg::Ptr{N_Vector}
+    ark_fp_q::Ptr{N_Vector}
+    ark_fp_fval::N_Vector
+    ark_fp_fold::N_Vector
+    ark_fp_gold::N_Vector
+    ark_linit::Ptr{Void}
+    ark_lsetup::Ptr{Void}
+    ark_lsolve::Ptr{Void}
+    ark_lfree::Ptr{Void}
+    ark_lmem::Ptr{Void}
+    ark_lsolve_type::Int
+    ark_mass_matrix::Int
+    ark_mass_solves::Int
+    ark_mass_mult::Int
+    ark_mtimes::ARKSpilsMassTimesVecFn
+    ark_mtimes_data::Ptr{Void}
+    ark_minit::Ptr{Void}
+    ark_msetup::Ptr{Void}
+    ark_msolve::Ptr{Void}
+    ark_mfree::Ptr{Void}
+    ark_mass_mem::Ptr{Void}
+    ark_msolve_type::Int
+    ark_nstlp::Int
+    ark_h0u::realtype
+    ark_tnew::realtype
+    ark_hold::realtype
+    ark_jcur::Int
+    ark_tolsf::realtype
+    ark_setupNonNull::Int
+    ark_MassSetupNonNull::Int
+    ark_VabstolMallocDone::Int
+    ark_VRabstolMallocDone::Int
+    ark_MallocDone::Int
+    ark_resized::Int
+    ark_firststage::Int
+    ark_ehfun::ARKErrHandlerFn
+    ark_eh_data::Ptr{Void}
+    ark_errfp::Ptr{Void}
+    ark_gfun::ARKRootFn
+    ark_nrtfn::Int
+    ark_iroots::Ptr{Cint}
+    ark_rootdir::Ptr{Cint}
+    ark_tlo::realtype
+    ark_thi::realtype
+    ark_trout::realtype
+    ark_glo::Vector{realtype}
+    ark_ghi::Vector{realtype}
+    ark_grout::Vector{realtype}
+    ark_toutc::realtype
+    ark_ttol::realtype
+    ark_taskc::Int
+    ark_irfnd::Int
+    ark_nge::Int
+    ark_gactive::Ptr{Cint}
+    ark_mxgnull::Int
+end
+
+typealias ARKodeMem Ptr{ARKodeMemRec}
+
+# begin enum ANONYMOUS_59
+typealias ANONYMOUS_59 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_59
+
+# begin enum ANONYMOUS_60
+typealias ANONYMOUS_60 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_60
+
+const ARKSLS_SUCCESS = 0
+const ARKSLS_MEM_NULL = -1
+const ARKSLS_LMEM_NULL = -2
+const ARKSLS_ILL_INPUT = -3
+const ARKSLS_MEM_FAIL = -4
+const ARKSLS_JAC_NOSET = -5
+const ARKSLS_MASS_NOSET = -6
+const ARKSLS_PACKAGE_FAIL = -7
+const ARKSLS_MASSMEM_NULL = -8
+const ARKSLS_JACFUNC_UNRECVR = -9
+const ARKSLS_JACFUNC_RECVR = -10
+const ARKSLS_MASSFUNC_UNRECVR = -11
+const ARKSLS_MASSFUNC_RECVR = -12
+
+typealias ARKSlsSparseJacFn Ptr{Void}
+typealias ARKSlsSparseMassFn Ptr{Void}
+
+# begin enum ANONYMOUS_61
+typealias ANONYMOUS_61 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_61
+
+# begin enum ANONYMOUS_62
+typealias ANONYMOUS_62 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_62
+
+# begin enum ANONYMOUS_63
+typealias ANONYMOUS_63 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_63
+
+# begin enum ANONYMOUS_64
+typealias ANONYMOUS_64 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_64
+
+# begin enum ANONYMOUS_65
+typealias ANONYMOUS_65 UInt32
+const PREC_NONE = (UInt32)(0)
+const PREC_LEFT = (UInt32)(1)
+const PREC_RIGHT = (UInt32)(2)
+const PREC_BOTH = (UInt32)(3)
+# end enum ANONYMOUS_65
+
+# begin enum ANONYMOUS_66
+typealias ANONYMOUS_66 UInt32
+const MODIFIED_GS = (UInt32)(1)
+const CLASSICAL_GS = (UInt32)(2)
+# end enum ANONYMOUS_66

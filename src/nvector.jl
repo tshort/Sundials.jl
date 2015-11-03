@@ -1,4 +1,4 @@
-# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/nvector/shlib.h
+# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/nvector/nvector_serial.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
 

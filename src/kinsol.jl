@@ -2,423 +2,2404 @@
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
 function KINCreate()
-    ccall((:KINCreate,libsundials_kinsol),Ptr{Void},())
+    ccall((:KINCreate,kinsol),Ptr{Void},())
 end
 
 function KINSetErrHandlerFn(kinmem::Ptr{Void},ehfun::KINErrHandlerFn,eh_data::Ptr{Void})
-    ccall((:KINSetErrHandlerFn,libsundials_kinsol),Cint,(Ptr{Void},KINErrHandlerFn,Ptr{Void}),kinmem,ehfun,eh_data)
+    ccall((:KINSetErrHandlerFn,kinsol),Cint,(Ptr{Void},KINErrHandlerFn,Ptr{Void}),kinmem,ehfun,eh_data)
 end
 
 function KINSetErrFile(kinmem::Ptr{Void},errfp::Ptr{Void})
-    ccall((:KINSetErrFile,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,errfp)
+    ccall((:KINSetErrFile,kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,errfp)
 end
 
 function KINSetInfoHandlerFn(kinmem::Ptr{Void},ihfun::KINInfoHandlerFn,ih_data::Ptr{Void})
-    ccall((:KINSetInfoHandlerFn,libsundials_kinsol),Cint,(Ptr{Void},KINInfoHandlerFn,Ptr{Void}),kinmem,ihfun,ih_data)
+    ccall((:KINSetInfoHandlerFn,kinsol),Cint,(Ptr{Void},KINInfoHandlerFn,Ptr{Void}),kinmem,ihfun,ih_data)
 end
 
 function KINSetInfoFile(kinmem::Ptr{Void},infofp::Ptr{Void})
-    ccall((:KINSetInfoFile,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,infofp)
+    ccall((:KINSetInfoFile,kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,infofp)
 end
 
 function KINSetUserData(kinmem::Ptr{Void},user_data::Ptr{Void})
-    ccall((:KINSetUserData,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,user_data)
+    ccall((:KINSetUserData,kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,user_data)
 end
 
 function KINSetPrintLevel(kinmemm::Ptr{Void},printfl::Int)
-    ccall((:KINSetPrintLevel,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmemm,printfl)
+    ccall((:KINSetPrintLevel,kinsol),Cint,(Ptr{Void},Cint),kinmemm,printfl)
+end
+
+function KINSetMAA(kinmem::Ptr{Void},maa::Int)
+    ccall((:KINSetMAA,kinsol),Cint,(Ptr{Void},Clong),kinmem,maa)
 end
 
 function KINSetNumMaxIters(kinmem::Ptr{Void},mxiter::Int)
-    ccall((:KINSetNumMaxIters,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,mxiter)
+    ccall((:KINSetNumMaxIters,kinsol),Cint,(Ptr{Void},Clong),kinmem,mxiter)
 end
 
 function KINSetNoInitSetup(kinmem::Ptr{Void},noInitSetup::Int)
-    ccall((:KINSetNoInitSetup,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,noInitSetup)
+    ccall((:KINSetNoInitSetup,kinsol),Cint,(Ptr{Void},Cint),kinmem,noInitSetup)
 end
 
 function KINSetNoResMon(kinmem::Ptr{Void},noNNIResMon::Int)
-    ccall((:KINSetNoResMon,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,noNNIResMon)
+    ccall((:KINSetNoResMon,kinsol),Cint,(Ptr{Void},Cint),kinmem,noNNIResMon)
 end
 
 function KINSetMaxSetupCalls(kinmem::Ptr{Void},msbset::Int)
-    ccall((:KINSetMaxSetupCalls,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,msbset)
+    ccall((:KINSetMaxSetupCalls,kinsol),Cint,(Ptr{Void},Clong),kinmem,msbset)
 end
 
 function KINSetMaxSubSetupCalls(kinmem::Ptr{Void},msbsetsub::Int)
-    ccall((:KINSetMaxSubSetupCalls,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,msbsetsub)
+    ccall((:KINSetMaxSubSetupCalls,kinsol),Cint,(Ptr{Void},Clong),kinmem,msbsetsub)
 end
 
 function KINSetEtaForm(kinmem::Ptr{Void},etachoice::Int)
-    ccall((:KINSetEtaForm,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,etachoice)
+    ccall((:KINSetEtaForm,kinsol),Cint,(Ptr{Void},Cint),kinmem,etachoice)
 end
 
 function KINSetEtaConstValue(kinmem::Ptr{Void},eta::realtype)
-    ccall((:KINSetEtaConstValue,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,eta)
+    ccall((:KINSetEtaConstValue,kinsol),Cint,(Ptr{Void},realtype),kinmem,eta)
 end
 
 function KINSetEtaParams(kinmem::Ptr{Void},egamma::realtype,ealpha::realtype)
-    ccall((:KINSetEtaParams,libsundials_kinsol),Cint,(Ptr{Void},realtype,realtype),kinmem,egamma,ealpha)
+    ccall((:KINSetEtaParams,kinsol),Cint,(Ptr{Void},realtype,realtype),kinmem,egamma,ealpha)
 end
 
 function KINSetResMonParams(kinmem::Ptr{Void},omegamin::realtype,omegamax::realtype)
-    ccall((:KINSetResMonParams,libsundials_kinsol),Cint,(Ptr{Void},realtype,realtype),kinmem,omegamin,omegamax)
+    ccall((:KINSetResMonParams,kinsol),Cint,(Ptr{Void},realtype,realtype),kinmem,omegamin,omegamax)
 end
 
 function KINSetResMonConstValue(kinmem::Ptr{Void},omegaconst::realtype)
-    ccall((:KINSetResMonConstValue,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,omegaconst)
+    ccall((:KINSetResMonConstValue,kinsol),Cint,(Ptr{Void},realtype),kinmem,omegaconst)
 end
 
 function KINSetNoMinEps(kinmem::Ptr{Void},noMinEps::Int)
-    ccall((:KINSetNoMinEps,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,noMinEps)
+    ccall((:KINSetNoMinEps,kinsol),Cint,(Ptr{Void},Cint),kinmem,noMinEps)
 end
 
 function KINSetMaxNewtonStep(kinmem::Ptr{Void},mxnewtstep::realtype)
-    ccall((:KINSetMaxNewtonStep,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,mxnewtstep)
+    ccall((:KINSetMaxNewtonStep,kinsol),Cint,(Ptr{Void},realtype),kinmem,mxnewtstep)
 end
 
 function KINSetMaxBetaFails(kinmem::Ptr{Void},mxnbcf::Int)
-    ccall((:KINSetMaxBetaFails,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,mxnbcf)
+    ccall((:KINSetMaxBetaFails,kinsol),Cint,(Ptr{Void},Clong),kinmem,mxnbcf)
 end
 
 function KINSetRelErrFunc(kinmem::Ptr{Void},relfunc::realtype)
-    ccall((:KINSetRelErrFunc,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,relfunc)
+    ccall((:KINSetRelErrFunc,kinsol),Cint,(Ptr{Void},realtype),kinmem,relfunc)
 end
 
 function KINSetFuncNormTol(kinmem::Ptr{Void},fnormtol::realtype)
-    ccall((:KINSetFuncNormTol,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,fnormtol)
+    ccall((:KINSetFuncNormTol,kinsol),Cint,(Ptr{Void},realtype),kinmem,fnormtol)
 end
 
 function KINSetScaledStepTol(kinmem::Ptr{Void},scsteptol::realtype)
-    ccall((:KINSetScaledStepTol,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,scsteptol)
+    ccall((:KINSetScaledStepTol,kinsol),Cint,(Ptr{Void},realtype),kinmem,scsteptol)
 end
 
 function KINSetConstraints(kinmem::Ptr{Void},constraints::N_Vector)
-    ccall((:KINSetConstraints,libsundials_kinsol),Cint,(Ptr{Void},N_Vector),kinmem,constraints)
+    ccall((:KINSetConstraints,kinsol),Cint,(Ptr{Void},N_Vector),kinmem,constraints)
 end
 
 function KINSetSysFunc(kinmem::Ptr{Void},func::KINSysFn)
-    ccall((:KINSetSysFunc,libsundials_kinsol),Cint,(Ptr{Void},KINSysFn),kinmem,func)
+    ccall((:KINSetSysFunc,kinsol),Cint,(Ptr{Void},KINSysFn),kinmem,func)
 end
 
 function KINInit(kinmem::Ptr{Void},func::KINSysFn,tmpl::N_Vector)
-    ccall((:KINInit,libsundials_kinsol),Cint,(Ptr{Void},KINSysFn,N_Vector),kinmem,func,tmpl)
+    ccall((:KINInit,kinsol),Cint,(Ptr{Void},KINSysFn,N_Vector),kinmem,func,tmpl)
 end
 
 function KINSol(kinmem::Ptr{Void},uu::N_Vector,strategy::Int,u_scale::N_Vector,f_scale::N_Vector)
-    ccall((:KINSol,libsundials_kinsol),Cint,(Ptr{Void},N_Vector,Cint,N_Vector,N_Vector),kinmem,uu,strategy,u_scale,f_scale)
+    ccall((:KINSol,kinsol),Cint,(Ptr{Void},N_Vector,Cint,N_Vector,N_Vector),kinmem,uu,strategy,u_scale,f_scale)
 end
 
 function KINGetWorkSpace(kinmem::Ptr{Void},lenrw::Ptr{Clong},leniw::Ptr{Clong})
-    ccall((:KINGetWorkSpace,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrw,leniw)
+    ccall((:KINGetWorkSpace,kinsol),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrw,leniw)
 end
 
 function KINGetNumNonlinSolvIters(kinmem::Ptr{Void},nniters::Ptr{Clong})
-    ccall((:KINGetNumNonlinSolvIters,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nniters)
+    ccall((:KINGetNumNonlinSolvIters,kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nniters)
 end
 
 function KINGetNumFuncEvals(kinmem::Ptr{Void},nfevals::Ptr{Clong})
-    ccall((:KINGetNumFuncEvals,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevals)
+    ccall((:KINGetNumFuncEvals,kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevals)
 end
 
 function KINGetNumBetaCondFails(kinmem::Ptr{Void},nbcfails::Ptr{Clong})
-    ccall((:KINGetNumBetaCondFails,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nbcfails)
+    ccall((:KINGetNumBetaCondFails,kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nbcfails)
 end
 
 function KINGetNumBacktrackOps(kinmem::Ptr{Void},nbacktr::Ptr{Clong})
-    ccall((:KINGetNumBacktrackOps,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nbacktr)
+    ccall((:KINGetNumBacktrackOps,kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nbacktr)
 end
 
-function KINGetFuncNorm(kinmem::Ptr{Void},fnorm::Ptr{realtype})
-    ccall((:KINGetFuncNorm,libsundials_kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,fnorm)
+function KINGetFuncNorm(kinmem::Ptr{Void},fnorm::Vector{realtype})
+    ccall((:KINGetFuncNorm,kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,fnorm)
 end
 
-function KINGetStepLength(kinmem::Ptr{Void},steplength::Ptr{realtype})
-    ccall((:KINGetStepLength,libsundials_kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,steplength)
+function KINGetStepLength(kinmem::Ptr{Void},steplength::Vector{realtype})
+    ccall((:KINGetStepLength,kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,steplength)
 end
 
 function KINGetReturnFlagName(flag::Int)
-    ccall((:KINGetReturnFlagName,libsundials_kinsol),Ptr{UInt8},(Clong,),flag)
+    ccall((:KINGetReturnFlagName,kinsol),Ptr{UInt8},(Clong,),flag)
 end
 
 function KINFree(kinmem::Vector{Ptr{Void}})
-    ccall((:KINFree,libsundials_kinsol),Void,(Ptr{Ptr{Void}},),kinmem)
+    ccall((:KINFree,kinsol),Void,(Ptr{Ptr{Void}},),kinmem)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_direct.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+
+function NewDenseMat(M::Int,N::Int)
+    ccall((:NewDenseMat,sundials_direct),DlsMat,(Clong,Clong),M,N)
+end
+
+function NewBandMat(N::Int,mu::Int,ml::Int,smu::Int)
+    ccall((:NewBandMat,sundials_direct),DlsMat,(Clong,Clong,Clong,Clong),N,mu,ml,smu)
+end
+
+function DestroyMat(A::DlsMat)
+    ccall((:DestroyMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function NewIntArray(N::Int)
+    ccall((:NewIntArray,sundials_direct),Ptr{Cint},(Cint,),N)
+end
+
+function NewLintArray(N::Int)
+    ccall((:NewLintArray,sundials_direct),Ptr{Clong},(Clong,),N)
+end
+
+function NewRealArray(N::Int)
+    ccall((:NewRealArray,sundials_direct),Ptr{realtype},(Clong,),N)
+end
+
+function DestroyArray(p::Ptr{Void})
+    ccall((:DestroyArray,sundials_direct),Void,(Ptr{Void},),p)
+end
+
+function AddIdentity(A::DlsMat)
+    ccall((:AddIdentity,sundials_direct),Void,(DlsMat,),A)
+end
+
+function SetToZero(A::DlsMat)
+    ccall((:SetToZero,sundials_direct),Void,(DlsMat,),A)
+end
+
+function PrintMat(A::DlsMat)
+    ccall((:PrintMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function newDenseMat(m::Int,n::Int)
+    ccall((:newDenseMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong),m,n)
+end
+
+function newBandMat(n::Int,smu::Int,ml::Int)
+    ccall((:newBandMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong,Clong),n,smu,ml)
+end
+
+function destroyMat(a::Vector{Ptr{realtype}})
+    ccall((:destroyMat,sundials_direct),Void,(Ptr{Ptr{realtype}},),a)
+end
+
+function newIntArray(n::Int)
+    ccall((:newIntArray,sundials_direct),Ptr{Cint},(Cint,),n)
+end
+
+function newLintArray(n::Int)
+    ccall((:newLintArray,sundials_direct),Ptr{Clong},(Clong,),n)
+end
+
+function newRealArray(m::Int)
+    ccall((:newRealArray,sundials_direct),Ptr{realtype},(Clong,),m)
+end
+
+function destroyArray(v::Ptr{Void})
+    ccall((:destroyArray,sundials_direct),Void,(Ptr{Void},),v)
+end
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
 function KINDlsSetDenseJacFn(kinmem::Ptr{Void},jac::KINDlsDenseJacFn)
-    ccall((:KINDlsSetDenseJacFn,libsundials_kinsol),Cint,(Ptr{Void},KINDlsDenseJacFn),kinmem,jac)
+    ccall((:KINDlsSetDenseJacFn,kinsol_direct),Cint,(Ptr{Void},KINDlsDenseJacFn),kinmem,jac)
 end
 
 function KINDlsSetBandJacFn(kinmem::Ptr{Void},jac::KINDlsBandJacFn)
-    ccall((:KINDlsSetBandJacFn,libsundials_kinsol),Cint,(Ptr{Void},KINDlsBandJacFn),kinmem,jac)
+    ccall((:KINDlsSetBandJacFn,kinsol_direct),Cint,(Ptr{Void},KINDlsBandJacFn),kinmem,jac)
 end
 
 function KINDlsGetWorkSpace(kinmem::Ptr{Void},lenrwB::Ptr{Clong},leniwB::Ptr{Clong})
-    ccall((:KINDlsGetWorkSpace,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwB,leniwB)
+    ccall((:KINDlsGetWorkSpace,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwB,leniwB)
 end
 
 function KINDlsGetNumJacEvals(kinmem::Ptr{Void},njevalsB::Ptr{Clong})
-    ccall((:KINDlsGetNumJacEvals,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njevalsB)
+    ccall((:KINDlsGetNumJacEvals,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njevalsB)
 end
 
 function KINDlsGetNumFuncEvals(kinmem::Ptr{Void},nfevalsB::Ptr{Clong})
-    ccall((:KINDlsGetNumFuncEvals,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsB)
+    ccall((:KINDlsGetNumFuncEvals,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsB)
 end
 
 function KINDlsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
-    ccall((:KINDlsGetLastFlag,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
+    ccall((:KINDlsGetLastFlag,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
 end
 
 function KINDlsGetReturnFlagName(flag::Int)
-    ccall((:KINDlsGetReturnFlagName,libsundials_kinsol),Ptr{UInt8},(Clong,),flag)
+    ccall((:KINDlsGetReturnFlagName,kinsol_direct),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_spils.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function ModifiedGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype})
+    ccall((:ModifiedGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype}),v,h,k,p,new_vk_norm)
+end
+
+function ClassicalGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype},temp::N_Vector,s::Vector{realtype})
+    ccall((:ClassicalGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype},N_Vector,Ptr{realtype}),v,h,k,p,new_vk_norm,temp,s)
+end
+
+function QRfact(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},job::Int)
+    ccall((:QRfact,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Cint),n,h,q,job)
+end
+
+function QRsol(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},b::Vector{realtype})
+    ccall((:QRsol,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype}),n,h,q,b)
+end
+
 function KINSpilsSetMaxRestarts(kinmem::Ptr{Void},maxrs::Int)
-    ccall((:KINSpilsSetMaxRestarts,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,maxrs)
+    ccall((:KINSpilsSetMaxRestarts,kinsol_spils),Cint,(Ptr{Void},Cint),kinmem,maxrs)
 end
 
 function KINSpilsSetPreconditioner(kinmem::Ptr{Void},pset::KINSpilsPrecSetupFn,psolve::KINSpilsPrecSolveFn)
-    ccall((:KINSpilsSetPreconditioner,libsundials_kinsol),Cint,(Ptr{Void},KINSpilsPrecSetupFn,KINSpilsPrecSolveFn),kinmem,pset,psolve)
+    ccall((:KINSpilsSetPreconditioner,kinsol_spils),Cint,(Ptr{Void},KINSpilsPrecSetupFn,KINSpilsPrecSolveFn),kinmem,pset,psolve)
 end
 
 function KINSpilsSetJacTimesVecFn(kinmem::Ptr{Void},jtv::KINSpilsJacTimesVecFn)
-    ccall((:KINSpilsSetJacTimesVecFn,libsundials_kinsol),Cint,(Ptr{Void},KINSpilsJacTimesVecFn),kinmem,jtv)
+    ccall((:KINSpilsSetJacTimesVecFn,kinsol_spils),Cint,(Ptr{Void},KINSpilsJacTimesVecFn),kinmem,jtv)
 end
 
 function KINSpilsGetWorkSpace(kinmem::Ptr{Void},lenrwSG::Ptr{Clong},leniwSG::Ptr{Clong})
-    ccall((:KINSpilsGetWorkSpace,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwSG,leniwSG)
+    ccall((:KINSpilsGetWorkSpace,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwSG,leniwSG)
 end
 
 function KINSpilsGetNumPrecEvals(kinmem::Ptr{Void},npevals::Ptr{Clong})
-    ccall((:KINSpilsGetNumPrecEvals,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npevals)
+    ccall((:KINSpilsGetNumPrecEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npevals)
 end
 
 function KINSpilsGetNumPrecSolves(kinmem::Ptr{Void},npsolves::Ptr{Clong})
-    ccall((:KINSpilsGetNumPrecSolves,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npsolves)
+    ccall((:KINSpilsGetNumPrecSolves,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npsolves)
 end
 
 function KINSpilsGetNumLinIters(kinmem::Ptr{Void},nliters::Ptr{Clong})
-    ccall((:KINSpilsGetNumLinIters,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nliters)
+    ccall((:KINSpilsGetNumLinIters,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nliters)
 end
 
 function KINSpilsGetNumConvFails(kinmem::Ptr{Void},nlcfails::Ptr{Clong})
-    ccall((:KINSpilsGetNumConvFails,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nlcfails)
+    ccall((:KINSpilsGetNumConvFails,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nlcfails)
 end
 
 function KINSpilsGetNumJtimesEvals(kinmem::Ptr{Void},njvevals::Ptr{Clong})
-    ccall((:KINSpilsGetNumJtimesEvals,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njvevals)
+    ccall((:KINSpilsGetNumJtimesEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njvevals)
 end
 
 function KINSpilsGetNumFuncEvals(kinmem::Ptr{Void},nfevalsS::Ptr{Clong})
-    ccall((:KINSpilsGetNumFuncEvals,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsS)
+    ccall((:KINSpilsGetNumFuncEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsS)
 end
 
 function KINSpilsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
-    ccall((:KINSpilsGetLastFlag,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
+    ccall((:KINSpilsGetLastFlag,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
 end
 
 function KINSpilsGetReturnFlagName(flag::Int)
-    ccall((:KINSpilsGetReturnFlagName,libsundials_kinsol),Ptr{UInt8},(Clong,),flag)
+    ccall((:KINSpilsGetReturnFlagName,kinsol_spils),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_band.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+
+function NewDenseMat(M::Int,N::Int)
+    ccall((:NewDenseMat,sundials_direct),DlsMat,(Clong,Clong),M,N)
+end
+
+function NewBandMat(N::Int,mu::Int,ml::Int,smu::Int)
+    ccall((:NewBandMat,sundials_direct),DlsMat,(Clong,Clong,Clong,Clong),N,mu,ml,smu)
+end
+
+function DestroyMat(A::DlsMat)
+    ccall((:DestroyMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function NewIntArray(N::Int)
+    ccall((:NewIntArray,sundials_direct),Ptr{Cint},(Cint,),N)
+end
+
+function NewLintArray(N::Int)
+    ccall((:NewLintArray,sundials_direct),Ptr{Clong},(Clong,),N)
+end
+
+function NewRealArray(N::Int)
+    ccall((:NewRealArray,sundials_direct),Ptr{realtype},(Clong,),N)
+end
+
+function DestroyArray(p::Ptr{Void})
+    ccall((:DestroyArray,sundials_direct),Void,(Ptr{Void},),p)
+end
+
+function AddIdentity(A::DlsMat)
+    ccall((:AddIdentity,sundials_direct),Void,(DlsMat,),A)
+end
+
+function SetToZero(A::DlsMat)
+    ccall((:SetToZero,sundials_direct),Void,(DlsMat,),A)
+end
+
+function PrintMat(A::DlsMat)
+    ccall((:PrintMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function newDenseMat(m::Int,n::Int)
+    ccall((:newDenseMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong),m,n)
+end
+
+function newBandMat(n::Int,smu::Int,ml::Int)
+    ccall((:newBandMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong,Clong),n,smu,ml)
+end
+
+function destroyMat(a::Vector{Ptr{realtype}})
+    ccall((:destroyMat,sundials_direct),Void,(Ptr{Ptr{realtype}},),a)
+end
+
+function newIntArray(n::Int)
+    ccall((:newIntArray,sundials_direct),Ptr{Cint},(Cint,),n)
+end
+
+function newLintArray(n::Int)
+    ccall((:newLintArray,sundials_direct),Ptr{Clong},(Clong,),n)
+end
+
+function newRealArray(m::Int)
+    ccall((:newRealArray,sundials_direct),Ptr{realtype},(Clong,),m)
+end
+
+function destroyArray(v::Ptr{Void})
+    ccall((:destroyArray,sundials_direct),Void,(Ptr{Void},),v)
+end
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function KINDlsSetDenseJacFn(kinmem::Ptr{Void},jac::KINDlsDenseJacFn)
+    ccall((:KINDlsSetDenseJacFn,kinsol_direct),Cint,(Ptr{Void},KINDlsDenseJacFn),kinmem,jac)
+end
+
+function KINDlsSetBandJacFn(kinmem::Ptr{Void},jac::KINDlsBandJacFn)
+    ccall((:KINDlsSetBandJacFn,kinsol_direct),Cint,(Ptr{Void},KINDlsBandJacFn),kinmem,jac)
+end
+
+function KINDlsGetWorkSpace(kinmem::Ptr{Void},lenrwB::Ptr{Clong},leniwB::Ptr{Clong})
+    ccall((:KINDlsGetWorkSpace,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwB,leniwB)
+end
+
+function KINDlsGetNumJacEvals(kinmem::Ptr{Void},njevalsB::Ptr{Clong})
+    ccall((:KINDlsGetNumJacEvals,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njevalsB)
+end
+
+function KINDlsGetNumFuncEvals(kinmem::Ptr{Void},nfevalsB::Ptr{Clong})
+    ccall((:KINDlsGetNumFuncEvals,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsB)
+end
+
+function KINDlsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:KINDlsGetLastFlag,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
+end
+
+function KINDlsGetReturnFlagName(flag::Int)
+    ccall((:KINDlsGetReturnFlagName,kinsol_direct),Ptr{UInt8},(Clong,),flag)
+end
+
+function BandGBTRF(A::DlsMat,p::Ptr{Clong})
+    ccall((:BandGBTRF,sundials_band),Clong,(DlsMat,Ptr{Clong}),A,p)
+end
+
+function bandGBTRF(a::Vector{Ptr{realtype}},n::Int,mu::Int,ml::Int,smu::Int,p::Ptr{Clong})
+    ccall((:bandGBTRF,sundials_band),Clong,(Ptr{Ptr{realtype}},Clong,Clong,Clong,Clong,Ptr{Clong}),a,n,mu,ml,smu,p)
+end
+
+function BandGBTRS(A::DlsMat,p::Ptr{Clong},b::Vector{realtype})
+    ccall((:BandGBTRS,sundials_band),Void,(DlsMat,Ptr{Clong},Ptr{realtype}),A,p,b)
+end
+
+function bandGBTRS(a::Vector{Ptr{realtype}},n::Int,smu::Int,ml::Int,p::Ptr{Clong},b::Vector{realtype})
+    ccall((:bandGBTRS,sundials_band),Void,(Ptr{Ptr{realtype}},Clong,Clong,Clong,Ptr{Clong},Ptr{realtype}),a,n,smu,ml,p,b)
+end
+
+function BandCopy(A::DlsMat,B::DlsMat,copymu::Int,copyml::Int)
+    ccall((:BandCopy,sundials_band),Void,(DlsMat,DlsMat,Clong,Clong),A,B,copymu,copyml)
+end
+
+function bandCopy(a::Vector{Ptr{realtype}},b::Vector{Ptr{realtype}},n::Int,a_smu::Int,b_smu::Int,copymu::Int,copyml::Int)
+    ccall((:bandCopy,sundials_band),Void,(Ptr{Ptr{realtype}},Ptr{Ptr{realtype}},Clong,Clong,Clong,Clong,Clong),a,b,n,a_smu,b_smu,copymu,copyml)
+end
+
+function BandScale(c::realtype,A::DlsMat)
+    ccall((:BandScale,sundials_band),Void,(realtype,DlsMat),c,A)
+end
+
+function bandScale(c::realtype,a::Vector{Ptr{realtype}},n::Int,mu::Int,ml::Int,smu::Int)
+    ccall((:bandScale,sundials_band),Void,(realtype,Ptr{Ptr{realtype}},Clong,Clong,Clong,Clong),c,a,n,mu,ml,smu)
+end
+
+function bandAddIdentity(a::Vector{Ptr{realtype}},n::Int,smu::Int)
+    ccall((:bandAddIdentity,sundials_band),Void,(Ptr{Ptr{realtype}},Clong,Clong),a,n,smu)
+end
+
+function BandMatvec(A::DlsMat,x::Vector{realtype},y::Vector{realtype})
+    ccall((:BandMatvec,sundials_band),Void,(DlsMat,Ptr{realtype},Ptr{realtype}),A,x,y)
+end
+
+function bandMatvec(a::Vector{Ptr{realtype}},x::Vector{realtype},y::Vector{realtype},n::Int,mu::Int,ml::Int,smu::Int)
+    ccall((:bandMatvec,sundials_band),Void,(Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype},Clong,Clong,Clong,Clong),a,x,y,n,mu,ml,smu)
+end
+
 function KINBand(kinmem::Ptr{Void},N::Int,mupper::Int,mlower::Int)
-    ccall((:KINBand,libsundials_kinsol),Cint,(Ptr{Void},Clong,Clong,Clong),kinmem,N,mupper,mlower)
+    ccall((:KINBand,kinsol_band),Cint,(Ptr{Void},Clong,Clong,Clong),kinmem,N,mupper,mlower)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_bbdpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
 function KINBBDPrecInit(kinmem::Ptr{Void},Nlocal::Int,mudq::Int,mldq::Int,mukeep::Int,mlkeep::Int,dq_rel_uu::realtype,gloc::KINLocalFn,gcomm::KINCommFn)
-    ccall((:KINBBDPrecInit,libsundials_kinsol),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,KINLocalFn,KINCommFn),kinmem,Nlocal,mudq,mldq,mukeep,mlkeep,dq_rel_uu,gloc,gcomm)
+    ccall((:KINBBDPrecInit,kinsol_bbdpre),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,KINLocalFn,KINCommFn),kinmem,Nlocal,mudq,mldq,mukeep,mlkeep,dq_rel_uu,gloc,gcomm)
 end
 
 function KINBBDPrecGetWorkSpace(kinmem::Ptr{Void},lenrwBBDP::Ptr{Clong},leniwBBDP::Ptr{Clong})
-    ccall((:KINBBDPrecGetWorkSpace,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwBBDP,leniwBBDP)
+    ccall((:KINBBDPrecGetWorkSpace,kinsol_bbdpre),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwBBDP,leniwBBDP)
 end
 
 function KINBBDPrecGetNumGfnEvals(kinmem::Ptr{Void},ngevalsBBDP::Ptr{Clong})
-    ccall((:KINBBDPrecGetNumGfnEvals,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,ngevalsBBDP)
+    ccall((:KINBBDPrecGetNumGfnEvals,kinsol_bbdpre),Cint,(Ptr{Void},Ptr{Clong}),kinmem,ngevalsBBDP)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_dense.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+
+function NewDenseMat(M::Int,N::Int)
+    ccall((:NewDenseMat,sundials_direct),DlsMat,(Clong,Clong),M,N)
+end
+
+function NewBandMat(N::Int,mu::Int,ml::Int,smu::Int)
+    ccall((:NewBandMat,sundials_direct),DlsMat,(Clong,Clong,Clong,Clong),N,mu,ml,smu)
+end
+
+function DestroyMat(A::DlsMat)
+    ccall((:DestroyMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function NewIntArray(N::Int)
+    ccall((:NewIntArray,sundials_direct),Ptr{Cint},(Cint,),N)
+end
+
+function NewLintArray(N::Int)
+    ccall((:NewLintArray,sundials_direct),Ptr{Clong},(Clong,),N)
+end
+
+function NewRealArray(N::Int)
+    ccall((:NewRealArray,sundials_direct),Ptr{realtype},(Clong,),N)
+end
+
+function DestroyArray(p::Ptr{Void})
+    ccall((:DestroyArray,sundials_direct),Void,(Ptr{Void},),p)
+end
+
+function AddIdentity(A::DlsMat)
+    ccall((:AddIdentity,sundials_direct),Void,(DlsMat,),A)
+end
+
+function SetToZero(A::DlsMat)
+    ccall((:SetToZero,sundials_direct),Void,(DlsMat,),A)
+end
+
+function PrintMat(A::DlsMat)
+    ccall((:PrintMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function newDenseMat(m::Int,n::Int)
+    ccall((:newDenseMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong),m,n)
+end
+
+function newBandMat(n::Int,smu::Int,ml::Int)
+    ccall((:newBandMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong,Clong),n,smu,ml)
+end
+
+function destroyMat(a::Vector{Ptr{realtype}})
+    ccall((:destroyMat,sundials_direct),Void,(Ptr{Ptr{realtype}},),a)
+end
+
+function newIntArray(n::Int)
+    ccall((:newIntArray,sundials_direct),Ptr{Cint},(Cint,),n)
+end
+
+function newLintArray(n::Int)
+    ccall((:newLintArray,sundials_direct),Ptr{Clong},(Clong,),n)
+end
+
+function newRealArray(m::Int)
+    ccall((:newRealArray,sundials_direct),Ptr{realtype},(Clong,),m)
+end
+
+function destroyArray(v::Ptr{Void})
+    ccall((:destroyArray,sundials_direct),Void,(Ptr{Void},),v)
+end
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function KINDlsSetDenseJacFn(kinmem::Ptr{Void},jac::KINDlsDenseJacFn)
+    ccall((:KINDlsSetDenseJacFn,kinsol_direct),Cint,(Ptr{Void},KINDlsDenseJacFn),kinmem,jac)
+end
+
+function KINDlsSetBandJacFn(kinmem::Ptr{Void},jac::KINDlsBandJacFn)
+    ccall((:KINDlsSetBandJacFn,kinsol_direct),Cint,(Ptr{Void},KINDlsBandJacFn),kinmem,jac)
+end
+
+function KINDlsGetWorkSpace(kinmem::Ptr{Void},lenrwB::Ptr{Clong},leniwB::Ptr{Clong})
+    ccall((:KINDlsGetWorkSpace,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwB,leniwB)
+end
+
+function KINDlsGetNumJacEvals(kinmem::Ptr{Void},njevalsB::Ptr{Clong})
+    ccall((:KINDlsGetNumJacEvals,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njevalsB)
+end
+
+function KINDlsGetNumFuncEvals(kinmem::Ptr{Void},nfevalsB::Ptr{Clong})
+    ccall((:KINDlsGetNumFuncEvals,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsB)
+end
+
+function KINDlsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:KINDlsGetLastFlag,kinsol_direct),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
+end
+
+function KINDlsGetReturnFlagName(flag::Int)
+    ccall((:KINDlsGetReturnFlagName,kinsol_direct),Ptr{UInt8},(Clong,),flag)
+end
+
+function DenseGETRF(A::DlsMat,p::Ptr{Clong})
+    ccall((:DenseGETRF,sundials_dense),Clong,(DlsMat,Ptr{Clong}),A,p)
+end
+
+function DenseGETRS(A::DlsMat,p::Ptr{Clong},b::Vector{realtype})
+    ccall((:DenseGETRS,sundials_dense),Void,(DlsMat,Ptr{Clong},Ptr{realtype}),A,p,b)
+end
+
+function denseGETRF(a::Vector{Ptr{realtype}},m::Int,n::Int,p::Ptr{Clong})
+    ccall((:denseGETRF,sundials_dense),Clong,(Ptr{Ptr{realtype}},Clong,Clong,Ptr{Clong}),a,m,n,p)
+end
+
+function denseGETRS(a::Vector{Ptr{realtype}},n::Int,p::Ptr{Clong},b::Vector{realtype})
+    ccall((:denseGETRS,sundials_dense),Void,(Ptr{Ptr{realtype}},Clong,Ptr{Clong},Ptr{realtype}),a,n,p,b)
+end
+
+function DensePOTRF(A::DlsMat)
+    ccall((:DensePOTRF,sundials_dense),Clong,(DlsMat,),A)
+end
+
+function DensePOTRS(A::DlsMat,b::Vector{realtype})
+    ccall((:DensePOTRS,sundials_dense),Void,(DlsMat,Ptr{realtype}),A,b)
+end
+
+function densePOTRF(a::Vector{Ptr{realtype}},m::Int)
+    ccall((:densePOTRF,sundials_dense),Clong,(Ptr{Ptr{realtype}},Clong),a,m)
+end
+
+function densePOTRS(a::Vector{Ptr{realtype}},m::Int,b::Vector{realtype})
+    ccall((:densePOTRS,sundials_dense),Void,(Ptr{Ptr{realtype}},Clong,Ptr{realtype}),a,m,b)
+end
+
+function DenseGEQRF(A::DlsMat,beta::Vector{realtype},wrk::Vector{realtype})
+    ccall((:DenseGEQRF,sundials_dense),Cint,(DlsMat,Ptr{realtype},Ptr{realtype}),A,beta,wrk)
+end
+
+function DenseORMQR(A::DlsMat,beta::Vector{realtype},vn::Vector{realtype},vm::Vector{realtype},wrk::Vector{realtype})
+    ccall((:DenseORMQR,sundials_dense),Cint,(DlsMat,Ptr{realtype},Ptr{realtype},Ptr{realtype},Ptr{realtype}),A,beta,vn,vm,wrk)
+end
+
+function denseGEQRF(a::Vector{Ptr{realtype}},m::Int,n::Int,beta::Vector{realtype},v::Vector{realtype})
+    ccall((:denseGEQRF,sundials_dense),Cint,(Ptr{Ptr{realtype}},Clong,Clong,Ptr{realtype},Ptr{realtype}),a,m,n,beta,v)
+end
+
+function denseORMQR(a::Vector{Ptr{realtype}},m::Int,n::Int,beta::Vector{realtype},v::Vector{realtype},w::Vector{realtype},wrk::Vector{realtype})
+    ccall((:denseORMQR,sundials_dense),Cint,(Ptr{Ptr{realtype}},Clong,Clong,Ptr{realtype},Ptr{realtype},Ptr{realtype},Ptr{realtype}),a,m,n,beta,v,w,wrk)
+end
+
+function DenseCopy(A::DlsMat,B::DlsMat)
+    ccall((:DenseCopy,sundials_dense),Void,(DlsMat,DlsMat),A,B)
+end
+
+function denseCopy(a::Vector{Ptr{realtype}},b::Vector{Ptr{realtype}},m::Int,n::Int)
+    ccall((:denseCopy,sundials_dense),Void,(Ptr{Ptr{realtype}},Ptr{Ptr{realtype}},Clong,Clong),a,b,m,n)
+end
+
+function DenseScale(c::realtype,A::DlsMat)
+    ccall((:DenseScale,sundials_dense),Void,(realtype,DlsMat),c,A)
+end
+
+function denseScale(c::realtype,a::Vector{Ptr{realtype}},m::Int,n::Int)
+    ccall((:denseScale,sundials_dense),Void,(realtype,Ptr{Ptr{realtype}},Clong,Clong),c,a,m,n)
+end
+
+function denseAddIdentity(a::Vector{Ptr{realtype}},n::Int)
+    ccall((:denseAddIdentity,sundials_dense),Void,(Ptr{Ptr{realtype}},Clong),a,n)
+end
+
+function DenseMatvec(A::DlsMat,x::Vector{realtype},y::Vector{realtype})
+    ccall((:DenseMatvec,sundials_dense),Void,(DlsMat,Ptr{realtype},Ptr{realtype}),A,x,y)
+end
+
+function denseMatvec(a::Vector{Ptr{realtype}},x::Vector{realtype},y::Vector{realtype},m::Int,n::Int)
+    ccall((:denseMatvec,sundials_dense),Void,(Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype},Clong,Clong),a,x,y,m,n)
+end
+
 function KINDense(kinmem::Ptr{Void},N::Int)
-    ccall((:KINDense,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,N)
+    ccall((:KINDense,kinsol_dense),Cint,(Ptr{Void},Clong),kinmem,N)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_impl.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
 function KINCreate()
-    ccall((:KINCreate,libsundials_kinsol),Ptr{Void},())
+    ccall((:KINCreate,kinsol),Ptr{Void},())
 end
 
 function KINSetErrHandlerFn(kinmem::Ptr{Void},ehfun::KINErrHandlerFn,eh_data::Ptr{Void})
-    ccall((:KINSetErrHandlerFn,libsundials_kinsol),Cint,(Ptr{Void},KINErrHandlerFn,Ptr{Void}),kinmem,ehfun,eh_data)
+    ccall((:KINSetErrHandlerFn,kinsol),Cint,(Ptr{Void},KINErrHandlerFn,Ptr{Void}),kinmem,ehfun,eh_data)
 end
 
 function KINSetErrFile(kinmem::Ptr{Void},errfp::Ptr{Void})
-    ccall((:KINSetErrFile,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,errfp)
+    ccall((:KINSetErrFile,kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,errfp)
 end
 
 function KINSetInfoHandlerFn(kinmem::Ptr{Void},ihfun::KINInfoHandlerFn,ih_data::Ptr{Void})
-    ccall((:KINSetInfoHandlerFn,libsundials_kinsol),Cint,(Ptr{Void},KINInfoHandlerFn,Ptr{Void}),kinmem,ihfun,ih_data)
+    ccall((:KINSetInfoHandlerFn,kinsol),Cint,(Ptr{Void},KINInfoHandlerFn,Ptr{Void}),kinmem,ihfun,ih_data)
 end
 
 function KINSetInfoFile(kinmem::Ptr{Void},infofp::Ptr{Void})
-    ccall((:KINSetInfoFile,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,infofp)
+    ccall((:KINSetInfoFile,kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,infofp)
 end
 
 function KINSetUserData(kinmem::Ptr{Void},user_data::Ptr{Void})
-    ccall((:KINSetUserData,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,user_data)
+    ccall((:KINSetUserData,kinsol),Cint,(Ptr{Void},Ptr{Void}),kinmem,user_data)
 end
 
 function KINSetPrintLevel(kinmemm::Ptr{Void},printfl::Int)
-    ccall((:KINSetPrintLevel,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmemm,printfl)
+    ccall((:KINSetPrintLevel,kinsol),Cint,(Ptr{Void},Cint),kinmemm,printfl)
+end
+
+function KINSetMAA(kinmem::Ptr{Void},maa::Int)
+    ccall((:KINSetMAA,kinsol),Cint,(Ptr{Void},Clong),kinmem,maa)
 end
 
 function KINSetNumMaxIters(kinmem::Ptr{Void},mxiter::Int)
-    ccall((:KINSetNumMaxIters,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,mxiter)
+    ccall((:KINSetNumMaxIters,kinsol),Cint,(Ptr{Void},Clong),kinmem,mxiter)
 end
 
 function KINSetNoInitSetup(kinmem::Ptr{Void},noInitSetup::Int)
-    ccall((:KINSetNoInitSetup,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,noInitSetup)
+    ccall((:KINSetNoInitSetup,kinsol),Cint,(Ptr{Void},Cint),kinmem,noInitSetup)
 end
 
 function KINSetNoResMon(kinmem::Ptr{Void},noNNIResMon::Int)
-    ccall((:KINSetNoResMon,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,noNNIResMon)
+    ccall((:KINSetNoResMon,kinsol),Cint,(Ptr{Void},Cint),kinmem,noNNIResMon)
 end
 
 function KINSetMaxSetupCalls(kinmem::Ptr{Void},msbset::Int)
-    ccall((:KINSetMaxSetupCalls,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,msbset)
+    ccall((:KINSetMaxSetupCalls,kinsol),Cint,(Ptr{Void},Clong),kinmem,msbset)
 end
 
 function KINSetMaxSubSetupCalls(kinmem::Ptr{Void},msbsetsub::Int)
-    ccall((:KINSetMaxSubSetupCalls,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,msbsetsub)
+    ccall((:KINSetMaxSubSetupCalls,kinsol),Cint,(Ptr{Void},Clong),kinmem,msbsetsub)
 end
 
 function KINSetEtaForm(kinmem::Ptr{Void},etachoice::Int)
-    ccall((:KINSetEtaForm,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,etachoice)
+    ccall((:KINSetEtaForm,kinsol),Cint,(Ptr{Void},Cint),kinmem,etachoice)
 end
 
 function KINSetEtaConstValue(kinmem::Ptr{Void},eta::realtype)
-    ccall((:KINSetEtaConstValue,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,eta)
+    ccall((:KINSetEtaConstValue,kinsol),Cint,(Ptr{Void},realtype),kinmem,eta)
 end
 
 function KINSetEtaParams(kinmem::Ptr{Void},egamma::realtype,ealpha::realtype)
-    ccall((:KINSetEtaParams,libsundials_kinsol),Cint,(Ptr{Void},realtype,realtype),kinmem,egamma,ealpha)
+    ccall((:KINSetEtaParams,kinsol),Cint,(Ptr{Void},realtype,realtype),kinmem,egamma,ealpha)
 end
 
 function KINSetResMonParams(kinmem::Ptr{Void},omegamin::realtype,omegamax::realtype)
-    ccall((:KINSetResMonParams,libsundials_kinsol),Cint,(Ptr{Void},realtype,realtype),kinmem,omegamin,omegamax)
+    ccall((:KINSetResMonParams,kinsol),Cint,(Ptr{Void},realtype,realtype),kinmem,omegamin,omegamax)
 end
 
 function KINSetResMonConstValue(kinmem::Ptr{Void},omegaconst::realtype)
-    ccall((:KINSetResMonConstValue,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,omegaconst)
+    ccall((:KINSetResMonConstValue,kinsol),Cint,(Ptr{Void},realtype),kinmem,omegaconst)
 end
 
 function KINSetNoMinEps(kinmem::Ptr{Void},noMinEps::Int)
-    ccall((:KINSetNoMinEps,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,noMinEps)
+    ccall((:KINSetNoMinEps,kinsol),Cint,(Ptr{Void},Cint),kinmem,noMinEps)
 end
 
 function KINSetMaxNewtonStep(kinmem::Ptr{Void},mxnewtstep::realtype)
-    ccall((:KINSetMaxNewtonStep,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,mxnewtstep)
+    ccall((:KINSetMaxNewtonStep,kinsol),Cint,(Ptr{Void},realtype),kinmem,mxnewtstep)
 end
 
 function KINSetMaxBetaFails(kinmem::Ptr{Void},mxnbcf::Int)
-    ccall((:KINSetMaxBetaFails,libsundials_kinsol),Cint,(Ptr{Void},Clong),kinmem,mxnbcf)
+    ccall((:KINSetMaxBetaFails,kinsol),Cint,(Ptr{Void},Clong),kinmem,mxnbcf)
 end
 
 function KINSetRelErrFunc(kinmem::Ptr{Void},relfunc::realtype)
-    ccall((:KINSetRelErrFunc,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,relfunc)
+    ccall((:KINSetRelErrFunc,kinsol),Cint,(Ptr{Void},realtype),kinmem,relfunc)
 end
 
 function KINSetFuncNormTol(kinmem::Ptr{Void},fnormtol::realtype)
-    ccall((:KINSetFuncNormTol,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,fnormtol)
+    ccall((:KINSetFuncNormTol,kinsol),Cint,(Ptr{Void},realtype),kinmem,fnormtol)
 end
 
 function KINSetScaledStepTol(kinmem::Ptr{Void},scsteptol::realtype)
-    ccall((:KINSetScaledStepTol,libsundials_kinsol),Cint,(Ptr{Void},realtype),kinmem,scsteptol)
+    ccall((:KINSetScaledStepTol,kinsol),Cint,(Ptr{Void},realtype),kinmem,scsteptol)
 end
 
 function KINSetConstraints(kinmem::Ptr{Void},constraints::N_Vector)
-    ccall((:KINSetConstraints,libsundials_kinsol),Cint,(Ptr{Void},N_Vector),kinmem,constraints)
+    ccall((:KINSetConstraints,kinsol),Cint,(Ptr{Void},N_Vector),kinmem,constraints)
 end
 
 function KINSetSysFunc(kinmem::Ptr{Void},func::KINSysFn)
-    ccall((:KINSetSysFunc,libsundials_kinsol),Cint,(Ptr{Void},KINSysFn),kinmem,func)
+    ccall((:KINSetSysFunc,kinsol),Cint,(Ptr{Void},KINSysFn),kinmem,func)
 end
 
 function KINInit(kinmem::Ptr{Void},func::KINSysFn,tmpl::N_Vector)
-    ccall((:KINInit,libsundials_kinsol),Cint,(Ptr{Void},KINSysFn,N_Vector),kinmem,func,tmpl)
+    ccall((:KINInit,kinsol),Cint,(Ptr{Void},KINSysFn,N_Vector),kinmem,func,tmpl)
 end
 
 function KINSol(kinmem::Ptr{Void},uu::N_Vector,strategy::Int,u_scale::N_Vector,f_scale::N_Vector)
-    ccall((:KINSol,libsundials_kinsol),Cint,(Ptr{Void},N_Vector,Cint,N_Vector,N_Vector),kinmem,uu,strategy,u_scale,f_scale)
+    ccall((:KINSol,kinsol),Cint,(Ptr{Void},N_Vector,Cint,N_Vector,N_Vector),kinmem,uu,strategy,u_scale,f_scale)
 end
 
 function KINGetWorkSpace(kinmem::Ptr{Void},lenrw::Ptr{Clong},leniw::Ptr{Clong})
-    ccall((:KINGetWorkSpace,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrw,leniw)
+    ccall((:KINGetWorkSpace,kinsol),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrw,leniw)
 end
 
 function KINGetNumNonlinSolvIters(kinmem::Ptr{Void},nniters::Ptr{Clong})
-    ccall((:KINGetNumNonlinSolvIters,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nniters)
+    ccall((:KINGetNumNonlinSolvIters,kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nniters)
 end
 
 function KINGetNumFuncEvals(kinmem::Ptr{Void},nfevals::Ptr{Clong})
-    ccall((:KINGetNumFuncEvals,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevals)
+    ccall((:KINGetNumFuncEvals,kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevals)
 end
 
 function KINGetNumBetaCondFails(kinmem::Ptr{Void},nbcfails::Ptr{Clong})
-    ccall((:KINGetNumBetaCondFails,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nbcfails)
+    ccall((:KINGetNumBetaCondFails,kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nbcfails)
 end
 
 function KINGetNumBacktrackOps(kinmem::Ptr{Void},nbacktr::Ptr{Clong})
-    ccall((:KINGetNumBacktrackOps,libsundials_kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nbacktr)
+    ccall((:KINGetNumBacktrackOps,kinsol),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nbacktr)
 end
 
-function KINGetFuncNorm(kinmem::Ptr{Void},fnorm::Ptr{realtype})
-    ccall((:KINGetFuncNorm,libsundials_kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,fnorm)
+function KINGetFuncNorm(kinmem::Ptr{Void},fnorm::Vector{realtype})
+    ccall((:KINGetFuncNorm,kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,fnorm)
 end
 
-function KINGetStepLength(kinmem::Ptr{Void},steplength::Ptr{realtype})
-    ccall((:KINGetStepLength,libsundials_kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,steplength)
+function KINGetStepLength(kinmem::Ptr{Void},steplength::Vector{realtype})
+    ccall((:KINGetStepLength,kinsol),Cint,(Ptr{Void},Ptr{realtype}),kinmem,steplength)
 end
 
 function KINGetReturnFlagName(flag::Int)
-    ccall((:KINGetReturnFlagName,libsundials_kinsol),Ptr{UInt8},(Clong,),flag)
+    ccall((:KINGetReturnFlagName,kinsol),Ptr{UInt8},(Clong,),flag)
 end
 
 function KINFree(kinmem::Vector{Ptr{Void}})
-    ccall((:KINFree,libsundials_kinsol),Void,(Ptr{Ptr{Void}},),kinmem)
+    ccall((:KINFree,kinsol),Void,(Ptr{Ptr{Void}},),kinmem)
 end
 
 function KINErrHandler(error_code::Int,_module::Ptr{UInt8},_function::Ptr{UInt8},msg::Ptr{UInt8},user_data::Ptr{Void})
-    ccall((:KINErrHandler,libsundials_kinsol),Void,(Cint,Ptr{UInt8},Ptr{UInt8},Ptr{UInt8},Ptr{Void}),error_code,_module,_function,msg,user_data)
+    ccall((:KINErrHandler,kinsol_impl),Void,(Cint,Ptr{UInt8},Ptr{UInt8},Ptr{UInt8},Ptr{Void}),error_code,_module,_function,msg,user_data)
 end
 
 function KINInfoHandler(_module::Ptr{UInt8},_function::Ptr{UInt8},msg::Ptr{UInt8},user_data::Ptr{Void})
-    ccall((:KINInfoHandler,libsundials_kinsol),Void,(Ptr{UInt8},Ptr{UInt8},Ptr{UInt8},Ptr{Void}),_module,_function,msg,user_data)
+    ccall((:KINInfoHandler,kinsol_impl),Void,(Ptr{UInt8},Ptr{UInt8},Ptr{UInt8},Ptr{Void}),_module,_function,msg,user_data)
+end
+# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_klu.h
+# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+
+function NewDenseMat(M::Int,N::Int)
+    ccall((:NewDenseMat,sundials_direct),DlsMat,(Clong,Clong),M,N)
+end
+
+function NewBandMat(N::Int,mu::Int,ml::Int,smu::Int)
+    ccall((:NewBandMat,sundials_direct),DlsMat,(Clong,Clong,Clong,Clong),N,mu,ml,smu)
+end
+
+function DestroyMat(A::DlsMat)
+    ccall((:DestroyMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function NewIntArray(N::Int)
+    ccall((:NewIntArray,sundials_direct),Ptr{Cint},(Cint,),N)
+end
+
+function NewLintArray(N::Int)
+    ccall((:NewLintArray,sundials_direct),Ptr{Clong},(Clong,),N)
+end
+
+function NewRealArray(N::Int)
+    ccall((:NewRealArray,sundials_direct),Ptr{realtype},(Clong,),N)
+end
+
+function DestroyArray(p::Ptr{Void})
+    ccall((:DestroyArray,sundials_direct),Void,(Ptr{Void},),p)
+end
+
+function AddIdentity(A::DlsMat)
+    ccall((:AddIdentity,sundials_direct),Void,(DlsMat,),A)
+end
+
+function SetToZero(A::DlsMat)
+    ccall((:SetToZero,sundials_direct),Void,(DlsMat,),A)
+end
+
+function PrintMat(A::DlsMat)
+    ccall((:PrintMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function newDenseMat(m::Int,n::Int)
+    ccall((:newDenseMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong),m,n)
+end
+
+function newBandMat(n::Int,smu::Int,ml::Int)
+    ccall((:newBandMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong,Clong),n,smu,ml)
+end
+
+function destroyMat(a::Vector{Ptr{realtype}})
+    ccall((:destroyMat,sundials_direct),Void,(Ptr{Ptr{realtype}},),a)
+end
+
+function newIntArray(n::Int)
+    ccall((:newIntArray,sundials_direct),Ptr{Cint},(Cint,),n)
+end
+
+function newLintArray(n::Int)
+    ccall((:newLintArray,sundials_direct),Ptr{Clong},(Clong,),n)
+end
+
+function newRealArray(m::Int)
+    ccall((:newRealArray,sundials_direct),Ptr{realtype},(Clong,),m)
+end
+
+function destroyArray(v::Ptr{Void})
+    ccall((:destroyArray,sundials_direct),Void,(Ptr{Void},),v)
+end
+
+function NewSparseMat(M::Int,N::Int,NNZ::Int)
+    ccall((:NewSparseMat,sundials_sparse),SlsMat,(Cint,Cint,Cint),M,N,NNZ)
+end
+
+function SlsConvertDls(A::DlsMat)
+    ccall((:SlsConvertDls,sundials_sparse),SlsMat,(DlsMat,),A)
+end
+
+function DestroySparseMat(A::SlsMat)
+    ccall((:DestroySparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function SlsSetToZero(A::SlsMat)
+    ccall((:SlsSetToZero,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function CopySparseMat(A::SlsMat,B::SlsMat)
+    ccall((:CopySparseMat,sundials_sparse),Void,(SlsMat,SlsMat),A,B)
+end
+
+function ScaleSparseMat(b::realtype,A::SlsMat)
+    ccall((:ScaleSparseMat,sundials_sparse),Void,(realtype,SlsMat),b,A)
+end
+
+function AddIdentitySparseMat(A::SlsMat)
+    ccall((:AddIdentitySparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function SlsAddMat(A::SlsMat,B::SlsMat)
+    ccall((:SlsAddMat,sundials_sparse),Cint,(SlsMat,SlsMat),A,B)
+end
+
+function ReallocSparseMat(A::SlsMat)
+    ccall((:ReallocSparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function SlsMatvec(A::SlsMat,x::Vector{realtype},y::Vector{realtype})
+    ccall((:SlsMatvec,sundials_sparse),Cint,(SlsMat,Ptr{realtype},Ptr{realtype}),A,x,y)
+end
+
+function PrintSparseMat(A::SlsMat)
+    ccall((:PrintSparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function KINKLU(kin_mem::Ptr{Void},n::Int,nnz::Int)
+    ccall((:KINKLU,kinsol_klu),Cint,(Ptr{Void},Cint,Cint),kin_mem,n,nnz)
+end
+
+function KINKLUReInit(kin_mem::Ptr{Void},n::Int,nnz::Int,reinit_type::Int)
+    ccall((:KINKLUReInit,kinsol_klu),Cint,(Ptr{Void},Cint,Cint,Cint),kin_mem,n,nnz,reinit_type)
+end
+
+function KINKLUSetOrdering(kin_mem::Ptr{Void},ordering_choice::Int)
+    ccall((:KINKLUSetOrdering,kinsol_klu),Cint,(Ptr{Void},Cint),kin_mem,ordering_choice)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_spbcgs.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function ModifiedGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype})
+    ccall((:ModifiedGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype}),v,h,k,p,new_vk_norm)
+end
+
+function ClassicalGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype},temp::N_Vector,s::Vector{realtype})
+    ccall((:ClassicalGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype},N_Vector,Ptr{realtype}),v,h,k,p,new_vk_norm,temp,s)
+end
+
+function QRfact(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},job::Int)
+    ccall((:QRfact,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Cint),n,h,q,job)
+end
+
+function QRsol(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},b::Vector{realtype})
+    ccall((:QRsol,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype}),n,h,q,b)
+end
+
+function KINSpilsSetMaxRestarts(kinmem::Ptr{Void},maxrs::Int)
+    ccall((:KINSpilsSetMaxRestarts,kinsol_spils),Cint,(Ptr{Void},Cint),kinmem,maxrs)
+end
+
+function KINSpilsSetPreconditioner(kinmem::Ptr{Void},pset::KINSpilsPrecSetupFn,psolve::KINSpilsPrecSolveFn)
+    ccall((:KINSpilsSetPreconditioner,kinsol_spils),Cint,(Ptr{Void},KINSpilsPrecSetupFn,KINSpilsPrecSolveFn),kinmem,pset,psolve)
+end
+
+function KINSpilsSetJacTimesVecFn(kinmem::Ptr{Void},jtv::KINSpilsJacTimesVecFn)
+    ccall((:KINSpilsSetJacTimesVecFn,kinsol_spils),Cint,(Ptr{Void},KINSpilsJacTimesVecFn),kinmem,jtv)
+end
+
+function KINSpilsGetWorkSpace(kinmem::Ptr{Void},lenrwSG::Ptr{Clong},leniwSG::Ptr{Clong})
+    ccall((:KINSpilsGetWorkSpace,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwSG,leniwSG)
+end
+
+function KINSpilsGetNumPrecEvals(kinmem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:KINSpilsGetNumPrecEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npevals)
+end
+
+function KINSpilsGetNumPrecSolves(kinmem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:KINSpilsGetNumPrecSolves,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npsolves)
+end
+
+function KINSpilsGetNumLinIters(kinmem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:KINSpilsGetNumLinIters,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nliters)
+end
+
+function KINSpilsGetNumConvFails(kinmem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:KINSpilsGetNumConvFails,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nlcfails)
+end
+
+function KINSpilsGetNumJtimesEvals(kinmem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:KINSpilsGetNumJtimesEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njvevals)
+end
+
+function KINSpilsGetNumFuncEvals(kinmem::Ptr{Void},nfevalsS::Ptr{Clong})
+    ccall((:KINSpilsGetNumFuncEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsS)
+end
+
+function KINSpilsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:KINSpilsGetLastFlag,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
+end
+
+function KINSpilsGetReturnFlagName(flag::Int)
+    ccall((:KINSpilsGetReturnFlagName,kinsol_spils),Ptr{UInt8},(Clong,),flag)
+end
+
+function SpbcgMalloc(l_max::Int,vec_tmpl::N_Vector)
+    ccall((:SpbcgMalloc,sundials_spbcgs),SpbcgMem,(Cint,N_Vector),l_max,vec_tmpl)
+end
+
+function SpbcgSolve(mem::SpbcgMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
+    ccall((:SpbcgSolve,sundials_spbcgs),Cint,(SpbcgMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
+end
+
+function SpbcgFree(mem::SpbcgMem)
+    ccall((:SpbcgFree,sundials_spbcgs),Void,(SpbcgMem,),mem)
+end
+
 function KINSpbcg(kinmem::Ptr{Void},maxl::Int)
-    ccall((:KINSpbcg,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,maxl)
+    ccall((:KINSpbcg,kinsol_spbcgs),Cint,(Ptr{Void},Cint),kinmem,maxl)
+end
+# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_spfgmr.h
+# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function ModifiedGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype})
+    ccall((:ModifiedGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype}),v,h,k,p,new_vk_norm)
+end
+
+function ClassicalGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype},temp::N_Vector,s::Vector{realtype})
+    ccall((:ClassicalGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype},N_Vector,Ptr{realtype}),v,h,k,p,new_vk_norm,temp,s)
+end
+
+function QRfact(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},job::Int)
+    ccall((:QRfact,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Cint),n,h,q,job)
+end
+
+function QRsol(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},b::Vector{realtype})
+    ccall((:QRsol,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype}),n,h,q,b)
+end
+
+function KINSpilsSetMaxRestarts(kinmem::Ptr{Void},maxrs::Int)
+    ccall((:KINSpilsSetMaxRestarts,kinsol_spils),Cint,(Ptr{Void},Cint),kinmem,maxrs)
+end
+
+function KINSpilsSetPreconditioner(kinmem::Ptr{Void},pset::KINSpilsPrecSetupFn,psolve::KINSpilsPrecSolveFn)
+    ccall((:KINSpilsSetPreconditioner,kinsol_spils),Cint,(Ptr{Void},KINSpilsPrecSetupFn,KINSpilsPrecSolveFn),kinmem,pset,psolve)
+end
+
+function KINSpilsSetJacTimesVecFn(kinmem::Ptr{Void},jtv::KINSpilsJacTimesVecFn)
+    ccall((:KINSpilsSetJacTimesVecFn,kinsol_spils),Cint,(Ptr{Void},KINSpilsJacTimesVecFn),kinmem,jtv)
+end
+
+function KINSpilsGetWorkSpace(kinmem::Ptr{Void},lenrwSG::Ptr{Clong},leniwSG::Ptr{Clong})
+    ccall((:KINSpilsGetWorkSpace,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwSG,leniwSG)
+end
+
+function KINSpilsGetNumPrecEvals(kinmem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:KINSpilsGetNumPrecEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npevals)
+end
+
+function KINSpilsGetNumPrecSolves(kinmem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:KINSpilsGetNumPrecSolves,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npsolves)
+end
+
+function KINSpilsGetNumLinIters(kinmem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:KINSpilsGetNumLinIters,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nliters)
+end
+
+function KINSpilsGetNumConvFails(kinmem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:KINSpilsGetNumConvFails,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nlcfails)
+end
+
+function KINSpilsGetNumJtimesEvals(kinmem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:KINSpilsGetNumJtimesEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njvevals)
+end
+
+function KINSpilsGetNumFuncEvals(kinmem::Ptr{Void},nfevalsS::Ptr{Clong})
+    ccall((:KINSpilsGetNumFuncEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsS)
+end
+
+function KINSpilsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:KINSpilsGetLastFlag,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
+end
+
+function KINSpilsGetReturnFlagName(flag::Int)
+    ccall((:KINSpilsGetReturnFlagName,kinsol_spils),Ptr{UInt8},(Clong,),flag)
+end
+
+function SpfgmrMalloc(l_max::Int,vec_tmpl::N_Vector)
+    ccall((:SpfgmrMalloc,sundials_spfgmr),SpfgmrMem,(Cint,N_Vector),l_max,vec_tmpl)
+end
+
+function SpfgmrSolve(mem::SpfgmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,gstype::Int,delta::realtype,max_restarts::Int,maxit::Int,P_data::Ptr{Void},s1::N_Vector,s2::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
+    ccall((:SpfgmrSolve,sundials_spfgmr),Cint,(SpfgmrMem,Ptr{Void},N_Vector,N_Vector,Cint,Cint,realtype,Cint,Cint,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,gstype,delta,max_restarts,maxit,P_data,s1,s2,atimes,psolve,res_norm,nli,nps)
+end
+
+function SpfgmrFree(mem::SpfgmrMem)
+    ccall((:SpfgmrFree,sundials_spfgmr),Void,(SpfgmrMem,),mem)
+end
+
+function KINSpfgmr(kinmem::Ptr{Void},maxl::Int)
+    ccall((:KINSpfgmr,kinsol_spfgmr),Cint,(Ptr{Void},Cint),kinmem,maxl)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_spgmr.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function ModifiedGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype})
+    ccall((:ModifiedGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype}),v,h,k,p,new_vk_norm)
+end
+
+function ClassicalGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype},temp::N_Vector,s::Vector{realtype})
+    ccall((:ClassicalGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype},N_Vector,Ptr{realtype}),v,h,k,p,new_vk_norm,temp,s)
+end
+
+function QRfact(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},job::Int)
+    ccall((:QRfact,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Cint),n,h,q,job)
+end
+
+function QRsol(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},b::Vector{realtype})
+    ccall((:QRsol,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype}),n,h,q,b)
+end
+
+function KINSpilsSetMaxRestarts(kinmem::Ptr{Void},maxrs::Int)
+    ccall((:KINSpilsSetMaxRestarts,kinsol_spils),Cint,(Ptr{Void},Cint),kinmem,maxrs)
+end
+
+function KINSpilsSetPreconditioner(kinmem::Ptr{Void},pset::KINSpilsPrecSetupFn,psolve::KINSpilsPrecSolveFn)
+    ccall((:KINSpilsSetPreconditioner,kinsol_spils),Cint,(Ptr{Void},KINSpilsPrecSetupFn,KINSpilsPrecSolveFn),kinmem,pset,psolve)
+end
+
+function KINSpilsSetJacTimesVecFn(kinmem::Ptr{Void},jtv::KINSpilsJacTimesVecFn)
+    ccall((:KINSpilsSetJacTimesVecFn,kinsol_spils),Cint,(Ptr{Void},KINSpilsJacTimesVecFn),kinmem,jtv)
+end
+
+function KINSpilsGetWorkSpace(kinmem::Ptr{Void},lenrwSG::Ptr{Clong},leniwSG::Ptr{Clong})
+    ccall((:KINSpilsGetWorkSpace,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwSG,leniwSG)
+end
+
+function KINSpilsGetNumPrecEvals(kinmem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:KINSpilsGetNumPrecEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npevals)
+end
+
+function KINSpilsGetNumPrecSolves(kinmem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:KINSpilsGetNumPrecSolves,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npsolves)
+end
+
+function KINSpilsGetNumLinIters(kinmem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:KINSpilsGetNumLinIters,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nliters)
+end
+
+function KINSpilsGetNumConvFails(kinmem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:KINSpilsGetNumConvFails,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nlcfails)
+end
+
+function KINSpilsGetNumJtimesEvals(kinmem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:KINSpilsGetNumJtimesEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njvevals)
+end
+
+function KINSpilsGetNumFuncEvals(kinmem::Ptr{Void},nfevalsS::Ptr{Clong})
+    ccall((:KINSpilsGetNumFuncEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsS)
+end
+
+function KINSpilsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:KINSpilsGetLastFlag,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
+end
+
+function KINSpilsGetReturnFlagName(flag::Int)
+    ccall((:KINSpilsGetReturnFlagName,kinsol_spils),Ptr{UInt8},(Clong,),flag)
+end
+
+function SpgmrMalloc(l_max::Int,vec_tmpl::N_Vector)
+    ccall((:SpgmrMalloc,sundials_spgmr),SpgmrMem,(Cint,N_Vector),l_max,vec_tmpl)
+end
+
+function SpgmrSolve(mem::SpgmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,gstype::Int,delta::realtype,max_restarts::Int,P_data::Ptr{Void},s1::N_Vector,s2::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
+    ccall((:SpgmrSolve,sundials_spgmr),Cint,(SpgmrMem,Ptr{Void},N_Vector,N_Vector,Cint,Cint,realtype,Cint,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,gstype,delta,max_restarts,P_data,s1,s2,atimes,psolve,res_norm,nli,nps)
+end
+
+function SpgmrFree(mem::SpgmrMem)
+    ccall((:SpgmrFree,sundials_spgmr),Void,(SpgmrMem,),mem)
+end
+
 function KINSpgmr(kinmem::Ptr{Void},maxl::Int)
-    ccall((:KINSpgmr,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,maxl)
+    ccall((:KINSpgmr,kinsol_spgmr),Cint,(Ptr{Void},Cint),kinmem,maxl)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_sptfqmr.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
+
+function N_VClone(w::N_Vector)
+    ccall((:N_VClone,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VCloneEmpty(w::N_Vector)
+    ccall((:N_VCloneEmpty,libsundials_nvecserial),N_Vector,(N_Vector,),w)
+end
+
+function N_VDestroy(v::N_Vector)
+    ccall((:N_VDestroy,libsundials_nvecserial),Void,(N_Vector,),v)
+end
+
+function N_VSpace(v::N_Vector,lrw::Ptr{Clong},liw::Ptr{Clong})
+    ccall((:N_VSpace,libsundials_nvecserial),Void,(N_Vector,Ptr{Clong},Ptr{Clong}),v,lrw,liw)
+end
+
+function N_VGetArrayPointer(v::N_Vector)
+    ccall((:N_VGetArrayPointer,libsundials_nvecserial),Ptr{realtype},(N_Vector,),v)
+end
+
+function N_VSetArrayPointer(v_data::Vector{realtype},v::N_Vector)
+    ccall((:N_VSetArrayPointer,libsundials_nvecserial),Void,(Ptr{realtype},N_Vector),v_data,v)
+end
+
+function N_VLinearSum(a::realtype,x::N_Vector,b::realtype,y::N_Vector,z::N_Vector)
+    ccall((:N_VLinearSum,libsundials_nvecserial),Void,(realtype,N_Vector,realtype,N_Vector,N_Vector),a,x,b,y,z)
+end
+
+function N_VConst(c::realtype,z::N_Vector)
+    ccall((:N_VConst,libsundials_nvecserial),Void,(realtype,N_Vector),c,z)
+end
+
+function N_VProd(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VProd,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VDiv(x::N_Vector,y::N_Vector,z::N_Vector)
+    ccall((:N_VDiv,libsundials_nvecserial),Void,(N_Vector,N_Vector,N_Vector),x,y,z)
+end
+
+function N_VScale(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VScale,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VAbs(x::N_Vector,z::N_Vector)
+    ccall((:N_VAbs,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VInv(x::N_Vector,z::N_Vector)
+    ccall((:N_VInv,libsundials_nvecserial),Void,(N_Vector,N_Vector),x,z)
+end
+
+function N_VAddConst(x::N_Vector,b::realtype,z::N_Vector)
+    ccall((:N_VAddConst,libsundials_nvecserial),Void,(N_Vector,realtype,N_Vector),x,b,z)
+end
+
+function N_VDotProd(x::N_Vector,y::N_Vector)
+    ccall((:N_VDotProd,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,y)
+end
+
+function N_VMaxNorm(x::N_Vector)
+    ccall((:N_VMaxNorm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWrmsNorm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWrmsNorm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VWrmsNormMask(x::N_Vector,w::N_Vector,id::N_Vector)
+    ccall((:N_VWrmsNormMask,libsundials_nvecserial),realtype,(N_Vector,N_Vector,N_Vector),x,w,id)
+end
+
+function N_VMin(x::N_Vector)
+    ccall((:N_VMin,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VWL2Norm(x::N_Vector,w::N_Vector)
+    ccall((:N_VWL2Norm,libsundials_nvecserial),realtype,(N_Vector,N_Vector),x,w)
+end
+
+function N_VL1Norm(x::N_Vector)
+    ccall((:N_VL1Norm,libsundials_nvecserial),realtype,(N_Vector,),x)
+end
+
+function N_VCompare(c::realtype,x::N_Vector,z::N_Vector)
+    ccall((:N_VCompare,libsundials_nvecserial),Void,(realtype,N_Vector,N_Vector),c,x,z)
+end
+
+function N_VInvTest(x::N_Vector,z::N_Vector)
+    ccall((:N_VInvTest,libsundials_nvecserial),Cint,(N_Vector,N_Vector),x,z)
+end
+
+function N_VConstrMask(c::N_Vector,x::N_Vector,m::N_Vector)
+    ccall((:N_VConstrMask,libsundials_nvecserial),Cint,(N_Vector,N_Vector,N_Vector),c,x,m)
+end
+
+function N_VMinQuotient(num::N_Vector,denom::N_Vector)
+    ccall((:N_VMinQuotient,libsundials_nvecserial),realtype,(N_Vector,N_Vector),num,denom)
+end
+
+function N_VCloneEmptyVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneEmptyVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VCloneVectorArray(count::Int,w::N_Vector)
+    ccall((:N_VCloneVectorArray,libsundials_nvecserial),Ptr{N_Vector},(Cint,N_Vector),count,w)
+end
+
+function N_VDestroyVectorArray(vs::Ptr{N_Vector},count::Int)
+    ccall((:N_VDestroyVectorArray,libsundials_nvecserial),Void,(Ptr{N_Vector},Cint),vs,count)
+end
+
+function ModifiedGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype})
+    ccall((:ModifiedGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype}),v,h,k,p,new_vk_norm)
+end
+
+function ClassicalGS(v::Ptr{N_Vector},h::Vector{Ptr{realtype}},k::Int,p::Int,new_vk_norm::Vector{realtype},temp::N_Vector,s::Vector{realtype})
+    ccall((:ClassicalGS,sundials_iterative),Cint,(Ptr{N_Vector},Ptr{Ptr{realtype}},Cint,Cint,Ptr{realtype},N_Vector,Ptr{realtype}),v,h,k,p,new_vk_norm,temp,s)
+end
+
+function QRfact(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},job::Int)
+    ccall((:QRfact,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Cint),n,h,q,job)
+end
+
+function QRsol(n::Int,h::Vector{Ptr{realtype}},q::Vector{realtype},b::Vector{realtype})
+    ccall((:QRsol,sundials_iterative),Cint,(Cint,Ptr{Ptr{realtype}},Ptr{realtype},Ptr{realtype}),n,h,q,b)
+end
+
+function KINSpilsSetMaxRestarts(kinmem::Ptr{Void},maxrs::Int)
+    ccall((:KINSpilsSetMaxRestarts,kinsol_spils),Cint,(Ptr{Void},Cint),kinmem,maxrs)
+end
+
+function KINSpilsSetPreconditioner(kinmem::Ptr{Void},pset::KINSpilsPrecSetupFn,psolve::KINSpilsPrecSolveFn)
+    ccall((:KINSpilsSetPreconditioner,kinsol_spils),Cint,(Ptr{Void},KINSpilsPrecSetupFn,KINSpilsPrecSolveFn),kinmem,pset,psolve)
+end
+
+function KINSpilsSetJacTimesVecFn(kinmem::Ptr{Void},jtv::KINSpilsJacTimesVecFn)
+    ccall((:KINSpilsSetJacTimesVecFn,kinsol_spils),Cint,(Ptr{Void},KINSpilsJacTimesVecFn),kinmem,jtv)
+end
+
+function KINSpilsGetWorkSpace(kinmem::Ptr{Void},lenrwSG::Ptr{Clong},leniwSG::Ptr{Clong})
+    ccall((:KINSpilsGetWorkSpace,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),kinmem,lenrwSG,leniwSG)
+end
+
+function KINSpilsGetNumPrecEvals(kinmem::Ptr{Void},npevals::Ptr{Clong})
+    ccall((:KINSpilsGetNumPrecEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npevals)
+end
+
+function KINSpilsGetNumPrecSolves(kinmem::Ptr{Void},npsolves::Ptr{Clong})
+    ccall((:KINSpilsGetNumPrecSolves,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,npsolves)
+end
+
+function KINSpilsGetNumLinIters(kinmem::Ptr{Void},nliters::Ptr{Clong})
+    ccall((:KINSpilsGetNumLinIters,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nliters)
+end
+
+function KINSpilsGetNumConvFails(kinmem::Ptr{Void},nlcfails::Ptr{Clong})
+    ccall((:KINSpilsGetNumConvFails,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nlcfails)
+end
+
+function KINSpilsGetNumJtimesEvals(kinmem::Ptr{Void},njvevals::Ptr{Clong})
+    ccall((:KINSpilsGetNumJtimesEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,njvevals)
+end
+
+function KINSpilsGetNumFuncEvals(kinmem::Ptr{Void},nfevalsS::Ptr{Clong})
+    ccall((:KINSpilsGetNumFuncEvals,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,nfevalsS)
+end
+
+function KINSpilsGetLastFlag(kinmem::Ptr{Void},flag::Ptr{Clong})
+    ccall((:KINSpilsGetLastFlag,kinsol_spils),Cint,(Ptr{Void},Ptr{Clong}),kinmem,flag)
+end
+
+function KINSpilsGetReturnFlagName(flag::Int)
+    ccall((:KINSpilsGetReturnFlagName,kinsol_spils),Ptr{UInt8},(Clong,),flag)
+end
+
+function SptfqmrMalloc(l_max::Int,vec_tmpl::N_Vector)
+    ccall((:SptfqmrMalloc,sundials_sptfqmr),SptfqmrMem,(Cint,N_Vector),l_max,vec_tmpl)
+end
+
+function SptfqmrSolve(mem::SptfqmrMem,A_data::Ptr{Void},x::N_Vector,b::N_Vector,pretype::Int,delta::realtype,P_data::Ptr{Void},sx::N_Vector,sb::N_Vector,atimes::ATimesFn,psolve::PSolveFn,res_norm::Vector{realtype},nli::Ptr{Cint},nps::Ptr{Cint})
+    ccall((:SptfqmrSolve,sundials_sptfqmr),Cint,(SptfqmrMem,Ptr{Void},N_Vector,N_Vector,Cint,realtype,Ptr{Void},N_Vector,N_Vector,ATimesFn,PSolveFn,Ptr{realtype},Ptr{Cint},Ptr{Cint}),mem,A_data,x,b,pretype,delta,P_data,sx,sb,atimes,psolve,res_norm,nli,nps)
+end
+
+function SptfqmrFree(mem::SptfqmrMem)
+    ccall((:SptfqmrFree,sundials_sptfqmr),Void,(SptfqmrMem,),mem)
+end
+
 function KINSptfqmr(kinmem::Ptr{Void},maxl::Int)
-    ccall((:KINSptfqmr,libsundials_kinsol),Cint,(Ptr{Void},Cint),kinmem,maxl)
+    ccall((:KINSptfqmr,kinsol_sptfqmr),Cint,(Ptr{Void},Cint),kinmem,maxl)
+end
+# Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/kinsol/kinsol_superlumt.h
+# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+
+function NewDenseMat(M::Int,N::Int)
+    ccall((:NewDenseMat,sundials_direct),DlsMat,(Clong,Clong),M,N)
+end
+
+function NewBandMat(N::Int,mu::Int,ml::Int,smu::Int)
+    ccall((:NewBandMat,sundials_direct),DlsMat,(Clong,Clong,Clong,Clong),N,mu,ml,smu)
+end
+
+function DestroyMat(A::DlsMat)
+    ccall((:DestroyMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function NewIntArray(N::Int)
+    ccall((:NewIntArray,sundials_direct),Ptr{Cint},(Cint,),N)
+end
+
+function NewLintArray(N::Int)
+    ccall((:NewLintArray,sundials_direct),Ptr{Clong},(Clong,),N)
+end
+
+function NewRealArray(N::Int)
+    ccall((:NewRealArray,sundials_direct),Ptr{realtype},(Clong,),N)
+end
+
+function DestroyArray(p::Ptr{Void})
+    ccall((:DestroyArray,sundials_direct),Void,(Ptr{Void},),p)
+end
+
+function AddIdentity(A::DlsMat)
+    ccall((:AddIdentity,sundials_direct),Void,(DlsMat,),A)
+end
+
+function SetToZero(A::DlsMat)
+    ccall((:SetToZero,sundials_direct),Void,(DlsMat,),A)
+end
+
+function PrintMat(A::DlsMat)
+    ccall((:PrintMat,sundials_direct),Void,(DlsMat,),A)
+end
+
+function newDenseMat(m::Int,n::Int)
+    ccall((:newDenseMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong),m,n)
+end
+
+function newBandMat(n::Int,smu::Int,ml::Int)
+    ccall((:newBandMat,sundials_direct),Ptr{Ptr{realtype}},(Clong,Clong,Clong),n,smu,ml)
+end
+
+function destroyMat(a::Vector{Ptr{realtype}})
+    ccall((:destroyMat,sundials_direct),Void,(Ptr{Ptr{realtype}},),a)
+end
+
+function newIntArray(n::Int)
+    ccall((:newIntArray,sundials_direct),Ptr{Cint},(Cint,),n)
+end
+
+function newLintArray(n::Int)
+    ccall((:newLintArray,sundials_direct),Ptr{Clong},(Clong,),n)
+end
+
+function newRealArray(m::Int)
+    ccall((:newRealArray,sundials_direct),Ptr{realtype},(Clong,),m)
+end
+
+function destroyArray(v::Ptr{Void})
+    ccall((:destroyArray,sundials_direct),Void,(Ptr{Void},),v)
+end
+
+function NewSparseMat(M::Int,N::Int,NNZ::Int)
+    ccall((:NewSparseMat,sundials_sparse),SlsMat,(Cint,Cint,Cint),M,N,NNZ)
+end
+
+function SlsConvertDls(A::DlsMat)
+    ccall((:SlsConvertDls,sundials_sparse),SlsMat,(DlsMat,),A)
+end
+
+function DestroySparseMat(A::SlsMat)
+    ccall((:DestroySparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function SlsSetToZero(A::SlsMat)
+    ccall((:SlsSetToZero,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function CopySparseMat(A::SlsMat,B::SlsMat)
+    ccall((:CopySparseMat,sundials_sparse),Void,(SlsMat,SlsMat),A,B)
+end
+
+function ScaleSparseMat(b::realtype,A::SlsMat)
+    ccall((:ScaleSparseMat,sundials_sparse),Void,(realtype,SlsMat),b,A)
+end
+
+function AddIdentitySparseMat(A::SlsMat)
+    ccall((:AddIdentitySparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function SlsAddMat(A::SlsMat,B::SlsMat)
+    ccall((:SlsAddMat,sundials_sparse),Cint,(SlsMat,SlsMat),A,B)
+end
+
+function ReallocSparseMat(A::SlsMat)
+    ccall((:ReallocSparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function SlsMatvec(A::SlsMat,x::Vector{realtype},y::Vector{realtype})
+    ccall((:SlsMatvec,sundials_sparse),Cint,(SlsMat,Ptr{realtype},Ptr{realtype}),A,x,y)
+end
+
+function PrintSparseMat(A::SlsMat)
+    ccall((:PrintSparseMat,sundials_sparse),Void,(SlsMat,),A)
+end
+
+function KINSuperLUMT(kin_mem::Ptr{Void},num_threads::Int,n::Int,nnz::Int)
+    ccall((:KINSuperLUMT,kinsol_superlumt),Cint,(Ptr{Void},Cint,Cint,Cint),kin_mem,num_threads,n,nnz)
+end
+
+function KINSuperLUMTSetOrdering(kin_mem::Ptr{Void},ordering_choice::Int)
+    ccall((:KINSuperLUMTSetOrdering,kinsol_superlumt),Cint,(Ptr{Void},Cint),kin_mem,ordering_choice)
 end
