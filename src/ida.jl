@@ -21,7 +21,7 @@ function IDASetMaxOrd(ida_mem::Ptr{Void},maxord::Int)
     ccall((:IDASetMaxOrd,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxord)
 end
 
-function IDASetMaxNumSteps(ida_mem::Ptr{Void},mxsteps::Clong)
+function IDASetMaxNumSteps(ida_mem::Ptr{Void},mxsteps::Int)
     ccall((:IDASetMaxNumSteps,libsundials_ida),Cint,(Ptr{Void},Clong),ida_mem,mxsteps)
 end
 
@@ -221,7 +221,7 @@ function IDAGetNonlinSolvStats(ida_mem::Ptr{Void},nniters::Ptr{Clong},nncfails::
     ccall((:IDAGetNonlinSolvStats,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),ida_mem,nniters,nncfails)
 end
 
-function IDAGetReturnFlagName(flag::Clong)
+function IDAGetReturnFlagName(flag::Int)
     ccall((:IDAGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -256,7 +256,7 @@ function IDADlsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:IDADlsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
 end
 
-function IDADlsGetReturnFlagName(flag::Clong)
+function IDADlsGetReturnFlagName(flag::Int)
     ccall((:IDADlsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/ida/ida_spils.h
@@ -323,7 +323,7 @@ function IDASpilsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:IDASpilsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
 end
 
-function IDASpilsGetReturnFlagName(flag::Clong)
+function IDASpilsGetReturnFlagName(flag::Int)
     ccall((:IDASpilsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/ida/ida_band.h
@@ -353,21 +353,21 @@ function IDADlsGetLastFlag(ida_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:IDADlsGetLastFlag,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong}),ida_mem,flag)
 end
 
-function IDADlsGetReturnFlagName(flag::Clong)
+function IDADlsGetReturnFlagName(flag::Int)
     ccall((:IDADlsGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
 end
 
-function IDABand(ida_mem::Ptr{Void},Neq::Clong,mupper::Clong,mlower::Clong)
+function IDABand(ida_mem::Ptr{Void},Neq::Int,mupper::Int,mlower::Int)
     ccall((:IDABand,libsundials_ida),Cint,(Ptr{Void},Clong,Clong,Clong),ida_mem,Neq,mupper,mlower)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/ida/ida_bbdpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function IDABBDPrecInit(ida_mem::Ptr{Void},Nlocal::Clong,mudq::Clong,mldq::Clong,mukeep::Clong,mlkeep::Clong,dq_rel_yy::realtype,Gres::IDABBDLocalFn,Gcomm::IDABBDCommFn)
+function IDABBDPrecInit(ida_mem::Ptr{Void},Nlocal::Int,mudq::Int,mldq::Int,mukeep::Int,mlkeep::Int,dq_rel_yy::realtype,Gres::IDABBDLocalFn,Gcomm::IDABBDCommFn)
     ccall((:IDABBDPrecInit,libsundials_ida),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,IDABBDLocalFn,IDABBDCommFn),ida_mem,Nlocal,mudq,mldq,mukeep,mlkeep,dq_rel_yy,Gres,Gcomm)
 end
 
-function IDABBDPrecReInit(ida_mem::Ptr{Void},mudq::Clong,mldq::Clong,dq_rel_yy::realtype)
+function IDABBDPrecReInit(ida_mem::Ptr{Void},mudq::Int,mldq::Int,dq_rel_yy::realtype)
     ccall((:IDABBDPrecReInit,libsundials_ida),Cint,(Ptr{Void},Clong,Clong,realtype),ida_mem,mudq,mldq,dq_rel_yy)
 end
 
@@ -382,7 +382,7 @@ end
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
 
-function IDADense(ida_mem::Ptr{Void},Neq::Clong)
+function IDADense(ida_mem::Ptr{Void},Neq::Int)
     ccall((:IDADense,libsundials_ida),Cint,(Ptr{Void},Clong),ida_mem,Neq)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/ida/ida_impl.h
@@ -409,7 +409,7 @@ function IDASetMaxOrd(ida_mem::Ptr{Void},maxord::Int)
     ccall((:IDASetMaxOrd,libsundials_ida),Cint,(Ptr{Void},Cint),ida_mem,maxord)
 end
 
-function IDASetMaxNumSteps(ida_mem::Ptr{Void},mxsteps::Clong)
+function IDASetMaxNumSteps(ida_mem::Ptr{Void},mxsteps::Int)
     ccall((:IDASetMaxNumSteps,libsundials_ida),Cint,(Ptr{Void},Clong),ida_mem,mxsteps)
 end
 
@@ -609,7 +609,7 @@ function IDAGetNonlinSolvStats(ida_mem::Ptr{Void},nniters::Ptr{Clong},nncfails::
     ccall((:IDAGetNonlinSolvStats,libsundials_ida),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),ida_mem,nniters,nncfails)
 end
 
-function IDAGetReturnFlagName(flag::Clong)
+function IDAGetReturnFlagName(flag::Int)
     ccall((:IDAGetReturnFlagName,libsundials_ida),Ptr{UInt8},(Clong,),flag)
 end
 

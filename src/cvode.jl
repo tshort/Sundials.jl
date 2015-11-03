@@ -22,7 +22,7 @@ function CVodeSetMaxOrd(cvode_mem::Ptr{Void},maxord::Int)
     ccall((:CVodeSetMaxOrd,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxord)
 end
 
-function CVodeSetMaxNumSteps(cvode_mem::Ptr{Void},mxsteps::Clong)
+function CVodeSetMaxNumSteps(cvode_mem::Ptr{Void},mxsteps::Int)
     ccall((:CVodeSetMaxNumSteps,libsundials_cvode),Cint,(Ptr{Void},Clong),cvode_mem,mxsteps)
 end
 
@@ -194,7 +194,7 @@ function CVodeGetNonlinSolvStats(cvode_mem::Ptr{Void},nniters::Ptr{Clong},nncfai
     ccall((:CVodeGetNonlinSolvStats,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,nniters,nncfails)
 end
 
-function CVodeGetReturnFlagName(flag::Clong)
+function CVodeGetReturnFlagName(flag::Int)
     ccall((:CVodeGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 
@@ -229,7 +229,7 @@ function CVDlsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:CVDlsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
 end
 
-function CVDlsGetReturnFlagName(flag::Clong)
+function CVDlsGetReturnFlagName(flag::Int)
     ccall((:CVDlsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_spils.h
@@ -291,19 +291,19 @@ function CVSpilsGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:CVSpilsGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
 end
 
-function CVSpilsGetReturnFlagName(flag::Clong)
+function CVSpilsGetReturnFlagName(flag::Int)
     ccall((:CVSpilsGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_band.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function CVBand(cvode_mem::Ptr{Void},N::Clong,mupper::Clong,mlower::Clong)
+function CVBand(cvode_mem::Ptr{Void},N::Int,mupper::Int,mlower::Int)
     ccall((:CVBand,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong),cvode_mem,N,mupper,mlower)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_bandpre.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function CVBandPrecInit(cvode_mem::Ptr{Void},N::Clong,mu::Clong,ml::Clong)
+function CVBandPrecInit(cvode_mem::Ptr{Void},N::Int,mu::Int,ml::Int)
     ccall((:CVBandPrecInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong),cvode_mem,N,mu,ml)
 end
 
@@ -319,11 +319,11 @@ end
 
 
 
-function CVBBDPrecInit(cvode_mem::Ptr{Void},Nlocal::Clong,mudq::Clong,mldq::Clong,mukeep::Clong,mlkeep::Clong,dqrely::realtype,gloc::CVLocalFn,cfn::CVCommFn)
+function CVBBDPrecInit(cvode_mem::Ptr{Void},Nlocal::Int,mudq::Int,mldq::Int,mukeep::Int,mlkeep::Int,dqrely::realtype,gloc::CVLocalFn,cfn::CVCommFn)
     ccall((:CVBBDPrecInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,Clong,Clong,Clong,realtype,CVLocalFn,CVCommFn),cvode_mem,Nlocal,mudq,mldq,mukeep,mlkeep,dqrely,gloc,cfn)
 end
 
-function CVBBDPrecReInit(cvode_mem::Ptr{Void},mudq::Clong,mldq::Clong,dqrely::realtype)
+function CVBBDPrecReInit(cvode_mem::Ptr{Void},mudq::Int,mldq::Int,dqrely::realtype)
     ccall((:CVBBDPrecReInit,libsundials_cvode),Cint,(Ptr{Void},Clong,Clong,realtype),cvode_mem,mudq,mldq,dqrely)
 end
 
@@ -337,7 +337,7 @@ end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_dense.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-function CVDense(cvode_mem::Ptr{Void},N::Clong)
+function CVDense(cvode_mem::Ptr{Void},N::Int)
     ccall((:CVDense,libsundials_cvode),Cint,(Ptr{Void},Clong),cvode_mem,N)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_diag.h
@@ -360,7 +360,7 @@ function CVDiagGetLastFlag(cvode_mem::Ptr{Void},flag::Ptr{Clong})
     ccall((:CVDiagGetLastFlag,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong}),cvode_mem,flag)
 end
 
-function CVDiagGetReturnFlagName(flag::Clong)
+function CVDiagGetReturnFlagName(flag::Int)
     ccall((:CVDiagGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 # Julia wrapper for header: /Users/jgoldfar/.julia/v0.4/Sundials/deps/usr/include/cvode/cvode_impl.h
@@ -386,7 +386,7 @@ function CVodeSetMaxOrd(cvode_mem::Ptr{Void},maxord::Int)
     ccall((:CVodeSetMaxOrd,libsundials_cvode),Cint,(Ptr{Void},Cint),cvode_mem,maxord)
 end
 
-function CVodeSetMaxNumSteps(cvode_mem::Ptr{Void},mxsteps::Clong)
+function CVodeSetMaxNumSteps(cvode_mem::Ptr{Void},mxsteps::Int)
     ccall((:CVodeSetMaxNumSteps,libsundials_cvode),Cint,(Ptr{Void},Clong),cvode_mem,mxsteps)
 end
 
@@ -558,7 +558,7 @@ function CVodeGetNonlinSolvStats(cvode_mem::Ptr{Void},nniters::Ptr{Clong},nncfai
     ccall((:CVodeGetNonlinSolvStats,libsundials_cvode),Cint,(Ptr{Void},Ptr{Clong},Ptr{Clong}),cvode_mem,nniters,nncfails)
 end
 
-function CVodeGetReturnFlagName(flag::Clong)
+function CVodeGetReturnFlagName(flag::Int)
     ccall((:CVodeGetReturnFlagName,libsundials_cvode),Ptr{UInt8},(Clong,),flag)
 end
 
