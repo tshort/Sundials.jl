@@ -283,18 +283,19 @@ function cvode(f::Function, y0::Vector{Float64}, t::Vector{Float64}; reltol::Flo
     # return: a solution matrix with time steps in `t` along rows and
     #         state variable `y` along columns
     neq = length(y0)
+    nt = length(t)
     mem = CVodeCreate(CV_BDF, CV_NEWTON)
     flag = CVodeInit(mem, cfunction(cvodefun, Int32, (realtype, N_Vector, N_Vector, Ref{Function})), t[1], nvector(y0))
     flag = CVodeSetUserData(mem, f)
     flag = CVodeSStolerances(mem, reltol, abstol)
     flag = CVDense(mem, neq)
-    yres = zeros(length(t), length(y0))
-    yres[1,:] = y0
+    yres = zeros(neq, nt)
+    yres[:, 1] = y0
     y = copy(y0)
     tout = [0.0]
-    for k in 2:length(t)
+    for k in 2:nt
         flag = CVode(mem, t[k], y, tout, CV_NORMAL)
-        yres[k,:] = y
+        yres[:, k] = y
     end
     CVodeFree([mem])
     return yres
@@ -320,6 +321,7 @@ function idasol(f::Function, y0::Vector{Float64}, yp0::Vector{Float64}, t::Vecto
     # return: (y,yp) two solution matrices representing the states and state derivatives
     #         with time steps in `t` along rows and state variable `y` or `yp` along columns
     neq = length(y0)
+    nt = length(t)
     mem = IDACreate()
     flag = IDAInit(mem, cfunction(idasolfun, Int32, (realtype, N_Vector, N_Vector, N_Vector, Ref{Function})), t[1], nvector(y0), nvector(yp0))
     flag = IDASetUserData(mem, f)
@@ -330,14 +332,14 @@ function idasol(f::Function, y0::Vector{Float64}, yp0::Vector{Float64}, t::Vecto
     if any(abs(rtest) .>= reltol)
         flag = IDACalcIC(mem, Sundials.IDA_YA_YDP_INIT, t[1] + tstep)
     end
-    yres = zeros(length(t), length(y0))
-    ypres = zeros(length(t), length(y0))
+    yres = zeros(nt, neq)
+    ypres = zeros(nt, neq)
     yres[1,:] = y0
     ypres[1,:] = yp0
     y = copy(y0)
     yp = copy(yp0)
     tout = [0.0]
-    for k in 2:length(t)
+    for k in 2:nt
         retval = Sundials.IDASolve(mem, t[k], tout, y, yp, IDA_NORMAL)
         yres[k,:] = y
         ypres[k,:] = yp
