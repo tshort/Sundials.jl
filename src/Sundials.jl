@@ -265,6 +265,12 @@ function kinsol(f::Function, y0::Vector{Float64})
 end
 
 @c Int32 CVodeSetUserData (Ptr{:Void},Any) libsundials_cvode  ## needed to allow passing a Function through the user data
+macro checkFlag(ex)
+  return quote
+  ($ex == 0) ? nothing : error("Sundials failed.")
+  end
+end
+@checkFlag (f(x)=0; f(0))
 
 function cvodefun(t::Float64, y::N_Vector, yp::N_Vector, userfun::Function)
     y = Sundials.asarray(y)
@@ -284,16 +290,15 @@ function cvode(f::Function, y0::Vector{Float64}, t::Vector{Float64}; reltol::Flo
     #         state variable `y` along columns
     neq = length(y0)
     mem = CVodeCreate(CV_BDF, CV_NEWTON)
-    flag = CVodeInit(mem, cfunction(cvodefun, Int32, (realtype, N_Vector, N_Vector, Ref{Function})), t[1], nvector(y0))
-    flag = CVodeSetUserData(mem, f)
-    flag = CVodeSStolerances(mem, reltol, abstol)
-    flag = CVDense(mem, neq)
+    @checkFlag CVodeInit(mem, cfunction(cvodefun, Int32, (realtype, N_Vector, N_Vector)), t[1], nvector(y0))
+    @checkFlag CVodeSStolerances(mem, reltol, abstol)
+    @checkFlag CVDense(mem, neq)
     yres = zeros(length(t), length(y0))
     yres[1,:] = y0
     y = copy(y0)
     tout = [0.0]
     for k in 2:length(t)
-        flag = CVode(mem, t[k], y, tout, CV_NORMAL)
+        @checkFlag CVode(mem, t[k], y, tout, CV_NORMAL)
         yres[k,:] = y
     end
     CVodeFree([mem])
