@@ -21,6 +21,8 @@ include("../examples/ida_Heat2D.jl")
 
 println("result at t=$(t[end]):")
 println(yout[end,:], "\n")
+# Norm of solution in Heat2D example should be decreasing
+@test norm(yout[1, :]) > norm(yout[end, :])
 
 # run kinsol example
 println("== start kinsol example")
