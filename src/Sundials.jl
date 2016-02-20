@@ -1,3 +1,5 @@
+VERSION >= v"0.4.0-dev+6521" && __precompile__()
+
 module Sundials
 const depsfile = joinpath(dirname(dirname(@__FILE__)),"deps","deps.jl")
 if isfile(depsfile)
@@ -13,7 +15,7 @@ end
 #
 ##################################################################
 
-recurs_sym_type(ex::Any) = 
+recurs_sym_type(ex::Any) =
   (ex==Union{} || typeof(ex)==Symbol || length(ex.args)==1) ? eval(ex) : Expr(ex.head, ex.args[1], recurs_sym_type(ex.args[2]))
 macro c(ret_type, func, arg_types, lib)
   local _arg_types = Expr(:tuple, [recurs_sym_type(a) for a in arg_types.args]...)
