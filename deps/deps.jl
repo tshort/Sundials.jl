@@ -1,4 +1,3 @@
-# This is an auto-generated file; do not edit
 
 # Pre-hooks
 # Macro to load a library
@@ -20,6 +19,3 @@ const libsundials_cvodes     = "$(@__DIR__)/$platform/lib/libsundials_cvodes.$ex
 # @checked_lib libsundials_idas "$(@__DIR__)/$platform/lib/libsundials_idas.$ext"
 # @checked_lib libsundials_nvecserial "$(@__DIR__)/$platform/lib/libsundials_nvecserial.$ext"
 # @checked_lib libsundials_cvodes "$(@__DIR__)/$platform/lib/libsundials_cvodes.$ext"
-
-# Load-hooks
-
